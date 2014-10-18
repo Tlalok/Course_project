@@ -1,4 +1,5 @@
 #include <vector>
+#include <map>
 #include "StatisticsAnswer.h"
 
 class StatisticsQuestion
@@ -11,4 +12,5 @@ class StatisticsQuestion
     unsigned int i;
     // статистика ответов
     std::vector<StatisticsAnswer> statisticsAnswers;
+    //std::map<unsigned int, unsigned int> statisticsAnswers;
 };

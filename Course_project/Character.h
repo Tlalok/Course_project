@@ -1,6 +1,6 @@
 #include <vector>
+#include <map>
 #include "StatisticsQuestion.h"
-//#include <unordered_map>
 
 class Character
 {
@@ -12,4 +12,5 @@ class Character
     // информация по вопросам и ответам 
     // для данного персонажа
     std::vector<StatisticsQuestion> statisticsQuestions;
+    //std::map<unsigned int, StatisticsQuestion> statisticsQuestions;
 };
