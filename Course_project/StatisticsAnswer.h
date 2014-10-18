@@ -4,5 +4,5 @@ class StatisticsAnswer
     unsigned int id;
     // сколько раз был дан ответ на вопрос
     // опять трудности с именованием...
-    unsigned int i;     //amountOfGivingAnswer  ,если не сильно громоздко //amount - немного не то, это скорее кол-во товара на складе, но это уже во мне наверн олимпиадник проснулся times лучше
+    unsigned int amountOfGivingAnswer;     //amountOfGivingAnswer  ,если не сильно громоздко //amount - немного не то, это скорее кол-во товара на складе, но это уже во мне наверн олимпиадник проснулся times лучше
 };

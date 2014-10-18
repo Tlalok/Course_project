@@ -1,6 +1,6 @@
 #include <vector>
+#include <map>
 #include "StatisticsQuestion.h"
-//#include <unordered_map>
 
 class Character
 {
@@ -8,8 +8,9 @@ class Character
     std::string name;
     // сколько раз был загадан
     // не знаю как назвать на английском)   //amountOfPicking  , наверное,только такое могу предложить
-    unsigned int i;
+    unsigned int amountOfPicking;
     // информация по вопросам и ответам 
     // для данного персонажа
     std::vector<StatisticsQuestion> statisticsQuestions;
+    //std::map<unsigned int, StatisticsQuestion> statisticsQuestions;
 };

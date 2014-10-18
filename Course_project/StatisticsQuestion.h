@@ -1,4 +1,5 @@
 #include <vector>
+#include <map>
 #include "StatisticsAnswer.h"
 
 class StatisticsQuestion
@@ -8,7 +9,8 @@ class StatisticsQuestion
     // когда загадывали персонажа которому
     // принадлежит объект этого класса 
     // тоже не знаю как назвать)     //amountOfAskingQuestion  ,если не сильно громоздко.можно урезать имя
-    unsigned int i;
+    unsigned int amountOfAskingQuestion;
     // статистика ответов
     std::vector<StatisticsAnswer> statisticsAnswers;
+    //std::map<unsigned int, unsigned int> statisticsAnswers;
 };

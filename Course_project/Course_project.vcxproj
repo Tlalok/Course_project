@@ -79,7 +79,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Answer.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Question.h" />
+    <ClInclude Include="StatisticsAnswer.h" />
+    <ClInclude Include="StatisticsGames.h" />
+    <ClInclude Include="StatisticsQuestion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
