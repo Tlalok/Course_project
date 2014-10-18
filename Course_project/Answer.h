@@ -1,8 +1,8 @@
 #include <string>
 
-class Question
+class Answer
 {
     unsigned int id;
-    // текст вопроса
+    // текст ответа
     std::string text;
 };
