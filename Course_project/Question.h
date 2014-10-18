@@ -4,5 +4,5 @@ class Question
 {
     unsigned int id;
     // текст вопроса
-    std::string text;
+    std::string text;  //questionText не катит? чтобы путаницы не было мб, или я придираюсь?
 };
