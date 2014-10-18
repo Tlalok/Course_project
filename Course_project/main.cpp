@@ -1,4 +1,5 @@
-
+#include <stdio.h>
+#include <iostrem.h> 
 
 int main()
 {
