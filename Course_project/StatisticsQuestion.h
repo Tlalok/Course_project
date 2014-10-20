@@ -8,6 +8,7 @@ class StatisticsQuestion
     unsigned int timesOfAskingQuestion;
     std::vector<StatisticsAnswer> statisticsAnswers;
     //std::map<unsigned int, unsigned int> statisticsAnswers;
+public:
 	StatisticsQuestion();
 	StatisticsQuestion(int, int, std::vector<StatisticsAnswer>);
 };
