@@ -11,4 +11,8 @@ class StatisticsQuestion
 public:
 	StatisticsQuestion();
 	StatisticsQuestion(int, int, std::vector<StatisticsAnswer>);
+	int getQuestionID();
+	int gettimesOfAskingQuestion();
+	int getAnswerStatistic(int);
+	
 };

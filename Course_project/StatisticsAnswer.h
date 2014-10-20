@@ -6,4 +6,6 @@ class StatisticsAnswer
 public:
 	StatisticsAnswer();
 	StatisticsAnswer(int, int);
+	int getAnswerID();
+	int gettimesOfGivingAnswer();
 };
