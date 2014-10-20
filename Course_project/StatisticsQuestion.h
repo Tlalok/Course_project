@@ -13,6 +13,6 @@ public:
 	StatisticsQuestion(int, int, std::vector<StatisticsAnswer>);
 	int getQuestionID();
 	int gettimesOfAskingQuestion();
-	int getAnswerStatistic(int);
+	StatisticsAnswer getAnswerStatistic(int);
 	
 };

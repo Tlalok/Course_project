@@ -80,7 +80,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Probability.cpp" />
+    <ClCompile Include="StatisticsAnswer.cpp" />
     <ClCompile Include="StatisticsGames.cpp" />
+    <ClCompile Include="StatisticsQuestion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Answer.h" />

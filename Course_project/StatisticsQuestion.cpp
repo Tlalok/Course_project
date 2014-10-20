@@ -27,7 +27,7 @@ int StatisticsQuestion :: gettimesOfAskingQuestion()
 	return this->timesOfAskingQuestion;
 }
 
-int StatisticsQuestion :: getAnswerStatistic(int number)
+StatisticsAnswer StatisticsQuestion :: getAnswerStatistic(int number)
 {
-	return this->statisticsAnswers[nimber];
+	return this->statisticsAnswers[number];
 }
