@@ -22,7 +22,7 @@ int StatisticsQuestion :: getQuestionID()
 	return this->id;
 }
 
-int StatisticsQuestion :: gettimesOfAskingQuestion()
+int StatisticsQuestion :: getTimesOfAskingQuestion()
 {
 	return this->timesOfAskingQuestion;
 }
@@ -30,4 +30,9 @@ int StatisticsQuestion :: gettimesOfAskingQuestion()
 StatisticsAnswer StatisticsQuestion :: getAnswerStatistic(int number)
 {
 	return this->statisticsAnswers[number];
+}
+
+unsigned int StatisticsQuestion::getTimesOfGivingAnswer(unsigned int idAnswer)
+{
+    return statisticsAnswers[idAnswer].getTimesOfGivingAnswer();
 }

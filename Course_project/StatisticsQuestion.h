@@ -12,7 +12,9 @@ public:
 	StatisticsQuestion();
 	StatisticsQuestion(int, int, std::vector<StatisticsAnswer>);
 	int getQuestionID();
-	int gettimesOfAskingQuestion();
+	int getTimesOfAskingQuestion();
 	StatisticsAnswer getAnswerStatistic(int);
+
+    unsigned int getTimesOfGivingAnswer(unsigned int idAnswer);
 	
 };

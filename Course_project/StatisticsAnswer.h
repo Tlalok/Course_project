@@ -1,11 +1,12 @@
+typedef unsigned uint;
 
 class StatisticsAnswer
 {
-    unsigned int id;
-    unsigned int timesOfGivingAnswer; 
+    uint id;
+    uint timesOfGivingAnswer; 
 public:
 	StatisticsAnswer();
-	StatisticsAnswer(int, int);
-	int getAnswerID();
-	int gettimesOfGivingAnswer();
+	StatisticsAnswer(uint, uint);
+	uint getAnswerID();
+	uint getTimesOfGivingAnswer();
 };

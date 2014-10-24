@@ -18,4 +18,7 @@ public:
 	int getTimesPicked();
 	int getId();
 	std::string getName();
+    //unsigned int getCountQuestions();
+    unsigned int getTimesOfAskingQuestion(unsigned int idQuestion);
+    unsigned int getTimesOfGivingAnswer(unsigned int idQuestion, unsigned int idAnswer);
 };

@@ -22,5 +22,13 @@ public:
 	int getTimesCharacterPicked(int);
 	std::string getNameOfCharacter(int);
 	int getNumberGames();
-	Character getCharacter(int)
+	Character getCharacter(int);
+
+    double getPBi(unsigned int idQuestion, unsigned int idAnswer);
+
+    // сколько всего раз задавался вопрос
+    unsigned int getTimesOfAskingQuestion(unsigned int idQuestion);
+    // сколько раз давался ответ на вопрос
+    unsigned int getTimesOfGivingAnswer(unsigned int idQuestion, unsigned int idAnswer);
+
 };

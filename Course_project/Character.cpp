@@ -14,3 +14,8 @@ int Character::getTimesPicked()
 {
 	return timesPicked;
 }
+
+unsigned int Character::getTimesOfGivingAnswer(unsigned int idQuestion, unsigned int idAnswer)
+{
+    return getTimesOfGivingAnswer(idQuestion, idAnswer);
+}
