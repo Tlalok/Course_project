@@ -1,6 +1,6 @@
 #include "Character.h"
 
-int Character::getId()
+uint Character::getId()
 {
 	return id;
 }
@@ -10,7 +10,12 @@ std::string Character::getName()
 	return name;
 }
 
-int Character::getTimesPicked()
+uint Character::getTimesPicked()
 {
 	return timesPicked;
+}
+
+uint Character::getTimesOfGivingAnswer(uint idQuestion, uint idAnswer)
+{
+    return getTimesOfGivingAnswer(idQuestion, idAnswer);
 }

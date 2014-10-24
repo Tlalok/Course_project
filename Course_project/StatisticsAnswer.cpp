@@ -1,6 +1,6 @@
 #include "StatisticsAnswer.h"
 
-StatisticsAnswer :: StatisticsAnswer(int id, int timeOfGivingAnswer)
+StatisticsAnswer :: StatisticsAnswer(uint id, uint timeOfGivingAnswer)
 {
 	this->id = id;
 	this->timesOfGivingAnswer = timeOfGivingAnswer;
@@ -13,12 +13,12 @@ StatisticsAnswer :: StatisticsAnswer()
 	this->timesOfGivingAnswer = 0;
 }
 
-int StatisticsAnswer :: getAnswerID()
+uint StatisticsAnswer :: getAnswerID()
 {
 	return this->id;
 }
 
-int StatisticsAnswer :: gettimesOfGivingAnswer()
+uint StatisticsAnswer :: getTimesOfGivingAnswer()
 {
 	return this->timesOfGivingAnswer;
 }

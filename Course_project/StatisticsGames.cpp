@@ -1,26 +1,48 @@
 #include "StatisticsGames.h"
 
-Character StatisticsGames::getCharacter(int n)
+Character StatisticsGames::getCharacter(uint n)
 {
 	return characters[n];
 }
 
-std::string StatisticsGames::getNameOfCharacter(int n)
+std::string StatisticsGames::getNameOfCharacter(uint n)
 {
 	return characters[n].getName();
 }
 
-int StatisticsGames::getNumberGames()
+uint StatisticsGames::getNumberGames()
 {
 	return numberGames;
 }
 
-int StatisticsGames::getNumberOfCharacters()
+uint StatisticsGames::getNumberOfCharacters()
 {
 	return characters.size();
 }
 
-int StatisticsGames::getTimesCharacterPicked(int n)
+uint StatisticsGames::getTimesCharacterPicked(uint n)
 {
 	return characters[n].getTimesPicked();
+}
+
+uint StatisticsGames::getTimesOfAskingQuestion(uint idQuestion)
+{
+    uint result = 0;
+    for (uint i = 0; i < characters.size(); i++)
+        result += characters[i].getTimesOfAskingQuestion(idQuestion);
+    return result;
+}
+
+uint StatisticsGames::getTimesOfGivingAnswer(uint idQuestion, uint idAnswer)
+{
+    uint result = 0;
+    for (uint i = 0; i < characters.size(); i++)
+        result += characters[i].getTimesOfGivingAnswer(idQuestion, idAnswer);
+    return result;
+    
+}
+
+double StatisticsGames::getPBi(uint idQuestion, uint idAnswer)
+{
+    return (double)getTimesOfGivingAnswer(idQuestion, idAnswer) / (double)getTimesOfAskingQuestion(idQuestion);
 }
