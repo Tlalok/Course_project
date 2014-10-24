@@ -1,48 +1,48 @@
 #include "StatisticsGames.h"
 
-Character StatisticsGames::getCharacter(int n)
+Character StatisticsGames::getCharacter(uint n)
 {
 	return characters[n];
 }
 
-std::string StatisticsGames::getNameOfCharacter(int n)
+std::string StatisticsGames::getNameOfCharacter(uint n)
 {
 	return characters[n].getName();
 }
 
-int StatisticsGames::getNumberGames()
+uint StatisticsGames::getNumberGames()
 {
 	return numberGames;
 }
 
-int StatisticsGames::getNumberOfCharacters()
+uint StatisticsGames::getNumberOfCharacters()
 {
 	return characters.size();
 }
 
-int StatisticsGames::getTimesCharacterPicked(int n)
+uint StatisticsGames::getTimesCharacterPicked(uint n)
 {
 	return characters[n].getTimesPicked();
 }
 
-unsigned int StatisticsGames::getTimesOfAskingQuestion(unsigned int idQuestion)
+uint StatisticsGames::getTimesOfAskingQuestion(uint idQuestion)
 {
-    unsigned int result = 0;
-    for (int i = 0; i < characters.size(); i++)
+    uint result = 0;
+    for (uint i = 0; i < characters.size(); i++)
         result += characters[i].getTimesOfAskingQuestion(idQuestion);
     return result;
 }
 
-unsigned int StatisticsGames::getTimesOfGivingAnswer(unsigned int idQuestion, unsigned int idAnswer)
+uint StatisticsGames::getTimesOfGivingAnswer(uint idQuestion, uint idAnswer)
 {
-    unsigned int result = 0;
-    for (int i = 0; i < characters.size(); i++)
+    uint result = 0;
+    for (uint i = 0; i < characters.size(); i++)
         result += characters[i].getTimesOfGivingAnswer(idQuestion, idAnswer);
     return result;
     
 }
 
-double StatisticsGames::getPBi(unsigned int idQuestion, unsigned int idAnswer)
+double StatisticsGames::getPBi(uint idQuestion, uint idAnswer)
 {
     return (double)getTimesOfGivingAnswer(idQuestion, idAnswer) / (double)getTimesOfAskingQuestion(idQuestion);
 }

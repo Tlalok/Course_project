@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-	for(int i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+	for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
 	{
 		Probability temp(statisticsGames.getCharacter(i), statisticsGames.getNumberGames);
 		currentProbability[statisticsGames.getNameOfCharacter(i)] = temp;
@@ -11,7 +11,7 @@ Game::Game()
 
 void Game::calculate()
 {
-	for(int i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+	for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
 	{
 
 	}

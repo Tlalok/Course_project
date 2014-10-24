@@ -7,7 +7,7 @@ StatisticsQuestion :: StatisticsQuestion()
 	this->timesOfAskingQuestion = 0;
 }
 
-StatisticsQuestion :: StatisticsQuestion(int id, int timesOfAskingQuestion, std::vector<StatisticsAnswer> statisticsAnswers)
+StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, std::vector<StatisticsAnswer> statisticsAnswers)
 {
 	this->id = id;
 	this->timesOfAskingQuestion = timesOfAskingQuestion;
@@ -17,22 +17,22 @@ StatisticsQuestion :: StatisticsQuestion(int id, int timesOfAskingQuestion, std:
 		begin = beginGiven;
 }
 
-int StatisticsQuestion :: getQuestionID()
+uint StatisticsQuestion :: getQuestionID()
 {
 	return this->id;
 }
 
-int StatisticsQuestion :: getTimesOfAskingQuestion()
+uint StatisticsQuestion :: getTimesOfAskingQuestion()
 {
 	return this->timesOfAskingQuestion;
 }
 
-StatisticsAnswer StatisticsQuestion :: getAnswerStatistic(int number)
+StatisticsAnswer StatisticsQuestion :: getAnswerStatistic(uint number)
 {
 	return this->statisticsAnswers[number];
 }
 
-unsigned int StatisticsQuestion::getTimesOfGivingAnswer(unsigned int idAnswer)
+uint StatisticsQuestion::getTimesOfGivingAnswer(uint idAnswer)
 {
     return statisticsAnswers[idAnswer].getTimesOfGivingAnswer();
 }
