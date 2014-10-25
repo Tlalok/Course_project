@@ -14,7 +14,7 @@ StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, st
 	std :: vector<StatisticsAnswer> :: iterator beginGiven = statisticsAnswers.begin();
 	std :: vector<StatisticsAnswer> :: iterator begin = this->statisticsAnswers.begin();
 	for(;beginGiven < statisticsAnswers.end(); beginGiven++, begin++)
-		begin = beginGiven;
+		*begin = *beginGiven;
 }
 
 uint StatisticsQuestion :: getQuestionID()

@@ -19,7 +19,7 @@ class Game
 	// здесь должен быть какой-то массив вероятностей текущих для всех персонажей, насколько я понимаю
 	// думаю да, тогда их проще будет вычислять
     // как вариант ассоциативный массив в котором вероятности хранятся по имени персонажа
-	std::map<std::string, Probability> currentProbability;
+	std::map<std::string, double> currentProbability;
 public:
 	Game();
 	void calculate();
