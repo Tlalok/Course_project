@@ -1,12 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-
 using namespace std;
 
 template <class TEntry> class vector
 {
 	TEntry *beginPtr;
 	int size;
+	int reserve;
 public:
 	vector();
 	vector(int);
@@ -17,4 +17,5 @@ public:
 	int getSize();
 	TEntry &operator[](int);
 	TEntry &operator=(TEntry);
+	int reserve();
 };
