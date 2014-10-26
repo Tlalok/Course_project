@@ -81,3 +81,22 @@ uint Game::gedIdNextQuestion()
             indexMin = i;
     return H[indexMin].first;
 }
+
+double Game::getPBAi(StatisticsGames statisticGame, StatisticsQuestion statisticQuestion, Character character, Question question, Answer answer)
+{
+	double result = 0;
+	uint idCharacter = character.getId();
+	uint idQuestion = question.getId();
+	uint idAnswer = answer.getId();
+	for(uint i = 0; i < statisticQuestion.getAnswerStatistic.size(); i++)
+		result *= statisticGame.getPBjAi(idCharacter, idQuestion, idAnswer);
+	return result;
+}
+
+double Game::getPAiB(StatisticsGames statisticGame, StatisticsQuestion statisticQuestion, Character character, Question question, Answer answer, uint n)
+{
+	double result = 0;
+	uint idQuestion = question.getId();
+	uint idAnswer = answer.getId();
+	result = this->getPBAi(statisticGame, statisticQuestion, character, question, answer) * statisticGame.getPAi(n) / statisticGame.getPBi(idQuestion, idAnswer);;
+}

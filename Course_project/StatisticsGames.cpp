@@ -52,3 +52,8 @@ double StatisticsGames::getPBjAi(uint idCharater, uint idQuestion, uint idAnswer
 {
     return characters[idCharater].getTimesOfGivingAnswer(idQuestion, idAnswer) / characters[idAnswer].getTimesOfAskingQuestion(idQuestion);
 }
+
+double StatisticsGames::getPAi(uint n)
+{
+	return this->getTimesCharacterPicked(n) / this->getNumberGames();
+}

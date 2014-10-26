@@ -36,4 +36,6 @@ public:
     // P(Bj|Ai)
     double getPBjAi(uint idCharater, uint idQuestion, uint idAnswer);
 
+	//P(Ai)
+	double getPAi(uint n);
 };
