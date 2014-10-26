@@ -1,13 +1,24 @@
 #include "StatisticsGames.h"
 
-Character StatisticsGames::getCharacter(uint n)
+Character StatisticsGames::getCharacter(uint id)
 {
-	return characters[n];
+	for (uint i = 0; i < characters.size(); i++)
+	{
+		if(id == characters[i].getId())
+			return characters[i].getName;
+	}
+	Character empty;
+	return empty;
 }
 
-std::string StatisticsGames::getNameOfCharacter(uint n)
+std::string StatisticsGames::getNameOfCharacter(uint id)
 {
-	return characters[n].getName();
+	for (uint i = 0; i < characters.size(); i++)
+	{
+		if(id == characters[i].getId())
+			return characters[i].getName;
+	}
+	return 0;
 }
 
 uint StatisticsGames::getNumberGames()
@@ -58,7 +69,7 @@ double StatisticsGames::getPBjAi(uint idCharater, uint idQuestion, uint idAnswer
     return characters[idCharater].getTimesOfGivingAnswer(idQuestion, idAnswer) / characters[idAnswer].getTimesOfAskingQuestion(idQuestion);
 }
 
-double StatisticsGames::getPAi(uint n)
+double StatisticsGames::getPAi(uint idCharacter)
 {
-	return this->getTimesCharacterPicked(n) / this->getNumberGames();
+	return this->getTimesCharacterPicked(idCharacter) / this->getNumberGames();
 }
