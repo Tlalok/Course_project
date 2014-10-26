@@ -20,9 +20,14 @@ uint StatisticsGames::getNumberOfCharacters()
 	return characters.size();
 }
 
-uint StatisticsGames::getTimesCharacterPicked(uint n)
+uint StatisticsGames::getTimesCharacterPicked(uint id)
 {
-	return characters[n].getTimesPicked();
+	for (uint i = 0; i < characters.size(); i++)
+	{
+		if(id == characters[i].getId())
+			return characters[i].getTimesPicked();
+	}
+	return 0;
 }
 
 uint StatisticsGames::getTimesOfAskingQuestion(uint idQuestion)

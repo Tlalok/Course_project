@@ -93,10 +93,10 @@ double Game::getPBAi(StatisticsGames statisticGame, StatisticsQuestion statistic
 	return result;
 }
 
-double Game::getPAiB(StatisticsGames statisticGame, StatisticsQuestion statisticQuestion, Character character, Question question, Answer answer, uint n)
+double Game::getPAiB(StatisticsGames statisticGame, StatisticsQuestion statisticQuestion, Character character, Question question, Answer answer)
 {
 	double result = 0;
 	uint idQuestion = question.getId();
 	uint idAnswer = answer.getId();
-	result = this->getPBAi(statisticGame, statisticQuestion, character, question, answer) * statisticGame.getPAi(n) / statisticGame.getPBi(idQuestion, idAnswer);;
+	result = this->getPBAi(statisticGame, statisticQuestion, character, question, answer) * statisticGame.getPAi(character.getId()) / statisticGame.getPBi(idQuestion, idAnswer);;
 }

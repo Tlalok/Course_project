@@ -35,7 +35,7 @@ class Game
 	//возвращает вероятность того,что будет такой набор вопросов-ответов при загаданном персонаже
 	double getPBAi(StatisticsGames, StatisticsQuestion, Character, Question, Answer);
 	//возвращает вероятность того,что загадан этот персонаж при данном наборе вопросов-ответов
-	double getPAiB(StatisticsGames, StatisticsQuestion, Character, Question, Answer, uint);
+	double getPAiB(StatisticsGames, StatisticsQuestion, Character, Question, Answer);
 
 public:
 	Game();
