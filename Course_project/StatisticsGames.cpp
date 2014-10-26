@@ -46,3 +46,9 @@ double StatisticsGames::getPBi(uint idQuestion, uint idAnswer)
 {
     return (double)getTimesOfGivingAnswer(idQuestion, idAnswer) / (double)getTimesOfAskingQuestion(idQuestion);
 }
+
+
+double StatisticsGames::getPBjAi(uint idCharater, uint idQuestion, uint idAnswer)
+{
+    return characters[idCharater].getTimesOfGivingAnswer(idQuestion, idAnswer) / characters[idAnswer].getTimesOfAskingQuestion(idQuestion);
+}

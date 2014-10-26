@@ -17,5 +17,5 @@ uint Character::getTimesPicked()
 
 uint Character::getTimesOfGivingAnswer(uint idQuestion, uint idAnswer)
 {
-    return getTimesOfGivingAnswer(idQuestion, idAnswer);
+    return statisticsQuestions[idQuestion].getTimesOfGivingAnswer(idAnswer);
 }

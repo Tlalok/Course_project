@@ -76,13 +76,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Answer.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Probability.cpp" />
+    <ClCompile Include="Question.cpp" />
     <ClCompile Include="StatisticsAnswer.cpp" />
     <ClCompile Include="StatisticsGames.cpp" />
     <ClCompile Include="StatisticsQuestion.cpp" />
+    <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Answer.h" />
@@ -93,6 +96,7 @@
     <ClInclude Include="StatisticsAnswer.h" />
     <ClInclude Include="StatisticsGames.h" />
     <ClInclude Include="StatisticsQuestion.h" />
+    <ClInclude Include="vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

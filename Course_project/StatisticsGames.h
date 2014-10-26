@@ -17,6 +17,12 @@ class StatisticsGames
     // есть мысль вынести из класса персонажа статискику вопросов 
     // в поле этого класса в качетве хеш-таблицы
     // и также поступить с ответами, но я не знаю что лучше(
+
+    // сколько всего раз задавался вопрос
+    uint getTimesOfAskingQuestion(uint idQuestion);
+    // сколько раз давался ответ на вопрос
+    uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
+
 public:
 	uint getNumberOfCharacters();
 	uint getTimesCharacterPicked(uint);
@@ -24,11 +30,10 @@ public:
 	uint getNumberGames();
 	Character getCharacter(uint);
 
+    //возвращает вероятность того что будет дан указанный ответ
     double getPBi(uint idQuestion, uint idAnswer);
 
-    // сколько всего раз задавался вопрос
-    uint getTimesOfAskingQuestion(uint idQuestion);
-    // сколько раз давался ответ на вопрос
-    uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
+    // P(Bj|Ai)
+    double getPBjAi(uint idCharater, uint idQuestion, uint idAnswer);
 
 };
