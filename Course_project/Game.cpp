@@ -96,5 +96,8 @@ double Game::getPAiB(Character character)
 	double result = 0;
 	uint idQuestion = questions[questions.size()].getId();
 	uint idAnswer = answers[answers.size()].getId();
-	result = this->getPBAi(character) * statisticsGames.getPAi(character.getId()) / statisticsGames.getPBi(idQuestion, idAnswer);;
+	double pBi = 1;
+	for(uint i = 0; i < questions.size(); i++)
+		pBi *= statisticsGames.getPBi(questions[i].getId(), answers[i].getId());
+	result = this->getPBAi(character) * statisticsGames.getPAi(character.getId()) / pBi;
 }
