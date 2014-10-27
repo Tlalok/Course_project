@@ -1,14 +1,8 @@
 #include "StatisticsGames.h"
 
-Character StatisticsGames::getCharacter(uint id)
+Character StatisticsGames::getCharacter(uint n)
 {
-	for (uint i = 0; i < characters.size(); i++)
-	{
-		if(id == characters[i].getId())
-			return characters[i].getName;
-	}
-	Character empty;
-	return empty;
+	return characters[n];
 }
 
 std::string StatisticsGames::getNameOfCharacter(uint id)

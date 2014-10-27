@@ -32,9 +32,9 @@ class Game
     // проверяет был ли задан указанный вопрос
     bool questionWasAsked(uint idQuestion);
 	//возвращает вероятность того,что будет такой набор вопросов-ответов при загаданном персонаже
-	double getPBAi(StatisticsGames, StatisticsQuestion, Character, Question, Answer);
+	double getPBAi(Character);
 	//возвращает вероятность того,что загадан этот персонаж при данном наборе вопросов-ответов
-	double getPAiB(StatisticsGames, StatisticsQuestion, Character, Question, Answer);
+	double getPAiB(Character);
 
 public:
 	Game();

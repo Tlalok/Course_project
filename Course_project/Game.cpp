@@ -17,7 +17,7 @@ void Game::calculate()
 {
 	for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
 	{
-
+		currentProbability[statisticsGames.getCharacter(i).getId()] = getPAiB(statisticsGames.getCharacter(i));
 	}
 }
 
@@ -82,21 +82,19 @@ uint Game::gedIdNextQuestion()
     return H[indexMin].first;
 }
 
-double Game::getPBAi(StatisticsGames statisticGame, StatisticsQuestion statisticQuestion, Character character, Question question, Answer answer)
+double Game::getPBAi(Character character)
 {
 	double result = 0;
 	uint idCharacter = character.getId();
-	uint idQuestion = question.getId();
-	uint idAnswer = answer.getId();
-	for(uint i = 0; i < statisticQuestion.getAnswerStatistic.size(); i++)
-		result *= statisticGame.getPBjAi(idCharacter, idQuestion, idAnswer);
+	for(uint i = 0; i < questions.size(); i++)
+		result *= statisticsGames.getPBjAi(idCharacter, questions[i].getId(), answers[i].getId());
 	return result;
 }
 
-double Game::getPAiB(StatisticsGames statisticGame, StatisticsQuestion statisticQuestion, Character character, Question question, Answer answer)
+double Game::getPAiB(Character character)
 {
 	double result = 0;
-	uint idQuestion = question.getId();
-	uint idAnswer = answer.getId();
-	result = this->getPBAi(statisticGame, statisticQuestion, character, question, answer) * statisticGame.getPAi(character.getId()) / statisticGame.getPBi(idQuestion, idAnswer);;
+	uint idQuestion = questions[questions.size()].getId();
+	uint idAnswer = answers[answers.size()].getId();
+	result = this->getPBAi(character) * statisticsGames.getPAi(character.getId()) / statisticsGames.getPBi(idQuestion, idAnswer);;
 }
