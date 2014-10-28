@@ -14,7 +14,8 @@ public:
 	uint getQuestionID();
 	uint getTimesOfAskingQuestion();
 	StatisticsAnswer getAnswerStatistic(uint);
-
     uint getTimesOfGivingAnswer(uint idAnswer);
+	friend std::fstream& operator>>(std::fstream& file, StatisticsQuestion& statisticsquestion);
+	friend std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquestion);
 	
 };

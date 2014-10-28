@@ -75,7 +75,7 @@ std::fstream& operator>>(std::fstream& file, StatisticsGames& answer)
 	file.read((char*)&numberOfCharacters, sizeof(uint));
 	for(uint i = 0; i < numberOfCharacters; i++)
 	{
-		file<<tempCharacter;
+		file>>tempCharacter;
 	}
 }
 

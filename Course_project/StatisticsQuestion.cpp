@@ -36,3 +36,14 @@ uint StatisticsQuestion::getTimesOfGivingAnswer(uint idAnswer)
 {
     return statisticsAnswers[idAnswer].getTimesOfGivingAnswer();
 }
+
+std::fstream& operator>>(std::fstream& file, StatisticsQuestion& statisticsquestion)
+{
+
+}
+
+std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquestion)
+{
+
+}
+
