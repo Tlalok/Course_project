@@ -3,6 +3,8 @@
 #include "Character.h"
 #include "Probability.h"
 #include <string>
+#include <fstream>
+
 
 class StatisticsGames
 {
@@ -17,7 +19,6 @@ class StatisticsGames
     // есть мысль вынести из класса персонажа статискику вопросов 
     // в поле этого класса в качетве хеш-таблицы
     // и также поступить с ответами, но я не знаю что лучше(
-
     // сколько всего раз задавался вопрос
     uint getTimesOfAskingQuestion(uint idQuestion);
     // сколько раз давался ответ на вопрос
@@ -38,4 +39,7 @@ public:
 
 	//P(Ai)
 	double getPAi(uint n);
+
+	friend std::fstream& operator>>(std::fstream& file, StatisticsGames& question);
+	friend std::fstream& operator<<(std::fstream& file, StatisticsGames& question);
 };

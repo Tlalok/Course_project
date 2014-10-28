@@ -5,6 +5,14 @@
 #include <map>
 #include <math.h>
 #include "Probability.h"
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+//SetConsoleCP(1251);
+//SetConsoleCP(866);
+//шаманство для ввода русского текста в консоли
 
 class Game
 {
@@ -13,8 +21,6 @@ class Game
     std::vector<Question> questions;
     // список всех ответов
     std::vector<Answer> answers;
-	//текущее кол-во заданных в этой игре вопросов // текущее количество можно получить из свойства вектора //это же private, придётся вызывать метод этого класса в котором будет вызываться метод класса вектор, норм разве7
-                                                   // по идее нам делать этот метод не нужно, но если бы и пришлось мы бы в любом случае делали ли бы метод оавницы бы почти не было либо return numberQuestions либо return currentQustionsAnswers.size()
     // текущая последовательность вопросов и ответов которые дал пользователь
     std::vector<std::pair<uint, uint>> currentAnswers;
 	// здесь должен быть какой-то массив вероятностей текущих для всех персонажей, насколько я понимаю
@@ -32,9 +38,9 @@ class Game
     // проверяет был ли задан указанный вопрос
     bool questionWasAsked(uint idQuestion);
 	//возвращает вероятность того,что будет такой набор вопросов-ответов при загаданном персонаже
-	double getPBAi(Character);
+	double getPBAi(Character&);
 	//возвращает вероятность того,что загадан этот персонаж при данном наборе вопросов-ответов
-	double getPAiB(Character);
+	double getPAiB(Character&);
 
 public:
 	Game();

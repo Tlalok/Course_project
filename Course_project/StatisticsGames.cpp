@@ -67,3 +67,19 @@ double StatisticsGames::getPAi(uint idCharacter)
 {
 	return this->getTimesCharacterPicked(idCharacter) / this->getNumberGames();
 }
+
+std::fstream& operator>>(std::fstream& file, StatisticsGames& answer)
+{
+	uint numberOfCharacters;
+	Character tempCharacter;
+	file.read((char*)&numberOfCharacters, sizeof(uint));
+	for(uint i = 0; i < numberOfCharacters; i++)
+	{
+		file<<tempCharacter;
+	}
+}
+
+std::fstream& operator<<(std::fstream& file, StatisticsGames& answer)
+{
+
+}
