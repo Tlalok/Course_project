@@ -1,6 +1,7 @@
 #include "StatisticsGames.h"
 #include "Question.h"
 #include "Answer.h"
+#include "Character.h"
 #include <vector>
 #include <map>
 #include <math.h>
@@ -40,9 +41,11 @@ class Game
 	//возвращает вероятность того,что будет такой набор вопросов-ответов при загаданном персонаже
 	double getPBAi(Character&);
 	//возвращает вероятность того,что загадан этот персонаж при данном наборе вопросов-ответов
-	double getPAiB(Character&);
+	double getPAiB(Character);
 
 public:
 	Game();
 	void calculate();
+	uint read();
+	uint write();
 };

@@ -5,7 +5,6 @@
 
 class Character
 {
-	const uint NAME_SIZE = 100;
 	//мне кажется что нужно, да и инты быстрее стринга работать будут, мб ещё и персонажи с одинаковыми именами, хз
 	uint id;
     // имя персонажа
@@ -17,6 +16,9 @@ class Character
     std::vector<StatisticsQuestion> statisticsQuestions;
     //std::map<uint, StatisticsQuestion> statisticsQuestions;
 public:
+	Character();
+	Character(const Character& toCopy);
+	Character& operator=(Character toCopy); 
 	uint getTimesPicked();
 	uint getId();
 	std::string getName();

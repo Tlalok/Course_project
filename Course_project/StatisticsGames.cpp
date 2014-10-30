@@ -68,7 +68,7 @@ double StatisticsGames::getPAi(uint idCharacter)
 	return this->getTimesCharacterPicked(idCharacter) / this->getNumberGames();
 }
 
-std::fstream& operator>>(std::fstream& file, StatisticsGames& answer)
+std::fstream& operator>>(std::fstream& file, StatisticsGames& statisticsGames)
 {
 	uint numberOfCharacters;
 	Character tempCharacter;
@@ -76,10 +76,19 @@ std::fstream& operator>>(std::fstream& file, StatisticsGames& answer)
 	for(uint i = 0; i < numberOfCharacters; i++)
 	{
 		file>>tempCharacter;
+		statisticsGames.characters.push_back(tempCharacter);
 	}
 }
 
-std::fstream& operator<<(std::fstream& file, StatisticsGames& answer)
+std::fstream& operator<<(std::fstream& file, StatisticsGames& statisticsGames)
 {
-
+	uint numberOfCharacters;
+	Character tempCharacter;
+	numberOfCharacters = statisticsGames.getNumberOfCharacters();
+	file.write((char*)&numberOfCharacters, sizeof(uint));
+	for(uint i = 0; i < numberOfCharacters; i++)
+	{
+		tempCharacter = statisticsGames.characters[i];
+		file<<tempCharacter;
+	}
 }

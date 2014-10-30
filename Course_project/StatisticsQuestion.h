@@ -1,6 +1,8 @@
 #include <vector>
 #include <map>
 #include "StatisticsAnswer.h"
+#include <fstream>
+
 
 class StatisticsQuestion
 {

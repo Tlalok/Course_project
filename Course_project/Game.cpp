@@ -1,35 +1,46 @@
 #include "Game.h"
+#include "Character.h"
 
 double log(double a, double b)
 {
     return log(b) / log(a);
 }
 
-Game::Game()
+uint Game::read()
 {
-	Question question;
 	fstream file("questions.txt", std::ios::in);
-	while(!file.eof())
+	if(file.is_open())
 	{
-		file>>question;
-		questions.push_back(question);
+		Question question;
+		while(!file.eof())
+		{
+			file>>question;
+			questions.push_back(question);
+		}
+		file.close();
 	}
-	file.close();
+	else return 0;
 
 	file.open("answers.txt", std::ios::in);
-	Answer answer;
-	fstream file("answers.txt");
-	while(!file.eof())
+	if(file.is_open())
 	{
-		file>>answer;
-		answers.push_back(answer);
+		Answer answer;
+		while(!file.eof())
+		{
+			file>>answer;
+			answers.push_back(answer);
+		}
+		file.close();
 	}
-	file.close();
+	else return 0;
 
-	for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+	file.open("statistic.txt", std::ios::in);
+	if(file.is_open())
 	{
-		
+		file>>statisticsGames;
+		file.close();
 	}
+	else return 0;
 }
 
 void Game::calculate()
@@ -110,7 +121,7 @@ double Game::getPBAi(Character& character)
 	return result;
 }
 
-double Game::getPAiB(Character& character)
+double Game::getPAiB(Character character)
 {
 	double result = 0;
 	double PB = 1;
