@@ -1,5 +1,4 @@
 #include "StatisticsQuestion.h"
-#include <vector>
 
 StatisticsQuestion :: StatisticsQuestion()
 {
@@ -7,14 +6,15 @@ StatisticsQuestion :: StatisticsQuestion()
 	this->timesOfAskingQuestion = 0;
 }
 
-StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, std::vector<StatisticsAnswer> statisticsAnswers)
+StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, _vector<StatisticsAnswer> statisticsAnswers)
 {
-	this->id = id;
+/*	this->id = id;
 	this->timesOfAskingQuestion = timesOfAskingQuestion;
 	std :: vector<StatisticsAnswer> :: iterator beginGiven = statisticsAnswers.begin();
 	std :: vector<StatisticsAnswer> :: iterator begin = this->statisticsAnswers.begin();
 	for(;beginGiven < statisticsAnswers.end(); beginGiven++, begin++)
 		*begin = *beginGiven;
+		*/
 }
 
 uint StatisticsQuestion :: getQuestionID()

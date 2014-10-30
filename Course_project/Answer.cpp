@@ -5,7 +5,7 @@ uint Answer::getId()
     return id;
 }
 
-fstream& operator>>(fstream& file, Answer& answer)
+std::fstream& operator>>(std::fstream& file, Answer& answer)
 {
 	file.read((char*)&answer.id, sizeof(uint));
 	char buf[100];
@@ -14,7 +14,7 @@ fstream& operator>>(fstream& file, Answer& answer)
     return file;
 }
 
-fstream& operator<<(fstream& file, Answer& answer)
+std::fstream& operator<<(std::fstream& file, Answer& answer)
 {
 	file.write((char*)&answer.id, sizeof(uint));
     file.write(answer.text.c_str(), answer.TEXT_SIZE);

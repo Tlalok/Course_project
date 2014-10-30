@@ -1,13 +1,11 @@
 #include "StatisticsGames.h"
 #include "Question.h"
 #include "Answer.h"
-#include <vector>
 #include <map>
 #include <math.h>
 #include <iostream>
 #include <fstream>
 
-using namespace std;
 
 //SetConsoleCP(1251);
 //SetConsoleCP(866);
@@ -17,11 +15,11 @@ class Game
 {
     StatisticsGames statisticsGames;
     // список всех вопросов
-    std::vector<Question> questions;
+    _vector<Question> questions;
     // список всех ответов
-    std::vector<Answer> answers;
+	_vector<Answer> answers;
     // текущая последовательность вопросов и ответов которые дал пользователь
-    std::vector<std::pair<uint, uint>> currentAnswers;
+    _vector<std::pair<uint, uint>> currentAnswers;
 	// здесь должен быть какой-то массив вероятностей текущих для всех персонажей, насколько я понимаю
 	// думаю да, тогда их проще будет вычислять
     // как вариант ассоциативный массив в котором вероятности хранятся по id персонажа

@@ -1,4 +1,3 @@
-#include <vector>
 #include <map>
 #include "StatisticsQuestion.h"
 #include <fstream>
@@ -13,9 +12,10 @@ class Character
     uint timesPicked;
     // информация по вопросам и ответам 
     // для данного персонажа
-    std::vector<StatisticsQuestion> statisticsQuestions;
+    _vector<StatisticsQuestion> statisticsQuestions;
     //std::map<uint, StatisticsQuestion> statisticsQuestions;
 public:
+	operator Character();
 	Character();
 	Character(const Character& toCopy);
 	Character& operator=(Character toCopy); 

@@ -7,7 +7,7 @@ double log(double a, double b)
 
 uint Game::read()
 {
-	fstream file("questions.txt", std::ios::in);
+	std::fstream file("questions.txt", std::ios::in);
 	if(file.is_open())
 	{
 		Question question;
@@ -40,6 +40,7 @@ uint Game::read()
 		file.close();
 	}
 	else return 0;
+	return 1;
 }
 
 void Game::calculate()
@@ -86,7 +87,7 @@ bool Game::questionWasAsked(uint idQuestion)
 
 uint Game::gedIdNextQuestion()
 {
-    std::vector<std::pair<uint, double>> H;
+    _vector<std::pair<uint, double>> H;
     uint i = 0;
     for (uint i = 0; i < questions.size(); i++)
     {

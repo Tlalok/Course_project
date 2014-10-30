@@ -1,81 +1,80 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "vector.h"
+#define max(a, b) (((a) > (b)) ? (a) : (b))
+class IndexOutOfRange{};
 
-using namespace std;
-
-template <class TEntry> vector<TEntry> :: vector()
+template <class TEntry> _vector<TEntry> :: _vector()
 {
-	reserve_ = 10;
-	size = 0;
-	beginPtr = new TEntry[reserve_];
+	_reserve = 10;
+	_size = 0;
+	beginPtr = new TEntry[_reserve];
 }
 
-template <class TEntry> vector<TEntry> :: vector(int newSize)
+template <class TEntry> _vector<TEntry> :: _vector(int newSize)
 {
-	size = newSize;
-	reserve_ = max(size, reserve_);
-	beginPtr = new Tentry[reserve_];
+	_size = newSize;
+	reserve_ = max(_size, _reserve);
+	beginPtr = new Tentry[_reserve];
 }
-
-template <class TEntry> vector<TEntry> :: ~vector()
+template <class TEntry> _vector<TEntry> :: ~_vector()
 {
 	delete [] beginPtr;
 }
 
-template <class TEntry> void vector<TEntry> :: pushback(const TEntry &toAdd)
+template <class TEntry> void _vector<TEntry> :: push_back(const TEntry &toAdd)
 {
-	if(size == reserve_)
+	if(_size == _reserve)
 	{
 		TEntry *temp = beginPtr;
-		reserve_ *= 2;
-		beginPtr = new TEntry[reserve_];
+		_reserve *= 2;
+		beginPtr = new TEntry[_reserve];
 		if(temp)
-			memcpy(beginPtr, temp, sizeof(TEntry)*size);
-		beginPtr[size + 1] = toAdd;
-		size++;
+			memcpy(beginPtr, temp, sizeof(TEntry)*_size);
+		beginPtr[_size + 1] = toAdd;
+		_size++;
 		if(temp)
 		delete [] temp;
 	}
 	else
 	{
-		beginPtr[size + 1] = toAdd;
-		size++;
+		beginPtr[_size + 1] = toAdd;
+		_size++;
 	}
 }
 
-template <class TEntry> TEntry* vector<TEntry> :: begin()
+template <class TEntry> TEntry* _vector<TEntry> :: begin()
 {
 	return beginPtr;
 }
 
-template <class TEntry> int vector<TEntry> :: getSize()
+template <class TEntry> int _vector<TEntry> :: size()
 {
-	return size;
+	return _size;
 }
 
-template <class TEntry> TEntry* vector<TEntry> :: end()
+template <class TEntry> TEntry* _vector<TEntry> :: end()
 {
-	return beginPtr + size;
+	return beginPtr + _size;
 }
 
-template <class TEntry> TEntry& vector<TEntry> :: operator[](int index)
+template <class TEntry> TEntry& _vector<TEntry> :: operator[](int index)
 {
-	if(index < 0 || index >= size)
-		throw IndexOutOfRange;
+	if(index < 0 || index >= _size)
+		throw IndexOutOfRange();
 	return beginPtr[index];
 }
 
-template <class TEntry> TEntry& vector<TEntry> :: operator=(TEntry newBeginPtr)
+template <class TEntry> TEntry& _vector<TEntry> :: operator=(TEntry newBeginPtr)
 {
 	delete [] beginPtr;
-	size = newBeginPtr.getSize();
+	_size = newBeginPtr.getSize();
 	beginPtr = new TEntry[newSize];
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < _size; i++)
 		beginPtr[i] = newBeginPtr[i];
 	return *beginPtr;
 }
 
-template <class TEntry> int vector<TEntry> :: reserve()
+template <class TEntry> int _vector<TEntry> :: reserve()
 {
-	return reserve_;
+	return _reserve;
 }

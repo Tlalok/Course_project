@@ -1,18 +1,17 @@
-#include <vector>
 #include <map>
 #include "StatisticsAnswer.h"
 #include <fstream>
-
+#include "vector.cpp"
 
 class StatisticsQuestion
 {
     uint id;
     uint timesOfAskingQuestion;
-    std::vector<StatisticsAnswer> statisticsAnswers;
+    _vector<StatisticsAnswer> statisticsAnswers;
     //std::map<uint, uint> statisticsAnswers;
 public:
 	StatisticsQuestion();
-	StatisticsQuestion(uint, uint, std::vector<StatisticsAnswer>);
+	StatisticsQuestion(uint, uint, _vector<StatisticsAnswer>);
 	uint getQuestionID();
 	uint getTimesOfAskingQuestion();
 	StatisticsAnswer getAnswerStatistic(uint);

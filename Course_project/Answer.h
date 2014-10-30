@@ -1,8 +1,5 @@
 #include <string>
 #include <fstream>
-
-using namespace std;
-
 typedef unsigned uint;
 
 class Answer
@@ -14,6 +11,6 @@ class Answer
                          // когда будем обращаться получится answers[i].text вроде норм
 public:
     uint getId();
-	friend fstream& operator>>(fstream& file, Answer& question);
-	friend fstream& operator<<(fstream& file, Answer& question);
+	friend std::fstream& operator>>(std::fstream& file, Answer& question);
+	friend std::fstream& operator<<(std::fstream& file, Answer& question);
 };
