@@ -6,7 +6,7 @@ template <class TEntry> class vector
 {
 	TEntry *beginPtr;
 	int size;
-	int reserve;
+	int reserve_;
 public:
 	vector();
 	vector(int);

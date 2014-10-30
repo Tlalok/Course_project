@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Character.h"
 
 double log(double a, double b)
 {
@@ -128,4 +127,5 @@ double Game::getPAiB(Character character)
 	for(uint i = 0; i < questions.size(); i++)
 		PB *= statisticsGames.getPBi(currentAnswers[i].first, currentAnswers[i].second);
 	result = getPBAi(character) * statisticsGames.getPAi(character.getId()) / PB;
+    return result;
 }

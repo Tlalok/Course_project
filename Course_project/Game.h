@@ -1,11 +1,9 @@
 #include "StatisticsGames.h"
 #include "Question.h"
 #include "Answer.h"
-#include "Character.h"
 #include <vector>
 #include <map>
 #include <math.h>
-#include "Probability.h"
 #include <iostream>
 #include <fstream>
 

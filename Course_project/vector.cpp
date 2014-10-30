@@ -5,16 +5,16 @@ using namespace std;
 
 template <class TEntry> vector<TEntry> :: vector()
 {
-	reserve = 10;
+	reserve_ = 10;
 	size = 0;
-	beginPtr = new TEntry[reserve];
+	beginPtr = new TEntry[reserve_];
 }
 
 template <class TEntry> vector<TEntry> :: vector(int newSize)
 {
 	size = newSize;
-	reserve = max(size, reserve);
-	beginPtr = new Tentry[reserve];
+	reserve_ = max(size, reserve_);
+	beginPtr = new Tentry[reserve_];
 }
 
 template <class TEntry> vector<TEntry> :: ~vector()
@@ -24,11 +24,11 @@ template <class TEntry> vector<TEntry> :: ~vector()
 
 template <class TEntry> void vector<TEntry> :: pushback(const TEntry &toAdd)
 {
-	if(size == reserve)
+	if(size == reserve_)
 	{
 		TEntry *temp = beginPtr;
-		reserve *= 2;
-		beginPtr = new TEntry[reserve];
+		reserve_ *= 2;
+		beginPtr = new TEntry[reserve_];
 		if(temp)
 			memcpy(beginPtr, temp, sizeof(TEntry)*size);
 		beginPtr[size + 1] = toAdd;
@@ -77,5 +77,5 @@ template <class TEntry> TEntry& vector<TEntry> :: operator=(TEntry newBeginPtr)
 
 template <class TEntry> int vector<TEntry> :: reserve()
 {
-	return reserve;
+	return reserve_;
 }

@@ -46,7 +46,14 @@ uint Character::getNumberOfQuestions()
 
 uint Character::getTimesOfGivingAnswer(uint idQuestion, uint idAnswer)
 {
+    // переписать т.к. index != id
     return statisticsQuestions[idQuestion].getTimesOfGivingAnswer(idAnswer);
+}
+
+uint Character::getTimesOfAskingQuestion(uint idQuestion)
+{
+    // переписать т.к. index != id
+    return statisticsQuestions[idQuestion].getTimesOfAskingQuestion();
 }
 
 std::fstream& operator>>(std::fstream& file, Character& character)
@@ -65,6 +72,7 @@ std::fstream& operator>>(std::fstream& file, Character& character)
 		file>>tempStatisticsQuestion;
 		character.statisticsQuestions.push_back(tempStatisticsQuestion);
 	}
+    return file;
 }
 
 
@@ -85,4 +93,5 @@ std::fstream& operator<<(std::fstream& file, Character& character)
 		tempStatisticsQuestion = character.statisticsQuestions[i];
 		file<<tempStatisticsQuestion;
 	}
+    return file;
 }

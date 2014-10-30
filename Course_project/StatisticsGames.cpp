@@ -10,7 +10,7 @@ std::string StatisticsGames::getNameOfCharacter(uint id)
 	for (uint i = 0; i < characters.size(); i++)
 	{
 		if(id == characters[i].getId())
-			return characters[i].getName;
+			return characters[i].getName();
 	}
 	return 0;
 }
@@ -78,6 +78,7 @@ std::fstream& operator>>(std::fstream& file, StatisticsGames& statisticsGames)
 		file>>tempCharacter;
 		statisticsGames.characters.push_back(tempCharacter);
 	}
+    return file;
 }
 
 std::fstream& operator<<(std::fstream& file, StatisticsGames& statisticsGames)
@@ -91,4 +92,5 @@ std::fstream& operator<<(std::fstream& file, StatisticsGames& statisticsGames)
 		tempCharacter = statisticsGames.characters[i];
 		file<<tempCharacter;
 	}
+    return file;
 }

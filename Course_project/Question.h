@@ -7,7 +7,7 @@ typedef unsigned uint;
 
 class Question
 {
-	const uint TEXT_SIZE = 100;
+	static const uint TEXT_SIZE = 100;
     uint id;
     // текст вопроса
     std::string text;  //questionText не катит? чтобы путаницы не было мб, или я придираюсь?

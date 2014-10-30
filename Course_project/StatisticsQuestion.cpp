@@ -49,6 +49,7 @@ std::fstream& operator>>(std::fstream& file, StatisticsQuestion& statisticsquest
 		file>>tempStatisticsAnswers;
 		statisticsquestion.statisticsAnswers.push_back(tempStatisticsAnswers);
 	}
+    return file;
 }
 
 std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquestion)
@@ -64,5 +65,6 @@ std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquest
 		tempStatisticsAnswers = statisticsquestion.statisticsAnswers[i];
 		file<<tempStatisticsAnswers;
 	}
+    return file;
 }
 

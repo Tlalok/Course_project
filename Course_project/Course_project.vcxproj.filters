@@ -21,9 +21,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="Probability.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="StatisticsGames.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
@@ -66,9 +63,6 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Answer.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Probability.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="vector.h">
