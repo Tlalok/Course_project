@@ -1,12 +1,14 @@
 #include "StatisticsQuestion.h"
 
+class noAnswer{};
+
 StatisticsQuestion :: StatisticsQuestion()
 {
 	this->id = 0;
 	this->timesOfAskingQuestion = 0;
 }
 
-StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, _vector<StatisticsAnswer> statisticsAnswers)
+StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer> statisticsAnswers)
 {
 /*	this->id = id;
 	this->timesOfAskingQuestion = timesOfAskingQuestion;
@@ -27,14 +29,24 @@ uint StatisticsQuestion :: getTimesOfAskingQuestion()
 	return this->timesOfAskingQuestion;
 }
 
-StatisticsAnswer StatisticsQuestion :: getAnswerStatistic(uint number)
+StatisticsAnswer StatisticsQuestion :: getAnswerStatistic(uint idAnswer)
 {
-	return this->statisticsAnswers[number];
+	for(uint i = 0; i < statisticsAnswers.size(); i++)
+	{
+		if(id == statisticsAnswers[i].getAnswerID())
+			return statisticsAnswers[i];
+	}
+	throw noAnswer();
 }
 
 uint StatisticsQuestion::getTimesOfGivingAnswer(uint idAnswer)
 {
-    return statisticsAnswers[idAnswer].getTimesOfGivingAnswer();
+    for(uint i = 0; i < statisticsAnswers.size(); i++)
+	{
+		if(id == statisticsAnswers[i].getAnswerID())
+			return statisticsAnswers[i].getTimesOfGivingAnswer();
+	}
+	throw noAnswer();
 }
 
 std::fstream& operator>>(std::fstream& file, StatisticsQuestion& statisticsquestion)
@@ -66,5 +78,15 @@ std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquest
 		file<<tempStatisticsAnswers;
 	}
     return file;
+}
+
+void StatisticsQuestion::addAnswer(StatisticsAnswer toAdd)
+{
+	statisticsAnswers.push_back(toAdd);
+}
+
+void StatisticsQuestion::setId(uint id)
+{
+	this->id = id;
 }
 

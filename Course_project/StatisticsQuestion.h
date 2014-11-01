@@ -1,21 +1,21 @@
 #include <map>
 #include "StatisticsAnswer.h"
-#include <fstream>
-#include "vector.cpp"
 
 class StatisticsQuestion
 {
     uint id;
     uint timesOfAskingQuestion;
-    _vector<StatisticsAnswer> statisticsAnswers;
+    Vector<StatisticsAnswer> statisticsAnswers;
     //std::map<uint, uint> statisticsAnswers;
 public:
+	void setId(uint id);
 	StatisticsQuestion();
-	StatisticsQuestion(uint, uint, _vector<StatisticsAnswer>);
+	StatisticsQuestion(uint, uint, Vector<StatisticsAnswer>);
 	uint getQuestionID();
 	uint getTimesOfAskingQuestion();
 	StatisticsAnswer getAnswerStatistic(uint);
     uint getTimesOfGivingAnswer(uint idAnswer);
+	void addAnswer(StatisticsAnswer toAdd);
 	friend std::fstream& operator>>(std::fstream& file, StatisticsQuestion& statisticsquestion);
 	friend std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquestion);
 	

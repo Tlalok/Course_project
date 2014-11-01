@@ -1,20 +1,23 @@
 #define _CRT_SECURE_NO_WARNINGS
 
+typedef unsigned uint;
+
 template <class TEntry> 
-class _vector
+class Vector
 {
 	TEntry *beginPtr;
-	int _size;
-	int _reserve;
+	uint _size;
+	uint _reserve;
 public:
-	_vector();
-	_vector(int);
-	~_vector();
+	Vector();
+	Vector(uint);
+	~Vector();
 	void push_back(const TEntry &);
 	TEntry* begin();
 	TEntry* end();
-	int size();
-	TEntry &operator[](int);
+	uint size();
+	TEntry &operator[](uint);
 	TEntry &operator=(TEntry);
-	int reserve();
+	uint reserve();
+	bool isEmpty();
 };

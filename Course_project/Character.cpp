@@ -1,5 +1,8 @@
 #include "Character.h"
 
+class noQuestion{};
+class noAnswer{};
+
 Character::Character()
 {
 	id = 0;
@@ -44,16 +47,52 @@ uint Character::getNumberOfQuestions()
 	return statisticsQuestions.size();
 }
 
+void Character::checkCharacterStatistics(Vector<Question>& questions, Vector<Answer>& answers)
+{
+	for(uint i = 0; i < questions.size(); i++)
+	{
+		uint idQuestionToCheck = questions[i].getId();
+		try
+		{
+			getStatisticsQuestion(idQuestionToCheck);
+		}
+		catch(noQuestion)
+		{
+			StatisticsQuestion temp;
+			temp.setId(questions[i].getId());
+			statisticsQuestions.push_back(temp);
+		}
+	}
+}
+
+StatisticsQuestion& Character::getStatisticsQuestion(uint idQuestion)
+{
+	for(uint i = 0; i < statisticsQuestions.size(); i++)
+	{
+		if(id == statisticsQuestions[i].getQuestionID())
+			return statisticsQuestions[i];
+	}
+	throw noQuestion();
+}
+
 uint Character::getTimesOfGivingAnswer(uint idQuestion, uint idAnswer)
 {
-    // переписать т.к. index != id
-    return statisticsQuestions[idQuestion].getTimesOfGivingAnswer(idAnswer);
+    for(uint i = 0; i < statisticsQuestions.size(); i++)
+	{
+		if(id == statisticsQuestions[i].getQuestionID())
+			return statisticsQuestions[i].getTimesOfGivingAnswer(idAnswer);
+	}
+	throw noQuestion();
 }
 
 uint Character::getTimesOfAskingQuestion(uint idQuestion)
 {
-    // переписать т.к. index != id
-    return statisticsQuestions[idQuestion].getTimesOfAskingQuestion();
+    for(uint i = 0; i < statisticsQuestions.size(); i++)
+	{
+		if(id == statisticsQuestions[i].getQuestionID())
+			return statisticsQuestions[i].getTimesOfAskingQuestion();
+	}
+	throw noQuestion();
 }
 
 std::fstream& operator>>(std::fstream& file, Character& character)
@@ -94,4 +133,9 @@ std::fstream& operator<<(std::fstream& file, Character& character)
 		file<<tempStatisticsQuestion;
 	}
     return file;
+}
+
+void Character::addQuestion(StatisticsQuestion toAdd)
+{
+	statisticsQuestions.push_back(toAdd);
 }

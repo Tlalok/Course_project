@@ -5,6 +5,15 @@ double log(double a, double b)
     return log(b) / log(a);
 }
 
+void Game::checkCharactersStatistics()
+{
+	if(!statisticsGames.charactersIsEmpty())
+	{
+		if(!questions.isEmpty())
+			statisticsGames.checkCharactersStatistics(questions, answers);
+	}
+}
+
 uint Game::read()
 {
 	std::fstream file("questions.txt", std::ios::in);
@@ -87,7 +96,7 @@ bool Game::questionWasAsked(uint idQuestion)
 
 uint Game::gedIdNextQuestion()
 {
-    _vector<std::pair<uint, double>> H;
+    Vector<std::pair<uint, double>> H;
     uint i = 0;
     for (uint i = 0; i < questions.size(); i++)
     {
@@ -129,4 +138,27 @@ double Game::getPAiB(Character character)
 		PB *= statisticsGames.getPBi(currentAnswers[i].first, currentAnswers[i].second);
 	result = getPBAi(character) * statisticsGames.getPAi(character.getId()) / PB;
     return result;
+}
+
+void Game::addQuestion(std::string text)
+{
+	for(uint i = 0; i < questions.size(); i++)
+	{
+		if(text == questions[i].getText())
+		{
+			//придумать что-то сделать если такой вопрос уже есть
+			return;
+		}
+	}
+	Question toAdd;
+	toAdd.setId(questions.size() + 1);
+	toAdd.setText(text);
+	StatisticsQuestion statisticsQToAdd;
+	StatisticsAnswer statisticsAToAdd;
+	for(uint i = 0; i < answers.size(); i++)
+	{
+		toAdd.setId(answers[i].getId());
+		statisticsQToAdd.addAnswer(statisticsAToAdd);
+	}
+	statisticsGames.addQuestion(statisticsQToAdd);
 }

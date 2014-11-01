@@ -1,6 +1,6 @@
-#include <map>
 #include "StatisticsQuestion.h"
-#include <fstream>
+#include "Question.h"
+#include "Answer.h"
 
 class Character
 {
@@ -12,7 +12,7 @@ class Character
     uint timesPicked;
     // информация по вопросам и ответам 
     // для данного персонажа
-    _vector<StatisticsQuestion> statisticsQuestions;
+    Vector<StatisticsQuestion> statisticsQuestions;
     //std::map<uint, StatisticsQuestion> statisticsQuestions;
 public:
 	operator Character();
@@ -22,9 +22,12 @@ public:
 	uint getTimesPicked();
 	uint getId();
 	std::string getName();
+	StatisticsQuestion& getStatisticsQuestion(uint idQuestion);
     uint getNumberOfQuestions();
     uint getTimesOfAskingQuestion(uint idQuestion);
     uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
+	void checkCharacterStatistics(Vector<Question>& questions, Vector<Answer>& answers);
 	friend std::fstream& operator>>(std::fstream& file, Character& character);
 	friend std::fstream& operator<<(std::fstream& file, Character& character);
+	void addQuestion(StatisticsQuestion toAdd);
 };

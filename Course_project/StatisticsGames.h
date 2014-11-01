@@ -1,7 +1,6 @@
 //#include <unordered_map>
 #include "Character.h"
 #include <string>
-#include <fstream>
 
 
 class StatisticsGames
@@ -13,7 +12,7 @@ class StatisticsGames
     // персонаж
     uint numberGames;
     // список персонажей
-    _vector<Character> characters;
+    Vector<Character> characters;
     // есть мысль вынести из класса персонажа статискику вопросов 
     // в поле этого класса в качетве хеш-таблицы
     // и также поступить с ответами, но я не знаю что лучше(
@@ -21,8 +20,10 @@ class StatisticsGames
     uint getTimesOfAskingQuestion(uint idQuestion);
     // сколько раз давался ответ на вопрос
     uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
-
 public:
+	void addQuestion(StatisticsQuestion toAdd);
+	void checkCharactersStatistics(Vector<Question>& questions, Vector<Answer>& answers);
+	bool charactersIsEmpty();
 	uint getNumberOfCharacters();
 	uint getTimesCharacterPicked(uint);
 	std::string getNameOfCharacter(uint);

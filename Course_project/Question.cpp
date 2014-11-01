@@ -20,3 +20,18 @@ std::fstream& operator<<(std::fstream& file, Question& question)
 	file.write(question.text.c_str(), question.TEXT_SIZE);
     return file;
 }
+
+std::string Question::getText()
+{
+	return text;
+}
+
+void Question::setText(std::string text)
+{
+	this->text = text;
+}
+
+void Question::setId(uint id)
+{
+	this->id = id;
+}

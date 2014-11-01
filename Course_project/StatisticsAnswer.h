@@ -1,6 +1,7 @@
 typedef unsigned uint;
 
 #include <fstream>
+#include "vector.cpp"
 
 class StatisticsAnswer
 {

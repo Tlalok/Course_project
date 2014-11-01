@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+
 typedef unsigned uint;
 
 class Answer

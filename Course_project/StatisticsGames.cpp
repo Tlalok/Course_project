@@ -68,6 +68,22 @@ double StatisticsGames::getPAi(uint idCharacter)
 	return this->getTimesCharacterPicked(idCharacter) / this->getNumberGames();
 }
 
+bool StatisticsGames::charactersIsEmpty()
+{
+	return characters.isEmpty();
+}
+
+void StatisticsGames::checkCharactersStatistics(Vector<Question>& questions, Vector<Answer>& answers)
+{
+	for(uint i = 0; i < characters.size(); i++)
+	{
+		if(characters[i].getNumberOfQuestions() < questions.size())
+		{
+			characters[i].checkCharacterStatistics(questions, answers);
+		}
+	}
+}
+
 std::fstream& operator>>(std::fstream& file, StatisticsGames& statisticsGames)
 {
 	uint numberOfCharacters;
@@ -93,4 +109,12 @@ std::fstream& operator<<(std::fstream& file, StatisticsGames& statisticsGames)
 		file<<tempCharacter;
 	}
     return file;
+}
+
+void StatisticsGames::addQuestion(StatisticsQuestion toAdd)
+{
+	for(uint i = 0; i < characters.size(); i++)
+	{
+		characters[i].addQuestion(toAdd);
+	}
 }
