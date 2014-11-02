@@ -111,7 +111,7 @@ std::fstream& operator<<(std::fstream& file, StatisticsGames& statisticsGames)
     return file;
 }
 
-void StatisticsGames::addQuestion(StatisticsQuestion toAdd)
+void StatisticsGames::addQuestion(StatisticsQuestion& toAdd)
 {
 	for(uint i = 0; i < characters.size(); i++)
 	{
@@ -131,7 +131,7 @@ bool StatisticsGames::isCharacterExist(std::string name)
 	return false;
 }
 
-void StatisticsGames::addAnswer(StatisticsAnswer toAdd)
+void StatisticsGames::addAnswer(StatisticsAnswer& toAdd)
 {
 	for(uint i = 0; i < characters.size(); i++)
 	{
@@ -139,7 +139,7 @@ void StatisticsGames::addAnswer(StatisticsAnswer toAdd)
 	}
 }
 
-void StatisticsGames::addCharacter(Character toAdd)
+void StatisticsGames::addCharacter(Character& toAdd)
 {
 	characters.push_back(toAdd);
 }

@@ -33,7 +33,7 @@ template <class TEntry> void Vector<TEntry> :: push_back(const TEntry &toAdd)
 		beginPtr[_size + 1] = toAdd;
 		_size++;
 		if(temp)
-		delete [] temp;
+			delete [] temp;
 	}
 	else
 	{

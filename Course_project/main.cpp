@@ -8,7 +8,7 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 	Game* game;
-	game = new Game;
+	game = new Game();
 	game->read();
 	char buf[30];
 	SetConsoleCP(1251);

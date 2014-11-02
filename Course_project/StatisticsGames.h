@@ -21,10 +21,10 @@ class StatisticsGames
     // сколько раз давался ответ на вопрос
     uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
 public:
-	void addAnswer(StatisticsAnswer toAdd);
+	void addAnswer(StatisticsAnswer& toAdd);
 	bool isCharacterExist(std::string name);
-	void addQuestion(StatisticsQuestion toAdd);
-	void addCharacter(Character toAdd);
+	void addQuestion(StatisticsQuestion& toAdd);
+	void addCharacter(Character& toAdd);
 	void checkCharactersStatistics(Vector<Question>& questions, Vector<Answer>& answers);
 	bool charactersIsEmpty();
 	uint getNumberOfCharacters();

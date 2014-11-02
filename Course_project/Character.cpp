@@ -135,12 +135,12 @@ std::fstream& operator<<(std::fstream& file, Character& character)
     return file;
 }
 
-void Character::addQuestion(StatisticsQuestion toAdd)
+void Character::addQuestion(StatisticsQuestion& toAdd)
 {
 	statisticsQuestions.push_back(toAdd);
 }
 
-void Character::addAnswer(StatisticsAnswer toAdd)
+void Character::addAnswer(StatisticsAnswer& toAdd)
 {
 	for(uint i = 0; i < statisticsQuestions.size(); i++)
 	{

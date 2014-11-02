@@ -14,7 +14,7 @@ class Character
     Vector<StatisticsQuestion> statisticsQuestions;
     //std::map<uint, StatisticsQuestion> statisticsQuestions;
 public:
-	void addAnswer(StatisticsAnswer toAdd);
+	void addAnswer(StatisticsAnswer& toAdd);
 	operator Character();
 	Character();
 	Character(const Character& toCopy);
@@ -29,5 +29,5 @@ public:
 	void checkCharacterStatistics(Vector<Question>& questions, Vector<Answer>& answers);
 	friend std::fstream& operator>>(std::fstream& file, Character& character);
 	friend std::fstream& operator<<(std::fstream& file, Character& character);
-	void addQuestion(StatisticsQuestion toAdd);
+	void addQuestion(StatisticsQuestion& toAdd);
 };
