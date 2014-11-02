@@ -5,6 +5,21 @@ uint Answer::getId()
     return id;
 }
 
+std::string Answer::getText()
+{
+	return text;
+}
+
+void Answer::setId(uint id)
+{
+	this->id = id;
+}
+
+void Answer::setText(std::string text)
+{
+	this->text = text;
+}
+
 std::fstream& operator>>(std::fstream& file, Answer& answer)
 {
 	file.read((char*)&answer.id, sizeof(uint));

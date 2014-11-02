@@ -90,3 +90,8 @@ void StatisticsQuestion::setId(uint id)
 	this->id = id;
 }
 
+StatisticsQuestion& StatisticsQuestion::operator++()
+{
+	this->timesOfAskingQuestion++;
+	return *this;
+}

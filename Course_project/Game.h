@@ -35,6 +35,9 @@ class Game
 	double getPAiB(Character);
 
 public:
+	bool isQuestionExist(std::string);
+	bool isAnswerExist(std::string);
+	bool isCharacterExist(std::string);
 	void addQuestion(std::string);
 	void addAnswer(std::string);
 	void addCharacter(std::string);

@@ -142,14 +142,6 @@ double Game::getPAiB(Character character)
 
 void Game::addQuestion(std::string text)
 {
-	for(uint i = 0; i < questions.size(); i++)
-	{
-		if(text == questions[i].getText())
-		{
-			//придумать что-то сделать если такой вопрос уже есть
-			return;
-		}
-	}
 	Question toAdd;
 	toAdd.setId(questions.size() + 1);
 	toAdd.setText(text);
@@ -161,4 +153,43 @@ void Game::addQuestion(std::string text)
 		statisticsQToAdd.addAnswer(statisticsAToAdd);
 	}
 	statisticsGames.addQuestion(statisticsQToAdd);
+}
+
+void Game::addAnswer(std::string text)
+{
+	Answer toAdd;
+	toAdd.setId(answers.size() + 1);
+	toAdd.setText(text);
+	answers.push_back(toAdd);
+	StatisticsAnswer toAddAStatistic(toAdd.getId(), 1);
+	statisticsGames.addAnswer(toAddAStatistic);
+}
+
+bool Game::isAnswerExist(std::string text)
+{
+	for(uint i = 0; i < answers.size(); i++)
+	{
+		if(text == answers[i].getText())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Game::isQuestionExist(std::string text)
+{
+	for(uint i = 0; i < questions.size(); i++)
+	{
+		if(text == questions[i].getText())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Game::isCharacterExist(std::string name)
+{
+	return statisticsGames.isCharacterExist(name);
 }

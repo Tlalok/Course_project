@@ -1,9 +1,9 @@
 #include "StatisticsAnswer.h"
 
-StatisticsAnswer :: StatisticsAnswer(uint id, uint timeOfGivingAnswer)
+StatisticsAnswer :: StatisticsAnswer(uint id, uint timesOfGivingAnswer)
 {
 	this->id = id;
-	this->timesOfGivingAnswer = timeOfGivingAnswer;
+	this->timesOfGivingAnswer = timesOfGivingAnswer;
 
 }
 

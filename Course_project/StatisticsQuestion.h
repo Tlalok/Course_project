@@ -8,6 +8,7 @@ class StatisticsQuestion
     Vector<StatisticsAnswer> statisticsAnswers;
     //std::map<uint, uint> statisticsAnswers;
 public:
+	StatisticsQuestion& operator++();
 	void setId(uint id);
 	StatisticsQuestion();
 	StatisticsQuestion(uint, uint, Vector<StatisticsAnswer>);

@@ -118,3 +118,23 @@ void StatisticsGames::addQuestion(StatisticsQuestion toAdd)
 		characters[i].addQuestion(toAdd);
 	}
 }
+
+bool StatisticsGames::isCharacterExist(std::string name)
+{
+	for(uint i = 0; i < characters.size(); i++)
+	{
+		if(name == characters[i].getName())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void StatisticsGames::addAnswer(StatisticsAnswer toAdd)
+{
+	for(uint i = 0; i < characters.size(); i++)
+	{
+		characters[i].addAnswer(toAdd);
+	}
+}

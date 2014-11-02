@@ -12,6 +12,9 @@ class Answer
                          // когда будем обращаться получится answers[i].text вроде норм
 public:
     uint getId();
+	std::string getText();
+	void setId(uint id);
+	void setText(std::string text);
 	friend std::fstream& operator>>(std::fstream& file, Answer& question);
 	friend std::fstream& operator<<(std::fstream& file, Answer& question);
 };

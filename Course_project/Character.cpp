@@ -139,3 +139,12 @@ void Character::addQuestion(StatisticsQuestion toAdd)
 {
 	statisticsQuestions.push_back(toAdd);
 }
+
+void Character::addAnswer(StatisticsAnswer toAdd)
+{
+	for(uint i = 0; i < statisticsQuestions.size(); i++)
+	{
+		statisticsQuestions[i].addAnswer(toAdd);
+		++statisticsQuestions[i];
+	}
+}

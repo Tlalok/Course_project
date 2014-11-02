@@ -15,6 +15,7 @@ class Character
     Vector<StatisticsQuestion> statisticsQuestions;
     //std::map<uint, StatisticsQuestion> statisticsQuestions;
 public:
+	void addAnswer(StatisticsAnswer toAdd);
 	operator Character();
 	Character();
 	Character(const Character& toCopy);
