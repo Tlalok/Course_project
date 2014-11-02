@@ -6,5 +6,6 @@ int main()
 {
 	Game* game;
 	game = new Game;
+	game->read();
     return 0;
 }

@@ -9,6 +9,7 @@ class StatisticsAnswer
     uint timesOfGivingAnswer; 
 public:
 	StatisticsAnswer();
+	StatisticsAnswer& operator++();
 	StatisticsAnswer(uint id, uint timesOfGivingAnswer);
 	uint getAnswerID();
 	uint getTimesOfGivingAnswer();

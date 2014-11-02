@@ -107,3 +107,12 @@ StatisticsQuestion& StatisticsQuestion::operator++()
 	this->timesOfAskingQuestion++;
 	return *this;
 }
+
+StatisticsAnswer& StatisticsQuestion::operator[](uint answerId)
+{
+	for(uint i = 0; i < statisticsAnswers.size(); i++)
+	{
+		if(statisticsAnswers[i].getAnswerID() == answerId)
+			return statisticsAnswers[i];
+	}
+}

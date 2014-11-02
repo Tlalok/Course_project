@@ -201,6 +201,14 @@ void Game::addCharacter(std::string name)
 	for(uint i = 0; i < questions.size(); i++)
 	{
 		toAddQStatistics.setId(questions[i].getId());
+		for(uint j = 0; j < currentAnswers.size(); j++)
+		{
+			if(currentAnswers[j].first == toAddQStatistics.getQuestionID())
+			{
+				++toAddQStatistics;
+				++toAddQStatistics[currentAnswers[j].second];
+			}
+		}
 		toAdd.addQuestion(toAddQStatistics);
 	}
 	statisticsGames.addCharacter(toAdd);

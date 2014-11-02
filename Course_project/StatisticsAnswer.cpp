@@ -40,3 +40,9 @@ std::fstream& operator<<(std::fstream& file, StatisticsAnswer& statisticsAnswer)
 	file.write((char*)&statisticsAnswer.timesOfGivingAnswer, sizeof(uint));
     return file;
 }
+
+StatisticsAnswer& StatisticsAnswer::operator++()
+{
+	timesOfGivingAnswer++;
+	return *this;
+}
