@@ -42,7 +42,6 @@ public:
 	void addAnswer(std::string);
 	void addCharacter(std::string);
 	void checkCharactersStatistics();
-	Game();
 	void calculate();
 	uint read();
 	uint write();

@@ -1,6 +1,5 @@
 #include "StatisticsQuestion.h"
-#include "Question.h"
-#include "Answer.h"
+
 
 class Character
 {

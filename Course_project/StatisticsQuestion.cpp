@@ -8,6 +8,18 @@ StatisticsQuestion :: StatisticsQuestion()
 	this->timesOfAskingQuestion = 0;
 }
 
+StatisticsQuestion::StatisticsQuestion(Vector<Answer>& answers)
+{
+	id = 0;
+	timesOfAskingQuestion = answers.size();
+	StatisticsAnswer toAdd;
+	for(uint i = 0; i < answers.size(); i++)
+	{
+		toAdd.setId(answers[i].getId());
+		statisticsAnswers.push_back(toAdd);
+	}
+}
+
 StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer> statisticsAnswers)
 {
 /*	this->id = id;

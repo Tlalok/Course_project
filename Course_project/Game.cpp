@@ -193,3 +193,15 @@ bool Game::isCharacterExist(std::string name)
 {
 	return statisticsGames.isCharacterExist(name);
 }
+
+void Game::addCharacter(std::string name)
+{
+	Character toAdd;
+	StatisticsQuestion toAddQStatistics(answers);
+	for(uint i = 0; i < questions.size(); i++)
+	{
+		toAddQStatistics.setId(questions[i].getId());
+		toAdd.addQuestion(toAddQStatistics);
+	}
+	statisticsGames.addCharacter(toAdd);
+}

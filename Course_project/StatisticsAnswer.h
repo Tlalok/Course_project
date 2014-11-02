@@ -12,6 +12,7 @@ public:
 	StatisticsAnswer(uint id, uint timesOfGivingAnswer);
 	uint getAnswerID();
 	uint getTimesOfGivingAnswer();
+	void setId(uint id);
 	friend std::fstream& operator>>(std::fstream& file, StatisticsAnswer& statisticsAnswer);
 	friend std::fstream& operator<<(std::fstream& file, StatisticsAnswer& statisticsAnswer);
 };

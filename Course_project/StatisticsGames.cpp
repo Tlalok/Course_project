@@ -138,3 +138,8 @@ void StatisticsGames::addAnswer(StatisticsAnswer toAdd)
 		characters[i].addAnswer(toAdd);
 	}
 }
+
+void StatisticsGames::addCharacter(Character toAdd)
+{
+	characters.push_back(toAdd);
+}

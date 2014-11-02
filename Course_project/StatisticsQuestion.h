@@ -1,5 +1,7 @@
 #include <map>
 #include "StatisticsAnswer.h"
+#include "Question.h"
+#include "Answer.h"
 
 class StatisticsQuestion
 {
@@ -11,6 +13,7 @@ public:
 	StatisticsQuestion& operator++();
 	void setId(uint id);
 	StatisticsQuestion();
+	StatisticsQuestion(Vector<Answer>& answers);
 	StatisticsQuestion(uint, uint, Vector<StatisticsAnswer>);
 	uint getQuestionID();
 	uint getTimesOfAskingQuestion();
