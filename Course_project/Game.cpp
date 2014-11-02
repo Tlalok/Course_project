@@ -145,13 +145,7 @@ void Game::addQuestion(std::string text)
 	Question toAdd;
 	toAdd.setId(questions.size() + 1);
 	toAdd.setText(text);
-	StatisticsQuestion statisticsQToAdd;
-	StatisticsAnswer statisticsAToAdd;
-	for(uint i = 0; i < answers.size(); i++)
-	{
-		toAdd.setId(answers[i].getId());
-		statisticsQToAdd.addAnswer(statisticsAToAdd);
-	}
+	StatisticsQuestion statisticsQToAdd(answers);
 	statisticsGames.addQuestion(statisticsQToAdd);
 }
 
