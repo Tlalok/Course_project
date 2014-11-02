@@ -12,12 +12,12 @@ public:
 	Vector();
 	Vector(uint);
 	~Vector();
-	void push_back(const TEntry &);
+	void push_back(TEntry &);
 	TEntry* begin();
 	TEntry* end();
 	uint size();
 	TEntry &operator[](uint);
-	TEntry &operator=(TEntry);
+	Vector<TEntry> &operator=(Vector<TEntry>&);
 	uint reserve();
 	bool isEmpty();
 };

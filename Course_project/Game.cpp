@@ -52,6 +52,42 @@ uint Game::read()
 	return 1;
 }
 
+uint Game::write()
+{
+	std::fstream file("questions.txt", std::ios::out);
+	if(file.is_open())
+	{
+		Question question;
+		for(uint i = 0; i < questions.size(); i++)
+		{
+			file<<questions[i];
+		}
+		file.close();
+	}
+	else return 0;
+
+	file.open("answers.txt", std::ios::out);
+	if(file.is_open())
+	{
+		Answer answer;
+		for(uint i = 0; i < answers.size(); i++)
+		{
+			file<<answers[i];
+		}
+		file.close();
+	}
+	else return 0;
+
+	file.open("statistic.txt", std::ios::out);
+	if(file.is_open())
+	{
+		file<<statisticsGames;
+		file.close();
+	}
+	else return 0;
+	return 1;
+}
+
 void Game::calculate()
 {
 	for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
@@ -190,7 +226,7 @@ bool Game::isCharacterExist(std::string name)
 
 void Game::addCharacter(std::string name)
 {
-	Character toAdd;
+	Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, 1);
 	StatisticsQuestion toAddQStatistics(answers);
 	for(uint i = 0; i < questions.size(); i++)
 	{

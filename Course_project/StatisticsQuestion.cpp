@@ -116,3 +116,22 @@ StatisticsAnswer& StatisticsQuestion::operator[](uint answerId)
 			return statisticsAnswers[i];
 	}
 }
+
+StatisticsQuestion& StatisticsQuestion::operator=(StatisticsQuestion& toCopy)
+{
+	if(this != &toCopy)
+	{
+		id = toCopy.id;
+		timesOfAskingQuestion = toCopy.timesOfAskingQuestion;
+		statisticsAnswers = toCopy.statisticsAnswers;
+	}
+	return *this;
+}
+
+StatisticsQuestion::StatisticsQuestion(StatisticsQuestion& toCopy)
+{
+	id = toCopy.id;
+	timesOfAskingQuestion = toCopy.timesOfAskingQuestion;
+	statisticsAnswers = toCopy.statisticsAnswers;
+}
+	

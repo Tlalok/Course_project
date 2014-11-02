@@ -12,6 +12,8 @@ class StatisticsQuestion
 public:
 	StatisticsQuestion& operator++();
 	StatisticsAnswer& operator[](uint answerId);
+	StatisticsQuestion& operator=(StatisticsQuestion& toCopy);
+	StatisticsQuestion(StatisticsQuestion& toCopy);
 	void setId(uint id);
 	StatisticsQuestion();
 	StatisticsQuestion(Vector<Answer>& answers);

@@ -10,7 +10,7 @@ Character::Character()
 	timesPicked = 0;
 }
 
-Character::Character(const Character& toCopy)
+Character::Character(Character& toCopy)
 {
 	this->id = toCopy.id;
 	this->name = toCopy.name;
@@ -18,7 +18,14 @@ Character::Character(const Character& toCopy)
 	this->statisticsQuestions = toCopy.statisticsQuestions;
 }
 
-Character& Character::operator=(Character toCopy)
+Character::Character(uint id, std::string name, uint timesPicked)
+{
+	this->id = id;
+	this->name = name;
+	this->timesPicked = timesPicked;
+}
+
+Character& Character::operator=(Character& toCopy)
 {
 	this->id = toCopy.id;
 	this->name = toCopy.name;

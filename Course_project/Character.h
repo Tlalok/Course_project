@@ -17,8 +17,9 @@ public:
 	void addAnswer(StatisticsAnswer& toAdd);
 	operator Character();
 	Character();
-	Character(const Character& toCopy);
-	Character& operator=(Character toCopy); 
+	Character(Character& toCopy);
+	Character(uint id, std::string name, uint timesPicked);
+	Character& operator=(Character& toCopy); 
 	uint getTimesPicked();
 	uint getId();
 	std::string getName();
