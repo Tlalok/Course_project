@@ -127,11 +127,11 @@ std::fstream& operator<<(std::fstream& file, Character& character)
 	char buf[100];
 	uint numberOfQuestions, nameLength;
 	StatisticsQuestion tempStatisticsQuestion;
-	nameLength = character.name.length();
+	nameLength = character.name.length() + 1;
 	file.write((char*)&character.id, sizeof(uint));
 	file.write((char*)&character.timesPicked, sizeof(uint));
 	file.write((char*)&nameLength, sizeof(uint));
-	file.write(buf, nameLength);
+	file.write(character.name.c_str(), nameLength);
 	numberOfQuestions = character.getNumberOfQuestions();
 	file.write((char*)&numberOfQuestions, sizeof(uint));
 	for(uint i = 0; i < numberOfQuestions; i++)
