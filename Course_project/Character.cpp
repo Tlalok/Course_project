@@ -104,12 +104,13 @@ uint Character::getTimesOfAskingQuestion(uint idQuestion)
 
 std::fstream& operator>>(std::fstream& file, Character& character)
 {
-	char buf[100];
+	//char buf[100];
 	uint numberOfQuestions, nameLength;
 	StatisticsQuestion tempStatisticsQuestion;
 	file.read((char *) &character.id, sizeof(uint));
 	file.read((char *) &character.timesPicked, sizeof(uint));
 	file.read((char *) &nameLength, sizeof(uint));
+    char *buf = new char[nameLength];
 	file.read(buf, nameLength);
 	character.name = buf;
 	file.read((char *) &numberOfQuestions, sizeof(uint));
@@ -118,16 +119,18 @@ std::fstream& operator>>(std::fstream& file, Character& character)
 		file >> tempStatisticsQuestion;
 		character.statisticsQuestions.push_back(tempStatisticsQuestion);
 	}
+    delete[] buf;
     return file;
 }
 
 
 std::fstream& operator<<(std::fstream& file, Character& character)
 {
-	char buf[100];
+	//char buf[100];
 	uint numberOfQuestions, nameLength;
 	StatisticsQuestion tempStatisticsQuestion;
 	nameLength = character.name.length() + 1;
+    char *buf = new char[nameLength];
 	file.write((char *) &character.id, sizeof(uint));
 	file.write((char *) &character.timesPicked, sizeof(uint));
 	file.write((char *) &nameLength, sizeof(uint));
@@ -136,10 +139,11 @@ std::fstream& operator<<(std::fstream& file, Character& character)
 	file.write((char *) &numberOfQuestions, sizeof(uint));
 	for(uint i = 0; i < numberOfQuestions; i++)
 	{
-		tempStatisticsQuestion = character.statisticsQuestions[i];
-		file << tempStatisticsQuestion;
-        // file << character.statisticsQuestions[i];
+		//tempStatisticsQuestion = character.statisticsQuestions[i];
+		//file << tempStatisticsQuestion;
+        file << character.statisticsQuestions[i];
 	}
+    delete[] buf;
     return file;
 }
 

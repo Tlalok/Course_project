@@ -105,9 +105,9 @@ std::fstream& operator<<(std::fstream& file, StatisticsGames& statisticsGames)
 	file.write((char *) &numberOfCharacters, sizeof(uint));
 	for(uint i = 0; i < numberOfCharacters; i++)
 	{
-		tempCharacter = statisticsGames.characters[i];
-		file << tempCharacter;
-        // file << statisticsGames.characters[i]
+		//tempCharacter = statisticsGames.characters[i];
+		//file << tempCharacter;
+        file << statisticsGames.characters[i];
 	}
     return file;
 }

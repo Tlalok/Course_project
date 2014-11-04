@@ -86,8 +86,9 @@ std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquest
 	file.write((char *) &numberOfAnswers, sizeof(uint));
 	for(uint i = 0; i < numberOfAnswers; i++)
 	{
-		tempStatisticsAnswers = statisticsquestion.statisticsAnswers[i];
-		file << tempStatisticsAnswers;
+		//tempStatisticsAnswers = statisticsquestion.statisticsAnswers[i];
+		//file << tempStatisticsAnswers;
+        file << statisticsquestion.statisticsAnswers[i];
 	}
     return file;
 }

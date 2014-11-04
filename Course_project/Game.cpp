@@ -34,10 +34,8 @@ uint Game::read()
 	if(file.is_open())
 	{
 		Answer answer;
-		//while(!file.eof())
         while(file >> answer)
 		{
-			//file >> answer;
 			answers.push_back(answer);
 		}
 		file.close();
@@ -45,10 +43,8 @@ uint Game::read()
 	else return 0;
 
 	file.open("statistic.txt", std::ios::in);
-	//if(file.is_open())
     if(file >> statisticsGames)
 	{
-		//file >> statisticsGames;
 		file.close();
 	}
 	else return 0;

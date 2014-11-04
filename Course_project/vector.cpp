@@ -12,8 +12,10 @@ template <class TEntry> Vector<TEntry> :: Vector()
 
 template <class TEntry> Vector<TEntry> :: Vector(uint newSize)
 {
+    _reserve = 10;
 	_size = newSize;
-	reserve_ = max(_size, _reserve);
+	//reserve_ = max(_size, _reserve);
+    _reserve = max(_size, _reserve);
 	beginPtr = new Tentry[_reserve];
 }
 template <class TEntry> Vector<TEntry> :: ~Vector()
