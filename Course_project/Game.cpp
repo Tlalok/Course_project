@@ -181,7 +181,9 @@ void Game::addQuestion(std::string text)
 	Question toAdd;
 	toAdd.setId(questions.size() + 1);
 	toAdd.setText(text);
+	questions.push_back(toAdd);
 	StatisticsQuestion statisticsQToAdd(answers);
+	statisticsQToAdd.setId(toAdd.getId());
 	statisticsGames.addQuestion(statisticsQToAdd);
 }
 
