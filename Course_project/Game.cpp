@@ -20,9 +20,10 @@ uint Game::read()
 	if(file.is_open())
 	{
 		Question question;
-		while(!file.eof())
+		//while(!file.eof())
+        while(file >> question)
 		{
-			file>>question;
+			//file >> question;
 			questions.push_back(question);
 		}
 		file.close();
@@ -33,9 +34,10 @@ uint Game::read()
 	if(file.is_open())
 	{
 		Answer answer;
-		while(!file.eof())
+		//while(!file.eof())
+        while(file >> answer)
 		{
-			file>>answer;
+			//file >> answer;
 			answers.push_back(answer);
 		}
 		file.close();
@@ -43,9 +45,10 @@ uint Game::read()
 	else return 0;
 
 	file.open("statistic.txt", std::ios::in);
-	if(file.is_open())
+	//if(file.is_open())
+    if(file >> statisticsGames)
 	{
-		file>>statisticsGames;
+		//file >> statisticsGames;
 		file.close();
 	}
 	else return 0;
@@ -60,7 +63,7 @@ uint Game::write()
 		Question question;
 		for(uint i = 0; i < questions.size(); i++)
 		{
-			file<<questions[i];
+			file << questions[i];
 		}
 		file.close();
 	}
@@ -72,7 +75,7 @@ uint Game::write()
 		Answer answer;
 		for(uint i = 0; i < answers.size(); i++)
 		{
-			file<<answers[i];
+			file << answers[i];
 		}
 		file.close();
 	}
@@ -81,7 +84,7 @@ uint Game::write()
 	file.open("statistic.txt", std::ios::out);
 	if(file.is_open())
 	{
-		file<<statisticsGames;
+		file << statisticsGames;
 		file.close();
 	}
 	else return 0;
@@ -244,4 +247,23 @@ void Game::addCharacter(std::string name)
 		toAdd.addQuestion(toAddQStatistics);
 	}
 	statisticsGames.addCharacter(toAdd);
+}
+
+void Game::printStatistics()
+{
+    std::cout << "\nQuestions:\n" << "===========================\n";
+    for (uint i = 0; i < questions.size(); i++)
+        std::cout << "id:   " << questions[i].getId() << std::endl
+                  << "text: " << questions[i].getText() << std::endl
+                  << "--------------------------------\n";
+    std::cout << "\nAnswers:\n" << "===========================\n";
+    for (uint i = 0; i < answers.size(); i++)
+        std::cout << "id:   " << answers[i].getId() << std::endl
+                  << "text: " << answers[i].getText() << std::endl
+                  << "--------------------------------\n";
+    std::cout << "\nCharacters:\n" << "===========================\n";
+    for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+        std::cout << "name:         " << statisticsGames.getCharacter(i).getName() << std::endl
+                  << "times picked: " << statisticsGames.getCharacter(i).getTimesPicked() << std::endl
+                  << "--------------------------------\n";
 }

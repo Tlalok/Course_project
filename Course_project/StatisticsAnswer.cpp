@@ -29,15 +29,15 @@ void StatisticsAnswer::setId(uint id)
 
 std::fstream& operator>>(std::fstream& file, StatisticsAnswer& statisticsAnswer)
 {
-	file.read((char*)&statisticsAnswer.id, sizeof(uint));
-	file.read((char*)&statisticsAnswer.timesOfGivingAnswer, sizeof(uint));
+	file.read((char *) &statisticsAnswer.id, sizeof(uint));
+	file.read((char *) &statisticsAnswer.timesOfGivingAnswer, sizeof(uint));
     return file;
 }
 
 std::fstream& operator<<(std::fstream& file, StatisticsAnswer& statisticsAnswer)
 {
-	file.write((char*)&statisticsAnswer.id, sizeof(uint));
-	file.write((char*)&statisticsAnswer.timesOfGivingAnswer, sizeof(uint));
+	file.write((char *) &statisticsAnswer.id, sizeof(uint));
+	file.write((char *) &statisticsAnswer.timesOfGivingAnswer, sizeof(uint));
     return file;
 }
 

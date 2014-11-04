@@ -45,4 +45,6 @@ public:
 	void calculate();
 	uint read();
 	uint write();
+
+    void printStatistics();
 };

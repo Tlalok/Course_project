@@ -22,16 +22,22 @@ void Answer::setText(std::string text)
 
 std::fstream& operator>>(std::fstream& file, Answer& answer)
 {
-	file.read((char*)&answer.id, sizeof(uint));
-	char buf[100];
-	file.read(buf, answer.TEXT_SIZE);
+	if(!file.read((char *) &answer.id, sizeof(uint)))
+        return file;
+    uint length;
+    file.read((char *) &length, sizeof(uint));
+    char *buf = new char[length];
+    file.read(buf, length);
 	answer.text = buf;
+    delete[] buf;
     return file;
 }
 
 std::fstream& operator<<(std::fstream& file, Answer& answer)
 {
-	file.write((char*)&answer.id, sizeof(uint));
-    file.write(answer.text.c_str(), answer.TEXT_SIZE);
+	file.write((char *) &answer.id, sizeof(uint));
+    uint length = answer.text.size() + 1;
+    file.write((char *) &length, sizeof(uint));
+    file.write(answer.text.c_str(), length);
     return file;
 }

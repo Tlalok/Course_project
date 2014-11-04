@@ -7,17 +7,23 @@ uint Question::getId()
 
 std::fstream& operator>>(std::fstream& file, Question& question)
 {
-	file.read((char*)&question.id, sizeof(uint));
-	char buf[100];
-	file.read(buf, question.TEXT_SIZE);
+	if (!file.read((char *) &question.id, sizeof(uint)))
+        return file;
+    uint length;
+    file.read((char *) &length, sizeof(uint));
+    char *buf = new char[length];
+    file.read(buf, length);
 	question.text = buf;
+    delete[] buf;
     return file;
 }
 
 std::fstream& operator<<(std::fstream& file, Question& question)
 {
-	file.write((char*)&question.id, sizeof(uint));
-	file.write(question.text.c_str(), question.TEXT_SIZE);
+	file.write((char *) &question.id, sizeof(uint));
+    uint length = question.text.size() + 1;
+    file.write((char *) &length, sizeof(uint));
+    file.write(question.text.c_str(), length);
     return file;
 }
 

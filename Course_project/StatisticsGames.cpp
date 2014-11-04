@@ -88,10 +88,10 @@ std::fstream& operator>>(std::fstream& file, StatisticsGames& statisticsGames)
 {
 	uint numberOfCharacters;
 	Character tempCharacter;
-	file.read((char*)&numberOfCharacters, sizeof(uint));
+	file.read((char *) &numberOfCharacters, sizeof(uint));
 	for(uint i = 0; i < numberOfCharacters; i++)
 	{
-		file>>tempCharacter;
+		file >> tempCharacter;
 		statisticsGames.characters.push_back(tempCharacter);
 	}
     return file;
@@ -102,11 +102,12 @@ std::fstream& operator<<(std::fstream& file, StatisticsGames& statisticsGames)
 	uint numberOfCharacters;
 	Character tempCharacter;
 	numberOfCharacters = statisticsGames.getNumberOfCharacters();
-	file.write((char*)&numberOfCharacters, sizeof(uint));
+	file.write((char *) &numberOfCharacters, sizeof(uint));
 	for(uint i = 0; i < numberOfCharacters; i++)
 	{
 		tempCharacter = statisticsGames.characters[i];
-		file<<tempCharacter;
+		file << tempCharacter;
+        // file << statisticsGames.characters[i]
 	}
     return file;
 }

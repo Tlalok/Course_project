@@ -65,12 +65,12 @@ std::fstream& operator>>(std::fstream& file, StatisticsQuestion& statisticsquest
 {
 	uint numberOfAnswers;
 	StatisticsAnswer tempStatisticsAnswers;
-	file.read((char*)&statisticsquestion.id, sizeof(uint));
-	file.read((char*)&statisticsquestion.timesOfAskingQuestion, sizeof(uint));
-	file.read((char*)&numberOfAnswers, sizeof(uint));
+	file.read((char *) &statisticsquestion.id, sizeof(uint));
+	file.read((char *) &statisticsquestion.timesOfAskingQuestion, sizeof(uint));
+	file.read((char *) &numberOfAnswers, sizeof(uint));
 	for(uint i = 0; i < numberOfAnswers; i++)
 	{
-		file>>tempStatisticsAnswers;
+		file >> tempStatisticsAnswers;
 		statisticsquestion.statisticsAnswers.push_back(tempStatisticsAnswers);
 	}
     return file;
@@ -80,14 +80,14 @@ std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquest
 {
 	uint numberOfAnswers;
 	StatisticsAnswer tempStatisticsAnswers;
-	file.write((char*)&statisticsquestion.id, sizeof(uint));
-	file.write((char*)&statisticsquestion.timesOfAskingQuestion, sizeof(uint));
+	file.write((char *) &statisticsquestion.id, sizeof(uint));
+	file.write((char *) &statisticsquestion.timesOfAskingQuestion, sizeof(uint));
 	numberOfAnswers = statisticsquestion.statisticsAnswers.size();
-	file.write((char*)&numberOfAnswers, sizeof(uint));
+	file.write((char *) &numberOfAnswers, sizeof(uint));
 	for(uint i = 0; i < numberOfAnswers; i++)
 	{
 		tempStatisticsAnswers = statisticsquestion.statisticsAnswers[i];
-		file<<tempStatisticsAnswers;
+		file << tempStatisticsAnswers;
 	}
     return file;
 }
