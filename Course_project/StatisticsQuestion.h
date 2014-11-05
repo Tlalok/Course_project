@@ -24,7 +24,7 @@ public:
 	StatisticsAnswer getAnswerStatistic(uint);
     uint getTimesOfGivingAnswer(uint idAnswer);
 	void addAnswer(StatisticsAnswer toAdd);
-	friend std::ifstream& operator>>(std::ifstream& file, StatisticsQuestion& statisticsquestion);
-	friend std::ofstream& operator<<(std::ofstream& file, StatisticsQuestion& statisticsquestion);
+	friend std::istream& operator>>(std::istream& file, StatisticsQuestion& statisticsquestion);
+	friend std::ostream& operator<<(std::ostream& file, StatisticsQuestion& statisticsquestion);
 	
 };

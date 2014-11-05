@@ -66,7 +66,7 @@ uint StatisticsQuestion::getTimesOfGivingAnswer(uint idAnswer)
 	throw noAnswer();
 }
 
-std::ifstream& operator>>(std::ifstream& file, StatisticsQuestion& statisticsQuestion)
+std::istream& operator>>(std::istream& file, StatisticsQuestion& statisticsQuestion)
 {
 	uint numberOfAnswers;
 	StatisticsAnswer tempStatisticsAnswers;
@@ -81,7 +81,7 @@ std::ifstream& operator>>(std::ifstream& file, StatisticsQuestion& statisticsQue
     return file;
 }
 
-std::ofstream& operator<<(std::ofstream& file, StatisticsQuestion& statisticsQuestion)
+std::ostream& operator<<(std::ostream& file, StatisticsQuestion& statisticsQuestion)
 {
 	uint numberOfAnswers;
 	file.write((char *) &statisticsQuestion.id, sizeof(uint));

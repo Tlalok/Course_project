@@ -33,14 +33,14 @@ void StatisticsAnswer::setId(uint id)
 	this->id = id;
 }
 
-std::ifstream& operator>>(std::ifstream& file, StatisticsAnswer& statisticsAnswer)
+std::istream& operator>>(std::istream& file, StatisticsAnswer& statisticsAnswer)
 {
 	file.read((char *) &statisticsAnswer.id, sizeof(uint));
 	file.read((char *) &statisticsAnswer.timesOfGivingAnswer, sizeof(uint));
     return file;
 }
 
-std::ofstream& operator<<(std::ofstream& file, StatisticsAnswer& statisticsAnswer)
+std::ostream& operator<<(std::ostream& file, StatisticsAnswer& statisticsAnswer)
 {
 	file.write((char *) &statisticsAnswer.id, sizeof(uint));
 	file.write((char *) &statisticsAnswer.timesOfGivingAnswer, sizeof(uint));

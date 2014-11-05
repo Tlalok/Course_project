@@ -27,7 +27,7 @@ public:
     uint getTimesOfAskingQuestion(uint idQuestion);
     uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
 	void checkCharacterStatistics(Vector<Question>& questions, Vector<Answer>& answers);
-	friend std::ifstream& operator>>(std::ifstream& file, Character& character);
-	friend std::ofstream& operator<<(std::ofstream& file, Character& character);
+	friend std::istream& operator>>(std::istream& file, Character& character);
+	friend std::ostream& operator<<(std::ostream& file, Character& character);
 	void addQuestion(StatisticsQuestion& toAdd);
 };

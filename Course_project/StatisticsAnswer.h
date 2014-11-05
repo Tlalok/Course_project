@@ -17,7 +17,7 @@ public:
 	uint getAnswerID();
 	uint getTimesOfGivingAnswer();
 	void setId(uint id);
-	friend std::ifstream& operator>>(std::ifstream& file, StatisticsAnswer& statisticsAnswer);
-	friend std::ofstream& operator<<(std::ofstream& file, StatisticsAnswer& statisticsAnswer);
+	friend std::istream& operator>>(std::istream& file, StatisticsAnswer& statisticsAnswer);
+	friend std::ostream& operator<<(std::ostream& file, StatisticsAnswer& statisticsAnswer);
     StatisticsAnswer& operator=(StatisticsAnswer &toCopy);
 };

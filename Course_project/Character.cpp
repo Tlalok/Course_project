@@ -102,7 +102,7 @@ uint Character::getTimesOfAskingQuestion(uint idQuestion)
 	throw noQuestion();
 }
 
-std::ifstream& operator>>(std::ifstream& file, Character& character)
+std::istream& operator>>(std::istream& file, Character& character)
 {
 	uint numberOfQuestions, nameLength;
 	StatisticsQuestion tempStatisticsQuestion;
@@ -123,7 +123,7 @@ std::ifstream& operator>>(std::ifstream& file, Character& character)
 }
 
 
-std::ofstream& operator<<(std::ofstream& file, Character& character)
+std::ostream& operator<<(std::ostream& file, Character& character)
 {
 	uint numberOfQuestions, nameLength;
 	nameLength = character.name.length() + 1;

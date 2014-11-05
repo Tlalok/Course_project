@@ -16,7 +16,6 @@ void Game::checkCharactersStatistics()
 
 uint Game::read()
 {
-    
 	std::ifstream file("questions.txt");
 	if(file.is_open())
 	{

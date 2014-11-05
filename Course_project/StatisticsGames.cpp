@@ -94,7 +94,7 @@ void StatisticsGames::checkCharactersStatistics(Vector<Question>& questions, Vec
 	}
 }
 
-std::ifstream& operator>>(std::ifstream& file, StatisticsGames& statisticsGames)
+std::istream& operator>>(std::istream& file, StatisticsGames& statisticsGames)
 {
 	uint numberOfCharacters;
 	Character tempCharacter;
@@ -107,7 +107,7 @@ std::ifstream& operator>>(std::ifstream& file, StatisticsGames& statisticsGames)
     return file;
 }
 
-std::ofstream& operator<<(std::ofstream& file, StatisticsGames& statisticsGames)
+std::ostream& operator<<(std::ostream& file, StatisticsGames& statisticsGames)
 {
 	uint numberOfCharacters;
 	numberOfCharacters = statisticsGames.getNumberOfCharacters();
