@@ -9,10 +9,10 @@ std::ifstream& operator>>(std::ifstream& file, Question& question)
 {
 	if (!file.read((char *) &question.id, sizeof(uint)))
         return file;
-    uint length;
-    file.read((char *) &length, sizeof(uint));
-    char *buf = new char[length];
-    file.read(buf, length);
+    uint textLength;
+    file.read((char *) &textLength, sizeof(uint));
+    char *buf = new char[textLength];
+    file.read(buf, textLength);
 	question.text = buf;
     delete[] buf;
     return file;
@@ -21,9 +21,9 @@ std::ifstream& operator>>(std::ifstream& file, Question& question)
 std::ofstream& operator<<(std::ofstream& file, Question& question)
 {
 	file.write((char *) &question.id, sizeof(uint));
-    uint length = question.text.size() + 1;
-    file.write((char *) &length, sizeof(uint));
-    file.write(question.text.c_str(), length);
+    uint textLength = question.text.size() + 1;
+    file.write((char *) &textLength, sizeof(uint));
+    file.write(question.text.c_str(), textLength);
     return file;
 }
 

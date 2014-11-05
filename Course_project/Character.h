@@ -11,11 +11,11 @@ class Character
     uint timesPicked;
     // информация по вопросам и ответам 
     // для данного персонажа
-    vector<StatisticsQuestion> statisticsQuestions;
+    Vector<StatisticsQuestion> statisticsQuestions;
     //std::map<uint, StatisticsQuestion> statisticsQuestions;
 public:
     Character();
-	Character(const Character& toCopy);
+	Character(Character& toCopy);
 	Character(uint id, std::string name, uint timesPicked);
 	void addAnswer(StatisticsAnswer& toAdd);
 	Character& operator=(Character& toCopy); 
@@ -26,7 +26,7 @@ public:
     uint getNumberOfQuestions();
     uint getTimesOfAskingQuestion(uint idQuestion);
     uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
-	void checkCharacterStatistics(vector<Question>& questions, vector<Answer>& answers);
+	void checkCharacterStatistics(Vector<Question>& questions, Vector<Answer>& answers);
 	friend std::ifstream& operator>>(std::ifstream& file, Character& character);
 	friend std::ofstream& operator<<(std::ofstream& file, Character& character);
 	void addQuestion(StatisticsQuestion& toAdd);

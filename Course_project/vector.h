@@ -3,21 +3,21 @@
 typedef unsigned uint;
 
 template <class TEntry> 
-class vector
+class Vector
 {
 	TEntry *beginPtr;
 	uint _size;
 	uint _reserve;
 public:
-	vector();
-	vector(uint);
-	~vector();
+	Vector();
+	Vector(uint);
+	~Vector();
 	void push_back(TEntry &);
 	TEntry* begin();
 	TEntry* end();
 	uint size();
 	TEntry &operator[](uint);
-	vector<TEntry> &operator=(vector<TEntry>&);
+	Vector<TEntry> &operator=(Vector<TEntry>&);
 	uint reserve();
-	bool isEmpty();
+	bool empty();
 };

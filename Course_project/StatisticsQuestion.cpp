@@ -8,7 +8,7 @@ StatisticsQuestion :: StatisticsQuestion()
 	this->timesOfAskingQuestion = 0;
 }
 
-StatisticsQuestion::StatisticsQuestion(vector<Answer>& answers)
+StatisticsQuestion::StatisticsQuestion(Vector<Answer>& answers)
 {
 	id = 0;
 	timesOfAskingQuestion = answers.size();
@@ -20,7 +20,7 @@ StatisticsQuestion::StatisticsQuestion(vector<Answer>& answers)
 	}
 }
 
-StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, vector<StatisticsAnswer> answers)
+StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer> answers)
 {
 	this->id = id;
 	this->timesOfAskingQuestion = timesOfAskingQuestion;
@@ -29,20 +29,12 @@ StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, ve
 		
 }
 
-StatisticsQuestion::StatisticsQuestion(const StatisticsQuestion& toCopy)
+StatisticsQuestion::StatisticsQuestion(StatisticsQuestion& toCopy)
 {
 	id = toCopy.id;
 	timesOfAskingQuestion = toCopy.timesOfAskingQuestion;
 	statisticsAnswers = toCopy.statisticsAnswers;
 }
-/*
-StatisticsQuestion :: StatisticsQuestion(StatisticsQuestion & statisticsQuestion)
-{
-    this->id = statisticsQuestion.id;
-    this->timesOfAskingQuestion = statisticsQuestion.timesOfAskingQuestion;
-    this->statisticsAnswers = statisticsQuestion.statisticsAnswers;
-}
-*/
 
 uint StatisticsQuestion :: getQuestionID()
 {
@@ -92,15 +84,12 @@ std::ifstream& operator>>(std::ifstream& file, StatisticsQuestion& statisticsQue
 std::ofstream& operator<<(std::ofstream& file, StatisticsQuestion& statisticsQuestion)
 {
 	uint numberOfAnswers;
-	StatisticsAnswer tempStatisticsAnswers;
 	file.write((char *) &statisticsQuestion.id, sizeof(uint));
 	file.write((char *) &statisticsQuestion.timesOfAskingQuestion, sizeof(uint));
 	numberOfAnswers = statisticsQuestion.statisticsAnswers.size();
 	file.write((char *) &numberOfAnswers, sizeof(uint));
 	for(uint i = 0; i < numberOfAnswers; i++)
 	{
-		//tempStatisticsAnswers = statisticsQuestion.statisticsAnswers[i];
-		//file << tempStatisticsAnswers;
         file << statisticsQuestion.statisticsAnswers[i];
 	}
     return file;

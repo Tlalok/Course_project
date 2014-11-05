@@ -52,3 +52,10 @@ StatisticsAnswer& StatisticsAnswer::operator++()
 	timesOfGivingAnswer++;
 	return *this;
 }
+
+StatisticsAnswer& StatisticsAnswer::operator=(StatisticsAnswer &toCopy)
+{
+    this->id = toCopy.id;
+    this->timesOfGivingAnswer = toCopy.timesOfGivingAnswer;
+    return *this;
+}

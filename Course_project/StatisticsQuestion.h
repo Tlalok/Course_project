@@ -7,13 +7,13 @@ class StatisticsQuestion
 {
     uint id;
     uint timesOfAskingQuestion;
-    vector<StatisticsAnswer> statisticsAnswers;
+    Vector<StatisticsAnswer> statisticsAnswers;
     //std::map<uint, uint> statisticsAnswers;
 public:
 	StatisticsQuestion();
-	StatisticsQuestion(vector<Answer>& answers);
-	StatisticsQuestion(uint, uint, vector<StatisticsAnswer>);
-    StatisticsQuestion(const StatisticsQuestion& toCopy);
+	StatisticsQuestion(Vector<Answer>& answers);
+	StatisticsQuestion(uint, uint, Vector<StatisticsAnswer>);
+    StatisticsQuestion(StatisticsQuestion& toCopy);
     //StatisticsQuestion(StatisticsQuestion & statisticsQuestion);
     StatisticsQuestion& operator++();
 	StatisticsAnswer& operator[](uint answerId);

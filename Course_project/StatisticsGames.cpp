@@ -80,11 +80,10 @@ double StatisticsGames::getPAi(uint idCharacter)
 
 bool StatisticsGames::charactersIsEmpty()
 {
-	//return characters.isEmpty();
     return characters.empty();
 }
 
-void StatisticsGames::checkCharactersStatistics(vector<Question>& questions, vector<Answer>& answers)
+void StatisticsGames::checkCharactersStatistics(Vector<Question>& questions, Vector<Answer>& answers)
 {
 	for(uint i = 0; i < characters.size(); i++)
 	{
@@ -111,13 +110,10 @@ std::ifstream& operator>>(std::ifstream& file, StatisticsGames& statisticsGames)
 std::ofstream& operator<<(std::ofstream& file, StatisticsGames& statisticsGames)
 {
 	uint numberOfCharacters;
-	Character tempCharacter;
 	numberOfCharacters = statisticsGames.getNumberOfCharacters();
 	file.write((char *) &numberOfCharacters, sizeof(uint));
 	for(uint i = 0; i < numberOfCharacters; i++)
 	{
-		//tempCharacter = statisticsGames.characters[i];
-		//file << tempCharacter;
         file << statisticsGames.characters[i];
 	}
     return file;
@@ -154,4 +150,11 @@ void StatisticsGames::addAnswer(StatisticsAnswer& toAdd)
 void StatisticsGames::addCharacter(Character& toAdd)
 {
 	characters.push_back(toAdd);
+}
+
+StatisticsGames& StatisticsGames::operator=(StatisticsGames toCopy)
+{
+    this->numberGames = toCopy.numberGames;
+    this->characters = toCopy.characters;
+    return *this;
 }

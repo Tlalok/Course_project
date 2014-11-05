@@ -9,7 +9,6 @@ void Game::checkCharactersStatistics()
 {
 	if(!statisticsGames.charactersIsEmpty())
 	{
-		//if(!questions.isEmpty())
         if(!questions.empty())
 			statisticsGames.checkCharactersStatistics(questions, answers);
 	}
@@ -22,19 +21,14 @@ uint Game::read()
 	if(file.is_open())
 	{
 		Question question;
-		//while(!file.eof())
         while(file >> question)
 		{
-			//file >> question;
 			questions.push_back(question);
 		}
 		file.close();
 	}
 	else return 0;
     
-    
-    //std::fstream file2("answers.txt", std::ios::in);
-    //std::ifstream file("answers.txt");
 	file.open("answers.txt");
 	if(file.is_open())
 	{
@@ -47,9 +41,7 @@ uint Game::read()
 	}
 	else return 0;
     
-	//std::ifstream file3("statistic.txt");
     file.open("statistic.txt");
-    //std::ifstream file("statistic.txt");
     if(file.is_open())
 	{
         file >> statisticsGames;
@@ -61,7 +53,6 @@ uint Game::read()
 
 uint Game::write()
 {
-    
 	std::ofstream file("questions.txt");
 	if(file.is_open())
 	{
@@ -75,8 +66,6 @@ uint Game::write()
 	else return 0;
     
 	file.open("answers.txt");
-    
-    //std::ofstream file("answers.txt");
 	if(file.is_open())
 	{
 		Answer answer;
@@ -88,9 +77,7 @@ uint Game::write()
 	}
 	else return 0;
     
-    
 	file.open("statistic.txt");
-    //std::ofstream file3("statistic.txt");
 	if(file.is_open())
 	{
 		file << statisticsGames;
@@ -145,7 +132,7 @@ bool Game::questionWasAsked(uint idQuestion)
 
 uint Game::gedIdNextQuestion()
 {
-    vector<std::pair<uint, double>> H;
+    Vector<std::pair<uint, double>> H;
     uint i = 0;
     for (uint i = 0; i < questions.size(); i++)
     {

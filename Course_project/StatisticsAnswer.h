@@ -1,9 +1,9 @@
 typedef unsigned uint;
 
 #include <fstream>
-//#include "vector.cpp"
-#include <vector>
-using namespace std;
+#include "Vector.cpp"
+//#include <Vector>
+//using namespace std;
 
 class StatisticsAnswer
 {
@@ -19,4 +19,5 @@ public:
 	void setId(uint id);
 	friend std::ifstream& operator>>(std::ifstream& file, StatisticsAnswer& statisticsAnswer);
 	friend std::ofstream& operator<<(std::ofstream& file, StatisticsAnswer& statisticsAnswer);
+    StatisticsAnswer& operator=(StatisticsAnswer &toCopy);
 };
