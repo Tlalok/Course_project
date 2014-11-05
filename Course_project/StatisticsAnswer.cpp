@@ -12,6 +12,12 @@ StatisticsAnswer :: StatisticsAnswer()
 	this->timesOfGivingAnswer = 1;
 }
 
+StatisticsAnswer :: StatisticsAnswer(const StatisticsAnswer &statisticsAnswer)
+{
+    this->id = statisticsAnswer.id;
+    this->timesOfGivingAnswer = statisticsAnswer.timesOfGivingAnswer;
+}
+
 uint StatisticsAnswer :: getAnswerID()
 {
 	return this->id;
@@ -27,14 +33,14 @@ void StatisticsAnswer::setId(uint id)
 	this->id = id;
 }
 
-std::fstream& operator>>(std::fstream& file, StatisticsAnswer& statisticsAnswer)
+std::ifstream& operator>>(std::ifstream& file, StatisticsAnswer& statisticsAnswer)
 {
 	file.read((char *) &statisticsAnswer.id, sizeof(uint));
 	file.read((char *) &statisticsAnswer.timesOfGivingAnswer, sizeof(uint));
     return file;
 }
 
-std::fstream& operator<<(std::fstream& file, StatisticsAnswer& statisticsAnswer)
+std::ofstream& operator<<(std::ofstream& file, StatisticsAnswer& statisticsAnswer)
 {
 	file.write((char *) &statisticsAnswer.id, sizeof(uint));
 	file.write((char *) &statisticsAnswer.timesOfGivingAnswer, sizeof(uint));

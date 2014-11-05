@@ -15,6 +15,6 @@ public:
 	std::string getText();
 	void setId(uint id);
 	void setText(std::string text);
-	friend std::fstream& operator>>(std::fstream& file, Answer& question);
-	friend std::fstream& operator<<(std::fstream& file, Answer& question);
+	friend std::ifstream& operator>>(std::ifstream& file, Answer& question);
+	friend std::ofstream& operator<<(std::ofstream& file, Answer& question);
 };

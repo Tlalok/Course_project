@@ -10,7 +10,7 @@ Character::Character()
 	timesPicked = 0;
 }
 
-Character::Character(Character& toCopy)
+Character::Character(const Character& toCopy)
 {
 	this->id = toCopy.id;
 	this->name = toCopy.name;
@@ -54,7 +54,7 @@ uint Character::getNumberOfQuestions()
 	return statisticsQuestions.size();
 }
 
-void Character::checkCharacterStatistics(Vector<Question>& questions, Vector<Answer>& answers)
+void Character::checkCharacterStatistics(vector<Question>& questions, vector<Answer>& answers)
 {
 	for(uint i = 0; i < questions.size(); i++)
 	{
@@ -76,7 +76,7 @@ StatisticsQuestion& Character::getStatisticsQuestion(uint idQuestion)
 {
 	for(uint i = 0; i < statisticsQuestions.size(); i++)
 	{
-		if(id == statisticsQuestions[i].getQuestionID())
+		if(idQuestion == statisticsQuestions[i].getQuestionID())
 			return statisticsQuestions[i];
 	}
 	throw noQuestion();
@@ -86,7 +86,7 @@ uint Character::getTimesOfGivingAnswer(uint idQuestion, uint idAnswer)
 {
     for(uint i = 0; i < statisticsQuestions.size(); i++)
 	{
-		if(id == statisticsQuestions[i].getQuestionID())
+		if(idQuestion == statisticsQuestions[i].getQuestionID())
 			return statisticsQuestions[i].getTimesOfGivingAnswer(idAnswer);
 	}
 	throw noQuestion();
@@ -102,7 +102,7 @@ uint Character::getTimesOfAskingQuestion(uint idQuestion)
 	throw noQuestion();
 }
 
-std::fstream& operator>>(std::fstream& file, Character& character)
+std::ifstream& operator>>(std::ifstream& file, Character& character)
 {
 	//char buf[100];
 	uint numberOfQuestions, nameLength;
@@ -124,7 +124,7 @@ std::fstream& operator>>(std::fstream& file, Character& character)
 }
 
 
-std::fstream& operator<<(std::fstream& file, Character& character)
+std::ofstream& operator<<(std::ofstream& file, Character& character)
 {
 	//char buf[100];
 	uint numberOfQuestions, nameLength;

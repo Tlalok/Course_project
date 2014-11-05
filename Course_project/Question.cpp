@@ -5,7 +5,7 @@ uint Question::getId()
     return id;
 }
 
-std::fstream& operator>>(std::fstream& file, Question& question)
+std::ifstream& operator>>(std::ifstream& file, Question& question)
 {
 	if (!file.read((char *) &question.id, sizeof(uint)))
         return file;
@@ -18,7 +18,7 @@ std::fstream& operator>>(std::fstream& file, Question& question)
     return file;
 }
 
-std::fstream& operator<<(std::fstream& file, Question& question)
+std::ofstream& operator<<(std::ofstream& file, Question& question)
 {
 	file.write((char *) &question.id, sizeof(uint));
     uint length = question.text.size() + 1;

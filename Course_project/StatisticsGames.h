@@ -12,7 +12,7 @@ class StatisticsGames
     // персонаж
     uint numberGames;
     // список персонажей
-    Vector<Character> characters;
+    vector<Character> characters;
     // есть мысль вынести из класса персонажа статискику вопросов 
     // в поле этого класса в качетве хеш-таблицы
     // и также поступить с ответами, но я не знаю что лучше(
@@ -21,11 +21,13 @@ class StatisticsGames
     // сколько раз давался ответ на вопрос
     uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
 public:
+    StatisticsGames();
+    StatisticsGames(StatisticsGames &StatisticsGames);
 	void addAnswer(StatisticsAnswer& toAdd);
 	bool isCharacterExist(std::string name);
 	void addQuestion(StatisticsQuestion& toAdd);
 	void addCharacter(Character& toAdd);
-	void checkCharactersStatistics(Vector<Question>& questions, Vector<Answer>& answers);
+	void checkCharactersStatistics(vector<Question>& questions, vector<Answer>& answers);
 	bool charactersIsEmpty();
 	uint getNumberOfCharacters();
 	uint getTimesCharacterPicked(uint);
@@ -42,6 +44,6 @@ public:
 	//P(Ai)
 	double getPAi(uint n);
 
-	friend std::fstream& operator>>(std::fstream& file, StatisticsGames& question);
-	friend std::fstream& operator<<(std::fstream& file, StatisticsGames& question);
+	friend std::ifstream& operator>>(std::ifstream& file, StatisticsGames& question);
+	friend std::ofstream& operator<<(std::ofstream& file, StatisticsGames& question);
 };

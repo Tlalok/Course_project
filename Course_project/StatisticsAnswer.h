@@ -1,7 +1,9 @@
 typedef unsigned uint;
 
 #include <fstream>
-#include "vector.cpp"
+//#include "vector.cpp"
+#include <vector>
+using namespace std;
 
 class StatisticsAnswer
 {
@@ -9,11 +11,12 @@ class StatisticsAnswer
     uint timesOfGivingAnswer; 
 public:
 	StatisticsAnswer();
-	StatisticsAnswer& operator++();
 	StatisticsAnswer(uint id, uint timesOfGivingAnswer);
+    StatisticsAnswer(const StatisticsAnswer &statisticsAnswer);
+    StatisticsAnswer& operator++();
 	uint getAnswerID();
 	uint getTimesOfGivingAnswer();
 	void setId(uint id);
-	friend std::fstream& operator>>(std::fstream& file, StatisticsAnswer& statisticsAnswer);
-	friend std::fstream& operator<<(std::fstream& file, StatisticsAnswer& statisticsAnswer);
+	friend std::ifstream& operator>>(std::ifstream& file, StatisticsAnswer& statisticsAnswer);
+	friend std::ofstream& operator<<(std::ofstream& file, StatisticsAnswer& statisticsAnswer);
 };

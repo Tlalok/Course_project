@@ -9,14 +9,16 @@ void Game::checkCharactersStatistics()
 {
 	if(!statisticsGames.charactersIsEmpty())
 	{
-		if(!questions.isEmpty())
+		//if(!questions.isEmpty())
+        if(!questions.empty())
 			statisticsGames.checkCharactersStatistics(questions, answers);
 	}
 }
 
 uint Game::read()
 {
-	std::fstream file("questions.txt", std::ios::in);
+    
+	std::ifstream file("questions.txt");
 	if(file.is_open())
 	{
 		Question question;
@@ -29,8 +31,11 @@ uint Game::read()
 		file.close();
 	}
 	else return 0;
-
-	file.open("answers.txt", std::ios::in);
+    
+    
+    //std::fstream file2("answers.txt", std::ios::in);
+    //std::ifstream file("answers.txt");
+	file.open("answers.txt");
 	if(file.is_open())
 	{
 		Answer answer;
@@ -41,10 +46,13 @@ uint Game::read()
 		file.close();
 	}
 	else return 0;
-
-	file.open("statistic.txt", std::ios::in);
-    if(file >> statisticsGames)
+    
+	//std::ifstream file3("statistic.txt");
+    file.open("statistic.txt");
+    //std::ifstream file("statistic.txt");
+    if(file.is_open())
 	{
+        file >> statisticsGames;
 		file.close();
 	}
 	else return 0;
@@ -53,7 +61,8 @@ uint Game::read()
 
 uint Game::write()
 {
-	std::fstream file("questions.txt", std::ios::out);
+    
+	std::ofstream file("questions.txt");
 	if(file.is_open())
 	{
 		Question question;
@@ -64,8 +73,10 @@ uint Game::write()
 		file.close();
 	}
 	else return 0;
-
-	file.open("answers.txt", std::ios::out);
+    
+	file.open("answers.txt");
+    
+    //std::ofstream file("answers.txt");
 	if(file.is_open())
 	{
 		Answer answer;
@@ -76,14 +87,17 @@ uint Game::write()
 		file.close();
 	}
 	else return 0;
-
-	file.open("statistic.txt", std::ios::out);
+    
+    
+	file.open("statistic.txt");
+    //std::ofstream file3("statistic.txt");
 	if(file.is_open())
 	{
 		file << statisticsGames;
 		file.close();
 	}
 	else return 0;
+    
 	return 1;
 }
 
@@ -131,7 +145,7 @@ bool Game::questionWasAsked(uint idQuestion)
 
 uint Game::gedIdNextQuestion()
 {
-    Vector<std::pair<uint, double>> H;
+    vector<std::pair<uint, double>> H;
     uint i = 0;
     for (uint i = 0; i < questions.size(); i++)
     {
@@ -259,7 +273,30 @@ void Game::printStatistics()
                   << "--------------------------------\n";
     std::cout << "\nCharacters:\n" << "===========================\n";
     for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
-        std::cout << "name:         " << statisticsGames.getCharacter(i).getName() << std::endl
-                  << "times picked: " << statisticsGames.getCharacter(i).getTimesPicked() << std::endl
-                  << "--------------------------------\n";
+    {
+        Character character = statisticsGames.getCharacter(i);
+        std::cout << "name:         " << character.getName() << std::endl
+                  << "times picked: " << character.getTimesPicked() << std::endl
+                  << "++++++++++++++++++++++++++++\n";
+    
+        std::cout << "\n   StatisticsQuestions:\n";
+        for (int j = 0; j < questions.size(); j++)
+        {
+            StatisticsQuestion statisticsQuestion = character.getStatisticsQuestion(questions[j].getId());
+            std::cout << "   id:          " << questions[j].getId() << std::endl
+                      << "   name:        " << questions[j].getText() << std::endl
+                      << "   TimesAsking: " << statisticsQuestion.getTimesOfAskingQuestion() << std::endl
+                      << "\n      StatisticsAnswer:\n";
+            for (int k = 0; k < answers.size(); k++)
+            {
+                StatisticsAnswer statisticsAnswer = statisticsQuestion.getAnswerStatistic(answers[k].getId());
+                std::cout << "      id:          " << answers[k].getId() << std::endl
+                          << "      name:        " << answers[k].getText() << std::endl
+                          << "      TimesGiving: " << statisticsAnswer.getTimesOfGivingAnswer() << std::endl;
+
+            }
+            std::cout << std::endl;
+        }
+
+    }   
 }

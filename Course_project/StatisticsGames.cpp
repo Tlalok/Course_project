@@ -1,5 +1,15 @@
 #include "StatisticsGames.h"
 
+StatisticsGames::StatisticsGames()
+{
+    numberGames = 0;
+}
+StatisticsGames::StatisticsGames(StatisticsGames &statisticsGames)
+{
+    this->numberGames = statisticsGames.numberGames;
+    this->characters = statisticsGames.characters;
+}
+
 Character StatisticsGames::getCharacter(uint n)
 {
 	return characters[n];
@@ -70,10 +80,11 @@ double StatisticsGames::getPAi(uint idCharacter)
 
 bool StatisticsGames::charactersIsEmpty()
 {
-	return characters.isEmpty();
+	//return characters.isEmpty();
+    return characters.empty();
 }
 
-void StatisticsGames::checkCharactersStatistics(Vector<Question>& questions, Vector<Answer>& answers)
+void StatisticsGames::checkCharactersStatistics(vector<Question>& questions, vector<Answer>& answers)
 {
 	for(uint i = 0; i < characters.size(); i++)
 	{
@@ -84,7 +95,7 @@ void StatisticsGames::checkCharactersStatistics(Vector<Question>& questions, Vec
 	}
 }
 
-std::fstream& operator>>(std::fstream& file, StatisticsGames& statisticsGames)
+std::ifstream& operator>>(std::ifstream& file, StatisticsGames& statisticsGames)
 {
 	uint numberOfCharacters;
 	Character tempCharacter;
@@ -97,7 +108,7 @@ std::fstream& operator>>(std::fstream& file, StatisticsGames& statisticsGames)
     return file;
 }
 
-std::fstream& operator<<(std::fstream& file, StatisticsGames& statisticsGames)
+std::ofstream& operator<<(std::ofstream& file, StatisticsGames& statisticsGames)
 {
 	uint numberOfCharacters;
 	Character tempCharacter;

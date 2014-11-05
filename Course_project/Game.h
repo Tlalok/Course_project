@@ -10,11 +10,11 @@ class Game
 {
     StatisticsGames statisticsGames;
     // список всех вопросов
-    Vector<Question> questions;
+    vector<Question> questions;
     // список всех ответов
-	Vector<Answer> answers;
+	vector<Answer> answers;
     // текущая последовательность вопросов и ответов которые дал пользователь
-    Vector<std::pair<uint, uint>> currentAnswers;
+    vector<std::pair<uint, uint>> currentAnswers;
 	// здесь должен быть какой-то массив вероятностей текущих для всех персонажей, насколько я понимаю
 	// думаю да, тогда их проще будет вычислять
     // как вариант ассоциативный массив в котором вероятности хранятся по id персонажа

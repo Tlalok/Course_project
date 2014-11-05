@@ -8,7 +8,7 @@ StatisticsQuestion :: StatisticsQuestion()
 	this->timesOfAskingQuestion = 0;
 }
 
-StatisticsQuestion::StatisticsQuestion(Vector<Answer>& answers)
+StatisticsQuestion::StatisticsQuestion(vector<Answer>& answers)
 {
 	id = 0;
 	timesOfAskingQuestion = answers.size();
@@ -20,16 +20,29 @@ StatisticsQuestion::StatisticsQuestion(Vector<Answer>& answers)
 	}
 }
 
-StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer> statisticsAnswers)
+StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, vector<StatisticsAnswer> answers)
 {
-/*	this->id = id;
+	this->id = id;
 	this->timesOfAskingQuestion = timesOfAskingQuestion;
-	std :: vector<StatisticsAnswer> :: iterator beginGiven = statisticsAnswers.begin();
-	std :: vector<StatisticsAnswer> :: iterator begin = this->statisticsAnswers.begin();
-	for(;beginGiven < statisticsAnswers.end(); beginGiven++, begin++)
-		*begin = *beginGiven;
-		*/
+    for (int i = 0; i < answers.size(); i++)
+        this->statisticsAnswers.push_back(answers[i]);
+		
 }
+
+StatisticsQuestion::StatisticsQuestion(const StatisticsQuestion& toCopy)
+{
+	id = toCopy.id;
+	timesOfAskingQuestion = toCopy.timesOfAskingQuestion;
+	statisticsAnswers = toCopy.statisticsAnswers;
+}
+/*
+StatisticsQuestion :: StatisticsQuestion(StatisticsQuestion & statisticsQuestion)
+{
+    this->id = statisticsQuestion.id;
+    this->timesOfAskingQuestion = statisticsQuestion.timesOfAskingQuestion;
+    this->statisticsAnswers = statisticsQuestion.statisticsAnswers;
+}
+*/
 
 uint StatisticsQuestion :: getQuestionID()
 {
@@ -45,7 +58,7 @@ StatisticsAnswer StatisticsQuestion :: getAnswerStatistic(uint idAnswer)
 {
 	for(uint i = 0; i < statisticsAnswers.size(); i++)
 	{
-		if(id == statisticsAnswers[i].getAnswerID())
+		if(idAnswer == statisticsAnswers[i].getAnswerID())
 			return statisticsAnswers[i];
 	}
 	throw noAnswer();
@@ -55,40 +68,40 @@ uint StatisticsQuestion::getTimesOfGivingAnswer(uint idAnswer)
 {
     for(uint i = 0; i < statisticsAnswers.size(); i++)
 	{
-		if(id == statisticsAnswers[i].getAnswerID())
+		if(idAnswer == statisticsAnswers[i].getAnswerID())
 			return statisticsAnswers[i].getTimesOfGivingAnswer();
 	}
 	throw noAnswer();
 }
 
-std::fstream& operator>>(std::fstream& file, StatisticsQuestion& statisticsquestion)
+std::ifstream& operator>>(std::ifstream& file, StatisticsQuestion& statisticsQuestion)
 {
 	uint numberOfAnswers;
 	StatisticsAnswer tempStatisticsAnswers;
-	file.read((char *) &statisticsquestion.id, sizeof(uint));
-	file.read((char *) &statisticsquestion.timesOfAskingQuestion, sizeof(uint));
+	file.read((char *) &statisticsQuestion.id, sizeof(uint));
+	file.read((char *) &statisticsQuestion.timesOfAskingQuestion, sizeof(uint));
 	file.read((char *) &numberOfAnswers, sizeof(uint));
 	for(uint i = 0; i < numberOfAnswers; i++)
 	{
 		file >> tempStatisticsAnswers;
-		statisticsquestion.statisticsAnswers.push_back(tempStatisticsAnswers);
+		statisticsQuestion.statisticsAnswers.push_back(tempStatisticsAnswers);
 	}
     return file;
 }
 
-std::fstream& operator<<(std::fstream& file, StatisticsQuestion& statisticsquestion)
+std::ofstream& operator<<(std::ofstream& file, StatisticsQuestion& statisticsQuestion)
 {
 	uint numberOfAnswers;
 	StatisticsAnswer tempStatisticsAnswers;
-	file.write((char *) &statisticsquestion.id, sizeof(uint));
-	file.write((char *) &statisticsquestion.timesOfAskingQuestion, sizeof(uint));
-	numberOfAnswers = statisticsquestion.statisticsAnswers.size();
+	file.write((char *) &statisticsQuestion.id, sizeof(uint));
+	file.write((char *) &statisticsQuestion.timesOfAskingQuestion, sizeof(uint));
+	numberOfAnswers = statisticsQuestion.statisticsAnswers.size();
 	file.write((char *) &numberOfAnswers, sizeof(uint));
 	for(uint i = 0; i < numberOfAnswers; i++)
 	{
-		//tempStatisticsAnswers = statisticsquestion.statisticsAnswers[i];
+		//tempStatisticsAnswers = statisticsQuestion.statisticsAnswers[i];
 		//file << tempStatisticsAnswers;
-        file << statisticsquestion.statisticsAnswers[i];
+        file << statisticsQuestion.statisticsAnswers[i];
 	}
     return file;
 }
@@ -127,12 +140,5 @@ StatisticsQuestion& StatisticsQuestion::operator=(StatisticsQuestion& toCopy)
 		statisticsAnswers = toCopy.statisticsAnswers;
 	}
 	return *this;
-}
-
-StatisticsQuestion::StatisticsQuestion(StatisticsQuestion& toCopy)
-{
-	id = toCopy.id;
-	timesOfAskingQuestion = toCopy.timesOfAskingQuestion;
-	statisticsAnswers = toCopy.statisticsAnswers;
 }
 	

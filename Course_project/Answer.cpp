@@ -20,7 +20,7 @@ void Answer::setText(std::string text)
 	this->text = text;
 }
 
-std::fstream& operator>>(std::fstream& file, Answer& answer)
+std::ifstream& operator>>(std::ifstream& file, Answer& answer)
 {
 	if(!file.read((char *) &answer.id, sizeof(uint)))
         return file;
@@ -33,7 +33,7 @@ std::fstream& operator>>(std::fstream& file, Answer& answer)
     return file;
 }
 
-std::fstream& operator<<(std::fstream& file, Answer& answer)
+std::ofstream& operator<<(std::ofstream& file, Answer& answer)
 {
 	file.write((char *) &answer.id, sizeof(uint));
     uint length = answer.text.size() + 1;
