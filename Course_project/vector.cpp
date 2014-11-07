@@ -31,7 +31,7 @@ template <class TEntry> void Vector<TEntry> :: push_back(TEntry &toAdd)
 		_reserve *= 2;
 		beginPtr = new TEntry[_reserve];
 		if(temp)
-            for (int i = 0; i < _size; i++)
+            for (uint i = 0; i < _size; i++)
                 beginPtr[i] = temp[i];
         else
             throw BeginPtrisNULL();

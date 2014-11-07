@@ -266,14 +266,14 @@ void Game::printStatistics()
                   << "++++++++++++++++++++++++++++\n";
     
         std::cout << "\n   StatisticsQuestions:\n";
-        for (int j = 0; j < questions.size(); j++)
+        for (uint j = 0; j < questions.size(); j++)
         {
             StatisticsQuestion statisticsQuestion = character.getStatisticsQuestion(questions[j].getId());
             std::cout << "   id:          " << questions[j].getId() << std::endl
                       << "   name:        " << questions[j].getText() << std::endl
                       << "   TimesAsking: " << statisticsQuestion.getTimesOfAskingQuestion() << std::endl
                       << "\n      StatisticsAnswer:\n";
-            for (int k = 0; k < answers.size(); k++)
+            for (uint k = 0; k < answers.size(); k++)
             {
                 StatisticsAnswer statisticsAnswer = statisticsQuestion.getAnswerStatistic(answers[k].getId());
                 std::cout << "      id:          " << answers[k].getId() << std::endl

@@ -24,7 +24,7 @@ StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, Ve
 {
 	this->id = id;
 	this->timesOfAskingQuestion = timesOfAskingQuestion;
-    for (int i = 0; i < answers.size(); i++)
+    for (uint i = 0; i < answers.size(); i++)
         this->statisticsAnswers.push_back(answers[i]);
 		
 }
@@ -118,6 +118,7 @@ StatisticsAnswer& StatisticsQuestion::operator[](uint answerId)
 		if(statisticsAnswers[i].getAnswerID() == answerId)
 			return statisticsAnswers[i];
 	}
+	throw noAnswer();
 }
 
 StatisticsQuestion& StatisticsQuestion::operator=(StatisticsQuestion& toCopy)
