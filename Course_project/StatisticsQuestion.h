@@ -12,16 +12,16 @@ class StatisticsQuestion
 public:
 	StatisticsQuestion();
 	StatisticsQuestion(Vector<Answer>& answers);
-	StatisticsQuestion(uint, uint, Vector<StatisticsAnswer>);
+	StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer> answers);
     StatisticsQuestion(StatisticsQuestion& toCopy);
     //StatisticsQuestion(StatisticsQuestion & statisticsQuestion);
     StatisticsQuestion& operator++();
-	StatisticsAnswer& operator[](uint answerId);
+	StatisticsAnswer& operator[](uint idAnswer);
 	StatisticsQuestion& operator=(StatisticsQuestion& toCopy);
 	void setId(uint id);
 	uint getQuestionID();
 	uint getTimesOfAskingQuestion();
-	StatisticsAnswer getAnswerStatistic(uint);
+	StatisticsAnswer getAnswerStatistic(uint idAnswer);
     uint getTimesOfGivingAnswer(uint idAnswer);
 	void addAnswer(StatisticsAnswer toAdd);
 	friend std::istream& operator>>(std::istream& file, StatisticsQuestion& statisticsquestion);

@@ -10,14 +10,14 @@ class Vector
 	uint _reserve;
 public:
 	Vector();
-	Vector(uint);
+	Vector(uint reserve);
 	~Vector();
-	void push_back(TEntry &);
+	void push_back(TEntry & toAdd);
 	TEntry* begin();
 	TEntry* end();
 	uint size();
-	TEntry &operator[](uint);
-	Vector<TEntry> &operator=(Vector<TEntry>&);
+	TEntry &operator[](uint index);
+	Vector<TEntry> &operator=(Vector<TEntry>& toCopy);
 	uint reserve();
 	bool empty();
 };

@@ -25,25 +25,26 @@ class Game
     // возвращает энтопию для состояния, если мы зададим указанный вопрос
     // и получим указанный ответ
     double getHPAiBQjAns(uint idQuestion, uint idAnswer);
-    // возвращает индек следующего вопроса, который нужно задать
-    uint gedIdNextQuestion();
     // проверяет был ли задан указанный вопрос
     bool questionWasAsked(uint idQuestion);
 	//возвращает вероятность того,что будет такой набор вопросов-ответов при загаданном персонаже
 	double getPBAi(Character&);
 	//возвращает вероятность того,что загадан этот персонаж при данном наборе вопросов-ответов
-	double getPAiB(Character);
+	double getPAiB(Character&);
 
-public:
-	bool isQuestionExist(std::string);
-	bool isAnswerExist(std::string);
-	bool isCharacterExist(std::string);
-	void addQuestion(std::string);
-	void addAnswer(std::string);
-	void addCharacter(std::string);
+public: 
+	// возвращает индекс следующего вопроса, который нужно задать
+    uint gedIdNextQuestion();
+	bool isQuestionExist(std::string text);
+	bool isAnswerExist(std::string text);
+	bool isCharacterExist(std::string name);
+	void addQuestion(std::string text);
+	void addAnswer(std::string text);
+	void addCharacter(std::string name);
 	void checkCharactersStatistics();
 	void calculate();
 	uint read();
 	uint write();
     void printStatistics();
+	void giveAnswer(uint idQuestion, uint idAnswer);
 };

@@ -30,10 +30,10 @@ public:
 	void checkCharactersStatistics(Vector<Question>& questions, Vector<Answer>& answers);
 	bool charactersIsEmpty();
 	uint getNumberOfCharacters();
-	uint getTimesCharacterPicked(uint);
-	std::string getNameOfCharacter(uint);
+	uint getTimesCharacterPicked(uint idCharacter);
+	std::string getNameOfCharacter(uint idCharacter);
 	uint getNumberGames();
-	Character getCharacter(uint);
+	Character getCharacter(uint idCharacter);
 
     //возвращает вероятность того что будет дан указанный ответ
     double getPBi(uint idQuestion, uint idAnswer);
@@ -42,7 +42,7 @@ public:
     double getPBjAi(uint idCharater, uint idQuestion, uint idAnswer);
 
 	//P(Ai)
-	double getPAi(uint n);
+	double getPAi(uint idCharacter);
 
 	friend std::istream& operator>>(std::istream& file, StatisticsGames& question);
 	friend std::ostream& operator<<(std::ostream& file, StatisticsGames& question);

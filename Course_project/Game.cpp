@@ -1,5 +1,7 @@
 #include "Game.h"
 
+class incorrectIDs{};
+
 double log(double a, double b)
 {
     return log(b) / log(a);
@@ -165,7 +167,7 @@ double Game::getPBAi(Character& character)
 	return result;
 }
 
-double Game::getPAiB(Character character)
+double Game::getPAiB(Character& character)
 {
 	double result = 0;
 	double PB = 1;
@@ -285,4 +287,14 @@ void Game::printStatistics()
         }
 
     }   
+}
+
+void Game::giveAnswer(uint idQuestion, uint idAnswer)
+{
+	if((idQuestion <= questions.size()) && (idAnswer <= answers.size()))
+	{
+		std::pair<uint, uint> toAdd(idQuestion, idAnswer);
+		currentAnswers.push_back(toAdd);
+	}
+	else throw incorrectIDs();
 }
