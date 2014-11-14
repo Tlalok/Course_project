@@ -1,7 +1,8 @@
+#pragma once
 typedef unsigned uint;
 
 #include <fstream>
-#include "Vector.cpp"
+#include "vector.cpp"
 //#include <Vector>
 //using namespace std;
 

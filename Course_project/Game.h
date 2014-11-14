@@ -1,3 +1,4 @@
+#pragma once
 #include "StatisticsGames.h"
 #include <math.h>
 
@@ -33,8 +34,10 @@ class Game
 	double getPAiB(Character&);
 
 public: 
+	const static int stackOfQuestions = 20;
+	const static int minQuestions = 10;
 	// возвращает индекс следующего вопроса, который нужно задать
-    uint gedIdNextQuestion();
+    uint getIdNextQuestion();
 	bool isQuestionExist(std::string text);
 	bool isAnswerExist(std::string text);
 	bool isCharacterExist(std::string name);
@@ -47,4 +50,8 @@ public:
 	uint write();
     void printStatistics();
 	void giveAnswer(uint idQuestion, uint idAnswer);
+	void Game::printProbability();
+	Vector<Answer>& getAnswers();
+	std::string getQuestionText(uint idQuestion);
+	uint LeadingCharacter();
 };

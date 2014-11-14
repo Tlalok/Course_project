@@ -1,3 +1,4 @@
+#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include "Vector.h"
 #define max(a, b) (((a) > (b)) ? (a) : (b))

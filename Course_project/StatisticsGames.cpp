@@ -158,3 +158,8 @@ StatisticsGames& StatisticsGames::operator=(StatisticsGames toCopy)
     this->characters = toCopy.characters;
     return *this;
 }
+
+Vector <Character> &StatisticsGames::getCharacters()
+{
+	return this->characters;
+}

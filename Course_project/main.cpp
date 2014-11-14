@@ -3,16 +3,18 @@
 #include "Game.h"
 #include "locale.h"
 #include "windows.h"
+#include "Menu.h"
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");
     
-	Game* game;
+	Menu menu;
+	menu.menu_main();
+/*	Game* game;
 	game = new Game();
 	game->read();
     game->printStatistics();
-    /*
 	std::string str("exist7");
 	std::cout << (int)game->isQuestionExist(str) << std::endl;
 	char buf[30];
@@ -40,7 +42,8 @@ int main()
     game->addCharacter("Character 5");
     
     game->write();
-    */
+ 
     delete game;
+	*/
     return 0;
 }

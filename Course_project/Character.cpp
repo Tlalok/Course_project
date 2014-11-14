@@ -96,7 +96,7 @@ uint Character::getTimesOfAskingQuestion(uint idQuestion)
 {
     for(uint i = 0; i < statisticsQuestions.size(); i++)
 	{
-		if(id == statisticsQuestions[i].getQuestionID())
+		if(idQuestion == statisticsQuestions[i].getQuestionID())
 			return statisticsQuestions[i].getTimesOfAskingQuestion();
 	}
 	throw noQuestion();

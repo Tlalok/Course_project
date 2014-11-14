@@ -1,3 +1,4 @@
+#pragma once
 //#include <unordered_map>
 #include "Character.h"
 #include <string>
@@ -34,6 +35,7 @@ public:
 	std::string getNameOfCharacter(uint idCharacter);
 	uint getNumberGames();
 	Character getCharacter(uint idCharacter);
+	Vector <Character>& getCharacters();
 
     //возвращает вероятность того что будет дан указанный ответ
     double getPBi(uint idQuestion, uint idAnswer);

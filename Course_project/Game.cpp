@@ -1,6 +1,7 @@
 #include "Game.h"
 
-class incorrectIDs{};
+
+class incorrectID{};
 
 double log(double a, double b)
 {
@@ -91,7 +92,7 @@ uint Game::write()
 
 void Game::calculate()
 {
-	for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+	for(uint i = 1; i <= statisticsGames.getNumberOfCharacters(); i++)
 	{
 		currentProbability[statisticsGames.getCharacter(i).getId()] = getPAiB(statisticsGames.getCharacter(i));
 	}
@@ -100,7 +101,7 @@ void Game::calculate()
 double Game::getPQjAns(uint idQuestion, uint idAnswer)
 {
     double result = 0;
-    for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+    for (uint i = 1; i <= statisticsGames.getNumberOfCharacters(); i++)
     {
         uint idCharacter = statisticsGames.getCharacter(i).getId();
         result += statisticsGames.getPBjAi(idCharacter, idQuestion, idAnswer) * currentProbability[idCharacter];
@@ -111,9 +112,9 @@ double Game::getPQjAns(uint idQuestion, uint idAnswer)
 double Game::getHPAiBQjAns(uint idQuestion, uint idAnswer)
 {
     double result =  0;
-    for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+    for (uint i = 1; i <= statisticsGames.getNumberOfCharacters(); i++)
     {
-        uint idCharacter = statisticsGames.getCharacter(i).getId();
+        uint idCharacter = statisticsGames.getCharacter( i).getId();
         double probability = currentProbability[idCharacter] * 
                              statisticsGames.getPBjAi(idCharacter, idQuestion, idAnswer) / 
                              statisticsGames.getPBi(idQuestion, idAnswer);
@@ -131,7 +132,7 @@ bool Game::questionWasAsked(uint idQuestion)
     return false;
 }
 
-uint Game::gedIdNextQuestion()
+uint Game::getIdNextQuestion()
 {
     Vector<std::pair<uint, double>> H;
     uint i = 0;
@@ -140,7 +141,7 @@ uint Game::gedIdNextQuestion()
         uint idQuestion = questions[i].getId();
         if (questionWasAsked(idQuestion))
             continue;
-        double currnetH;
+        double currnetH = 0;
         for (uint j = 0; j < answers.size(); j++)
         {
             uint idAnswer = answers[j].getId();
@@ -296,5 +297,29 @@ void Game::giveAnswer(uint idQuestion, uint idAnswer)
 		std::pair<uint, uint> toAdd(idQuestion, idAnswer);
 		currentAnswers.push_back(toAdd);
 	}
-	else throw incorrectIDs();
+	else throw incorrectID();
+}
+
+void Game::printProbability()
+{
+	Vector <Character>& characters = statisticsGames.getCharacters();
+	for(int i = 0; i < this->currentProbability.size(); i++)
+	{
+		std::cout<<characters[i]<<"->"<<this->currentProbability[characters[i].getId()]<<std::endl;
+	}
+}
+
+Vector <Answer>& Game::getAnswers()
+{
+	return answers;
+}
+
+std::string Game::getQuestionText(uint idQuestion)
+{
+	for(uint i = 0; i < questions.size(); i++)
+	{
+		if(idQuestion == questions[i].getId())
+			return questions[i].getText();
+	}
+	throw incorrectID();
 }
