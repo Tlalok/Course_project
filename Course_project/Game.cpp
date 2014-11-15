@@ -101,9 +101,10 @@ void Game::calculate()
 double Game::getPQjAns(uint idQuestion, uint idAnswer)
 {
     double result = 0;
-    for (uint i = 1; i <= statisticsGames.getNumberOfCharacters(); i++)
+    for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
     {
         uint idCharacter = statisticsGames.getCharacter(i).getId();
+        //result += statisticsGames.getPBjAi(i, idQuestion, idAnswer) * currentProbability[idCharacter];
         result += statisticsGames.getPBjAi(idCharacter, idQuestion, idAnswer) * currentProbability[idCharacter];
     }
     return result;
@@ -112,12 +113,19 @@ double Game::getPQjAns(uint idQuestion, uint idAnswer)
 double Game::getHPAiBQjAns(uint idQuestion, uint idAnswer)
 {
     double result =  0;
-    for (uint i = 1; i <= statisticsGames.getNumberOfCharacters(); i++)
+    for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
     {
-        uint idCharacter = statisticsGames.getCharacter( i).getId();
+        uint idCharacter = statisticsGames.getCharacter(i).getId();
+        double CP = currentProbability[idCharacter];
+        double PBjAi = statisticsGames.getPBjAi(idCharacter, idQuestion, idAnswer);
+        //double PBjAi = statisticsGames.getPBjAi(i, idQuestion, idAnswer);
+        double PBi = statisticsGames.getPBi(idQuestion, idAnswer);
+        double probability = CP * PBjAi / PBi;
+        /*
         double probability = currentProbability[idCharacter] * 
                              statisticsGames.getPBjAi(idCharacter, idQuestion, idAnswer) / 
                              statisticsGames.getPBi(idQuestion, idAnswer);
+        */
         result -= probability * log(2, probability);
         //result += probability * log(2, probability);
     }
@@ -303,7 +311,7 @@ void Game::giveAnswer(uint idQuestion, uint idAnswer)
 void Game::printProbability()
 {
 	Vector <Character>& characters = statisticsGames.getCharacters();
-	for(int i = 0; i < this->currentProbability.size(); i++)
+	for(uint i = 0; i < this->currentProbability.size(); i++)
 	{
 		std::cout<<characters[i]<<"->"<<this->currentProbability[characters[i].getId()]<<std::endl;
 	}
@@ -322,4 +330,9 @@ std::string Game::getQuestionText(uint idQuestion)
 			return questions[i].getText();
 	}
 	throw incorrectID();
+}
+
+uint  Game::LeadingCharacter()
+{
+    return 0; // заглушка
 }

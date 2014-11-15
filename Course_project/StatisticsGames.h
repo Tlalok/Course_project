@@ -35,6 +35,7 @@ public:
 	std::string getNameOfCharacter(uint idCharacter);
 	uint getNumberGames();
 	Character getCharacter(uint idCharacter);
+    Character getCharacterById(uint id);
 	Vector <Character>& getCharacters();
 
     //возвращает вероятность того что будет дан указанный ответ

@@ -1,5 +1,7 @@
 #include "StatisticsGames.h"
 
+class NoCharacter {};
+
 StatisticsGames::StatisticsGames()
 {
     numberGames = 0;
@@ -13,6 +15,14 @@ StatisticsGames::StatisticsGames(StatisticsGames &statisticsGames)
 Character StatisticsGames::getCharacter(uint n)
 {
 	return characters[n];
+}
+
+Character StatisticsGames::getCharacterById(uint id)
+{
+    for (uint i = 0; i < characters.size(); i++)
+        if (characters[i].getId() == id)
+            return characters[i];
+    throw new NoCharacter;
 }
 
 std::string StatisticsGames::getNameOfCharacter(uint id)
@@ -70,7 +80,10 @@ double StatisticsGames::getPBi(uint idQuestion, uint idAnswer)
 
 double StatisticsGames::getPBjAi(uint idCharater, uint idQuestion, uint idAnswer)
 {
-    return characters[idCharater].getTimesOfGivingAnswer(idQuestion, idAnswer) / characters[idAnswer].getTimesOfAskingQuestion(idQuestion);
+    uint timesOfGivingAnswer = getCharacterById(idCharater).getTimesOfGivingAnswer(idQuestion, idAnswer);
+    uint timesOfAskingQuestion = getCharacterById(idCharater).getTimesOfAskingQuestion(idQuestion);
+    return timesOfGivingAnswer / timesOfAskingQuestion;
+    //return characters[idCharater].getTimesOfGivingAnswer(idQuestion, idAnswer) / characters[idAnswer].getTimesOfAskingQuestion(idQuestion);
 }
 
 double StatisticsGames::getPAi(uint idCharacter)
