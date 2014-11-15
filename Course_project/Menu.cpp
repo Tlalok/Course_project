@@ -98,7 +98,8 @@ void Menu :: instructions()
 
 uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
 {
-    cout<<QuestionText;
+	system("cls");
+    cout<<QuestionText<<std::endl;
     for(uint i = 0; i < answers.size(); i++)
     {
         std::cout<<i+1<<"."<<answers[i].getText()<<std::endl;
@@ -114,8 +115,7 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
     coordUp.Y = 1;
     coordDown.X = 0;
     coordDown.Y = coordUp.Y + menuSize - 1; 
-    coord.X = 0;      
-    coord.Y = 0;  
+    coord = coordUp;
     wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
     FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
@@ -180,6 +180,7 @@ void Menu::gameMenu()
         std::string questionText = game.getQuestionText(idQuestionToAsk);
         uint Answer = GiveAnswer(questionText, answers);
         counterOfAnswers++;
+		game.giveAnswer(idQuestionToAsk, Answer);
         if(counterOfAnswers % game.stackOfQuestions == 0)
         {
             //попытка угадать
