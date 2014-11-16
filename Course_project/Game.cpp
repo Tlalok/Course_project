@@ -321,9 +321,8 @@ void Game::giveAnswer(uint idQuestion, uint idAnswer)
             double PBjAi = statisticsGames.getPBjAi(idCharacter, idQuestion, idAnswer);
             double PBi = statisticsGames.getPBi(idQuestion, idAnswer);
             currentProbability[idCharacter] *= PBjAi / PBi;
-            std:: cout << "current probability[" << idCharacter << "] = " << currentProbability[idCharacter] << std::endl;
+            //std:: cout << "current probability[" << idCharacter << "] = " << currentProbability[idCharacter] << std::endl;
         }
-        uint i = 0;
 	}
 	else throw incorrectID();
 }
