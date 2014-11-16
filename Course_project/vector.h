@@ -12,6 +12,7 @@ class Vector
 public:
 	Vector();
 	Vector(uint reserve);
+    Vector(const Vector<TEntry> &toCopy);
 	~Vector();
 	void push_back(TEntry & toAdd);
 	TEntry* begin();

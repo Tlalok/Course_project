@@ -51,7 +51,10 @@ public:
     void printStatistics();
 	void giveAnswer(uint idQuestion, uint idAnswer);
 	void Game::printProbability();
-	Vector<Answer>& getAnswers();
+	//Vector<Answer>& getAnswers();
+    Vector<Answer> getAnswers();
 	std::string getQuestionText(uint idQuestion);
-	uint LeadingCharacter();
+    bool canSupposeCharacter();
+	uint getIdLeadingCharacter();
+    Character getLeadingCharacter();
 };

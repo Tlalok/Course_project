@@ -28,7 +28,14 @@ public:
     uint getTimesOfAskingQuestion(uint idQuestion);
     uint getTimesOfGivingAnswer(uint idQuestion, uint idAnswer);
 	void checkCharacterStatistics(Vector<Question>& questions, Vector<Answer>& answers);
+    void addQuestion(StatisticsQuestion& toAdd);
+    // увеличиваем на 1 количество того сколько
+    // раз был загадан персонаж
+    void incTimesPicked();
+    // уменьшаем на 1 количество того сколько
+    // раз был загадан персонаж
+    void decTimesPicked();
+
 	friend std::istream& operator>>(std::istream& file, Character& character);
 	friend std::ostream& operator<<(std::ostream& file, Character& character);
-	void addQuestion(StatisticsQuestion& toAdd);
 };

@@ -19,6 +19,17 @@ template <class TEntry> Vector<TEntry> :: Vector(uint newSize)
     _reserve = max(newSize, _reserve);
 	beginPtr = new Tentry[_reserve];
 }
+
+template <class TEntry>
+Vector<TEntry> :: Vector(const Vector<TEntry> &toCopy)
+{
+    _size = toCopy._size;
+    _reserve = toCopy._reserve;
+    beginPtr = new TEntry[_reserve];
+	for(uint i = 0; i < _size; i++)
+        beginPtr[i] = toCopy.beginPtr[i];
+}
+
 template <class TEntry> Vector<TEntry> :: ~Vector()
 {
 	delete [] beginPtr;

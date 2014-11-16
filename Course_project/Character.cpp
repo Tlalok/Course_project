@@ -155,3 +155,13 @@ void Character::addAnswer(StatisticsAnswer& toAdd)
 		++statisticsQuestions[i];
 	}
 }
+
+void Character::incTimesPicked()
+{
+    timesPicked++;
+}
+
+void Character::decTimesPicked()
+{
+    timesPicked--;
+}

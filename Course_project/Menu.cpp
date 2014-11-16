@@ -5,6 +5,10 @@
 #include "conio.h"
 #include "menu.h"
 
+const int KEY_UP     = 72;
+const int KEY_DOWN   = 80;
+const int KEY_ENTER  = 13;
+const int KEY_ESCAPE = 27;
 
 void Menu :: menu_main()
 {
@@ -35,7 +39,7 @@ void Menu :: menu_main()
             choice = _getch();
             switch(choice)
             {
-            case 72: //вверх
+            case KEY_UP: //вверх
                 FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
                 if(count == 1)
                 {
@@ -49,7 +53,7 @@ void Menu :: menu_main()
                 }
                 FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
                 break;
-            case 80://вниз
+            case KEY_DOWN://вниз
                 FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
                 if(count == menuSize)
                 {
@@ -65,44 +69,43 @@ void Menu :: menu_main()
                 break;
             }
             break;
-        case 13:
+        case KEY_ENTER:
             if(count == 1)
                 gameMenu();
+            else if(count == 2)
+                cout<<"You've chosen Two"<<endl;
+            else if(count == 3)
+                cout<<"You've chosen Three"<<endl;
+            else if(count == 4)
+                cout<<"You've chosen Four"<<endl;
             else
-                if(count == 2)
-                    cout<<"You've chosen Two"<<endl;
-                else
-                    if(count == 3)
-                        cout<<"You've chosen Three"<<endl;
-                    else
-                        if(count == 4)
-                            cout<<"You've chosen Four"<<endl;
-                        else
-                            cout<<"Invalid choice"<<endl;
+                cout<<"Invalid choice"<<endl;
             break;
-        case 27:
+        case KEY_ESCAPE:
             break;
         default:
             ;
         }
-    }while(choice != 27);
+    }while(choice != KEY_ESCAPE);
 }
 
 void Menu :: instructions()
 {
-    cout<<"\t\t\tOne"<<endl;
-    cout<<"\t\t\tTwo"<<endl;
-    cout<<"\t\t\tThree"<<endl;
-    cout<<"\t\t\tFour"<<endl;
+    cout << "\t\t\tgameMenu()" << endl;
+    cout << "\t\t\tTwo" << endl;
+    cout << "\t\t\tThree" << endl;
+    cout << "\t\t\tFour" << endl;
 }
 
+// подумать насчет вывода id ответа
 uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
 {
 	system("cls");
     cout<<QuestionText<<std::endl;
     for(uint i = 0; i < answers.size(); i++)
     {
-        std::cout<<i+1<<"."<<answers[i].getText()<<std::endl;
+        //std::cout << i + 1 << "." << answers[i].getText() << std::endl;
+        std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
     }
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD cWritten;
@@ -128,7 +131,7 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
             choice = _getch();
             switch(choice)
             {
-            case 72: //вверх
+            case KEY_UP: //вверх
                 FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
                 if(count == 1)
                 {
@@ -142,7 +145,7 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
                 }
                 FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
                 break;
-            case 80://вниз
+            case KEY_DOWN://вниз
                 FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
                 if(count == menuSize)
                 {
@@ -158,7 +161,7 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
                 break;
             }
             break;
-        case 13:
+        case KEY_ENTER:
             return count;
             break;
         default:
@@ -173,31 +176,38 @@ void Menu::gameMenu()
     game.read();
     Vector<Answer> answers = game.getAnswers();
     uint counterOfAnswers = 0;
+    
     while(1)
     {
         uint idQuestionToAsk = game.getIdNextQuestion();
-        cout<<idQuestionToAsk;
+        if (idQuestionToAsk == 0)
+            break;
+        cout << idQuestionToAsk;
         std::string questionText = game.getQuestionText(idQuestionToAsk);
         uint Answer = GiveAnswer(questionText, answers);
+        //game.printProbability();
+        //_getch();
         counterOfAnswers++;
 		game.giveAnswer(idQuestionToAsk, Answer);
-        if(counterOfAnswers % game.stackOfQuestions == 0)
+        // counterOfAnswers == game.stackOfQuestions  -  число заданных вопросов равно ограничению
+        // !game.getIdNextQuestion()                  -  не найден следующий впрос, т.е. вопросов больше нет
+        if(counterOfAnswers == game.stackOfQuestions || !game.getIdNextQuestion())
         {
             //попытка угадать
-
-        }
-        else if(!game.getIdNextQuestion())
-        {
-            //уж точно угадать, вопросов больше нет
-            //если нет, то добавить персонажа/вопрос
+            Character characterToSuppos = game.getLeadingCharacter();
+            cout << "Name: " << characterToSuppos.getName() << endl;
+            _getch();
         }
         else if(counterOfAnswers > game.minQuestions)
         {
-            uint idCharacterToSuppose = game.LeadingCharacter();
-            if(idCharacterToSuppose)
+            //uint idCharacterToSuppose = game.LeadingCharacter();
+            if(game.canSupposeCharacter())
             {
+                Character characterToSuppos = game.getLeadingCharacter();
                 //есть лидер, угадываем
             }
         }
     }
+    
+
 }

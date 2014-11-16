@@ -249,7 +249,8 @@ void Game::addCharacter(std::string name)
 {
 	//Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, 1);
     //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, questions.size() * answers.size());
-    Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size()); // вроде так
+    //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size()); // вроде так
+    Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size() + 1); // вроде так
 	StatisticsQuestion toAddQStatistics(answers);
 	for(uint i = 0; i < questions.size(); i++)
 	{
@@ -264,6 +265,9 @@ void Game::addCharacter(std::string name)
 		}
 		toAdd.addQuestion(toAddQStatistics);
 	}
+    // проверка проводилась ли игра
+    if (currentAnswers.size() == 0)
+        toAdd.decTimesPicked();
 	statisticsGames.addCharacter(toAdd);
 }
 
@@ -332,11 +336,12 @@ void Game::printProbability()
 	Vector <Character>& characters = statisticsGames.getCharacters();
 	for(uint i = 0; i < this->currentProbability.size(); i++)
 	{
-		std::cout<<characters[i]<<"->"<<this->currentProbability[characters[i].getId()]<<std::endl;
+        std::cout << characters[i].getName() << " -> " << this->currentProbability[characters[i].getId()] << std::endl;
 	}
 }
 
-Vector <Answer>& Game::getAnswers()
+//Vector <Answer>& Game::getAnswers()
+Vector<Answer> Game::getAnswers()
 {
 	return answers;
 }
@@ -351,7 +356,39 @@ std::string Game::getQuestionText(uint idQuestion)
 	throw incorrectID();
 }
 
-uint  Game::LeadingCharacter()
+uint Game::getIdLeadingCharacter()
 {
-    return 0; // заглушка
+    uint idMax = statisticsGames.getCharacter(0).getId();
+    for (uint i = 1; i < statisticsGames.getNumberOfCharacters(); i++)
+    {
+        uint idCharacter = statisticsGames.getCharacter(i).getId();
+        if (currentProbability[idCharacter] > currentProbability[idMax])
+            idMax = idCharacter;
+    }
+    return idMax;
+}
+
+Character Game::getLeadingCharacter()
+{
+    return statisticsGames.getCharacterById(getIdLeadingCharacter());
+}
+
+bool Game::canSupposeCharacter()
+{
+    // предусмотеть наличие только 1-го персонажа
+    uint idMax = statisticsGames.getCharacter(0).getId();
+    for (uint i = 1; i < statisticsGames.getNumberOfCharacters(); i++)
+    {
+        uint idCharacter = statisticsGames.getCharacter(i).getId();
+        if (currentProbability[idCharacter] > currentProbability[idMax])
+            idMax = idCharacter;
+    }
+    uint idPrev = idMax == statisticsGames.getCharacter(0).getId() ? statisticsGames.getCharacter(1).getId() : statisticsGames.getCharacter(0).getId();
+    for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+    {
+        uint idCharacter = statisticsGames.getCharacter(i).getId();
+        if (idCharacter != idMax && currentProbability[idCharacter] > currentProbability[idPrev])
+            idPrev = idCharacter;
+    }
+    return idMax - 0.2 > idPrev;
 }

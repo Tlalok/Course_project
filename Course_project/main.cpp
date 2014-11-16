@@ -5,14 +5,16 @@
 #include "windows.h"
 #include "Menu.h"
 
+void writeTestData();
+
 int main()
 {
 	setlocale(LC_ALL, "Russian");
     
 	Menu menu;
 	menu.menu_main();
-    
-/*	Game* game;
+    /*
+	Game* game;
 	game = new Game();
 	game->read();
     game->printStatistics();
@@ -23,11 +25,15 @@ int main()
 	std::cin >> buf;
 	SetConsoleCP(866);
 	std::string name(buf);
+	game->addQuestion(name);
     */
-	//game->addQuestion(name);
-    /*
-    Game* game;
-	game = new Game();
+
+    return 0;
+}
+
+void writeTestData()
+{
+    Game* game = new Game();
     game->addAnswer("Answer 1");
     game->addAnswer("Answer 2");
     game->addAnswer("Answer 3");
@@ -46,6 +52,4 @@ int main()
     game->write();
  
     delete game;
-	*/
-    return 0;
 }
