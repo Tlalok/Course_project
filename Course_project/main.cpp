@@ -11,6 +11,7 @@ int main()
     
 	Menu menu;
 	menu.menu_main();
+    
 /*	Game* game;
 	game = new Game();
 	game->read();
@@ -24,8 +25,9 @@ int main()
 	std::string name(buf);
     */
 	//game->addQuestion(name);
-    
     /*
+    Game* game;
+	game = new Game();
     game->addAnswer("Answer 1");
     game->addAnswer("Answer 2");
     game->addAnswer("Answer 3");

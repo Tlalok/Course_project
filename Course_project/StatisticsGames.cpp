@@ -82,13 +82,13 @@ double StatisticsGames::getPBjAi(uint idCharater, uint idQuestion, uint idAnswer
 {
     uint timesOfGivingAnswer = getCharacterById(idCharater).getTimesOfGivingAnswer(idQuestion, idAnswer);
     uint timesOfAskingQuestion = getCharacterById(idCharater).getTimesOfAskingQuestion(idQuestion);
-    return timesOfGivingAnswer / timesOfAskingQuestion;
+    return timesOfGivingAnswer / (double)timesOfAskingQuestion;
     //return characters[idCharater].getTimesOfGivingAnswer(idQuestion, idAnswer) / characters[idAnswer].getTimesOfAskingQuestion(idQuestion);
 }
 
 double StatisticsGames::getPAi(uint idCharacter)
 {
-	return this->getTimesCharacterPicked(idCharacter) / this->getNumberGames();
+	return getTimesCharacterPicked(idCharacter) / (double)numberGames;
 }
 
 bool StatisticsGames::charactersIsEmpty()
@@ -109,6 +109,7 @@ void StatisticsGames::checkCharactersStatistics(Vector<Question>& questions, Vec
 
 std::istream& operator>>(std::istream& file, StatisticsGames& statisticsGames)
 {
+    file.read((char *) &statisticsGames.numberGames, sizeof(uint));
 	uint numberOfCharacters;
 	Character tempCharacter;
 	file.read((char *) &numberOfCharacters, sizeof(uint));
@@ -122,6 +123,7 @@ std::istream& operator>>(std::istream& file, StatisticsGames& statisticsGames)
 
 std::ostream& operator<<(std::ostream& file, StatisticsGames& statisticsGames)
 {
+    file.write((char *) &statisticsGames.numberGames, sizeof(uint));
 	uint numberOfCharacters;
 	numberOfCharacters = statisticsGames.getNumberOfCharacters();
 	file.write((char *) &numberOfCharacters, sizeof(uint));
@@ -134,6 +136,7 @@ std::ostream& operator<<(std::ostream& file, StatisticsGames& statisticsGames)
 
 void StatisticsGames::addQuestion(StatisticsQuestion& toAdd)
 {
+    //numberGames += characters.size() * toAdd.getNumberAnswers(); // вроде так
 	for(uint i = 0; i < characters.size(); i++)
 	{
 		characters[i].addQuestion(toAdd);
@@ -154,6 +157,7 @@ bool StatisticsGames::isCharacterExist(std::string name)
 
 void StatisticsGames::addAnswer(StatisticsAnswer& toAdd)
 {
+    numberGames += characters.size(); // вроде так хотя если вероятность сходится не будет можно убрать
 	for(uint i = 0; i < characters.size(); i++)
 	{
 		characters[i].addAnswer(toAdd);
@@ -162,6 +166,7 @@ void StatisticsGames::addAnswer(StatisticsAnswer& toAdd)
 
 void StatisticsGames::addCharacter(Character& toAdd)
 {
+    numberGames += toAdd.getTimesPicked(); // вроде так
 	characters.push_back(toAdd);
 }
 

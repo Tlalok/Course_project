@@ -50,6 +50,14 @@ uint Game::read()
 		file.close();
 	}
 	else return 0;
+
+    for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+    {
+        uint idCharacter = statisticsGames.getCharacter(i).getId();
+        currentProbability[idCharacter] = statisticsGames.getPAi(idCharacter);
+        //std:: cout << "current probability[" << idCharacter << "] = " << currentProbability[idCharacter] << std::endl;
+    }
+    
 	return 1;
 }
 
@@ -92,7 +100,8 @@ uint Game::write()
 
 void Game::calculate()
 {
-	for(uint i = 1; i <= statisticsGames.getNumberOfCharacters(); i++)
+	//for(uint i = 1; i <= statisticsGames.getNumberOfCharacters(); i++)
+    for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)  // по идее должно быть так
 	{
 		currentProbability[statisticsGames.getCharacter(i).getId()] = getPAiB(statisticsGames.getCharacter(i));
 	}
@@ -159,7 +168,7 @@ uint Game::getIdNextQuestion()
         H.push_back(HQuestion);
     }
     if (H.size() == 0)
-        return -1;    // заменить на исключение или иземнить тип возвращаемого значения
+        return 0;    // заменить на исключение или иземнить тип возвращаемого значения
     uint indexMin = 0;
     for (uint i = 1; i < H.size(); i++)
         if (H[indexMin].second > H[i].second)
@@ -238,7 +247,9 @@ bool Game::isCharacterExist(std::string name)
 
 void Game::addCharacter(std::string name)
 {
-	Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, 1);
+	//Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, 1);
+    //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, questions.size() * answers.size());
+    Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size()); // вроде так
 	StatisticsQuestion toAddQStatistics(answers);
 	for(uint i = 0; i < questions.size(); i++)
 	{
@@ -304,6 +315,15 @@ void Game::giveAnswer(uint idQuestion, uint idAnswer)
 	{
 		std::pair<uint, uint> toAdd(idQuestion, idAnswer);
 		currentAnswers.push_back(toAdd);
+        for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+        {
+            uint idCharacter = statisticsGames.getCharacter(i).getId();
+            double PBjAi = statisticsGames.getPBjAi(idCharacter, idQuestion, idAnswer);
+            double PBi = statisticsGames.getPBi(idQuestion, idAnswer);
+            currentProbability[idCharacter] *= PBjAi / PBi;
+            std:: cout << "current probability[" << idCharacter << "] = " << currentProbability[idCharacter] << std::endl;
+        }
+        uint i = 0;
 	}
 	else throw incorrectID();
 }

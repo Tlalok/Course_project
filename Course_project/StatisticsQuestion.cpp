@@ -131,4 +131,10 @@ StatisticsQuestion& StatisticsQuestion::operator=(StatisticsQuestion& toCopy)
 	}
 	return *this;
 }
+
+
+uint StatisticsQuestion::getNumberAnswers()
+{
+    return statisticsAnswers.size();
+}
 	

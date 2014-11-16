@@ -47,8 +47,8 @@ public:
 	//P(Ai)
 	double getPAi(uint idCharacter);
 
-	friend std::istream& operator>>(std::istream& file, StatisticsGames& question);
-	friend std::ostream& operator<<(std::ostream& file, StatisticsGames& question);
+	friend std::istream& operator>>(std::istream& file, StatisticsGames& statisticsGames);
+	friend std::ostream& operator<<(std::ostream& file, StatisticsGames& statisticsGames);
 
     StatisticsGames& operator=(StatisticsGames toCopy);
 };
