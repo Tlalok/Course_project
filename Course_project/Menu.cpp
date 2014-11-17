@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <wincon.h>
 #include "conio.h"
-#include "menu.h"
+#include "Menu.h"
 
 const int KEY_UP     = 72;
 const int KEY_DOWN   = 80;
@@ -71,7 +71,10 @@ void Menu :: menu_main()
             break;
         case KEY_ENTER:
             if(count == 1)
+			{
                 gameMenu();
+				return;
+			}
             else if(count == 2)
                 cout<<"You've chosen Two"<<endl;
             else if(count == 3)
@@ -194,20 +197,205 @@ void Menu::gameMenu()
         if(counterOfAnswers == game.stackOfQuestions || !game.getIdNextQuestion())
         {
             //попытка угадать
-            Character characterToSuppos = game.getLeadingCharacter();
-            cout << "Name: " << characterToSuppos.getName() << endl;
-            _getch();
+            Character characterToSuppose = game.getLeadingCharacter();
+            cout << "Name: " << characterToSuppose.getName() << endl;
+           if(!game.getIdNextQuestion())
+		   {
+			   guessMenu(game, 1);
+			   return;
+		   }
+		   else
+			   guessMenu(game,0);
         }
         else if(counterOfAnswers > game.minQuestions)
         {
             //uint idCharacterToSuppose = game.LeadingCharacter();
             if(game.canSupposeCharacter())
             {
-                Character characterToSuppos = game.getLeadingCharacter();
+                Character characterToSuppose = game.getLeadingCharacter();
                 //есть лидер, угадываем
+				guessMenu(game,0);
             }
         }
     }
     
 
+
+}
+
+void Menu::guessMenu(Game &game, uint End_Of_Game = 0)
+{
+	instructionsGuessMenu();
+	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD cWritten;
+    COORD coord, coordUp, coordDown;
+    WORD  wColor1, wColor2;
+    int choice;
+    int count = 1;
+    int menuSize = 2;
+    coordUp.X = 0;
+    coordUp.Y = 5;
+    coordDown.X = 0;
+    coordDown.Y = coordUp.Y + menuSize - 1; 
+    coord = coordUp;
+    wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+    wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
+    FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+	do
+    {
+        choice = _getch();
+        switch(choice)
+        {
+        case 224:
+            choice = _getch();
+            switch(choice)
+            {
+            case KEY_UP: //вверх
+                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
+                if(count == 1)
+                {
+                    coord = coordDown;
+                    count = menuSize;
+                }
+                else 
+                {
+                    coord.Y--;
+                    count--;
+                }
+                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                break;
+            case KEY_DOWN://вниз
+                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
+                if(count == menuSize)
+                {
+                    coord = coordUp;
+                    count = 1;
+                }
+                else
+                {
+                    coord.Y++;
+                    count++;
+                }
+                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                break;
+            }
+            break;
+		case KEY_ENTER:
+        if(count == 1)
+			;
+            else if(count == 2)
+				if(End_Of_Game == 1)
+				{
+					addingNewCharacter(game);
+					return;
+				}
+				else
+				{
+					return;
+				}
+            else
+                cout<<"Invalid choice"<<endl;
+            break;
+            break;
+        default:
+            ;
+        }
+    }while(1);
+
+
+}
+
+void Menu::instructionsGuessMenu()
+{
+	cout<<"1.This is my character."<<endl;
+	cout<<"2.This isn't my character."<<endl;
+}
+
+void Menu::addingNewCharacter(Game &game)
+{
+	std::string name;
+	cout<<"Enter the name of your character: "<<endl;
+	cin>>name;
+	game.addCharacter(name);
+	instructionsAddingNewCharater();
+	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD cWritten;
+    COORD coord, coordUp, coordDown;
+    WORD  wColor1, wColor2;
+    int choice;
+    int count = 1;
+    int menuSize = 2;
+    coordUp.X = 0;
+    coordUp.Y = 10;
+    coordDown.X = 0;
+    coordDown.Y = coordUp.Y + menuSize - 1; 
+    coord = coordUp;
+    wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+    wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
+    FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+	do
+	{
+		choice = _getch();
+        switch(choice)
+        {
+        case 224:
+            choice = _getch();
+            switch(choice)
+            {
+            case KEY_UP: //вверх
+                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
+                if(count == 1)
+                {
+                    coord = coordDown;
+                    count = menuSize;
+                }
+                else 
+                {
+                    coord.Y--;
+                    count--;
+                }
+                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                break;
+            case KEY_DOWN://вниз
+                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
+                if(count == menuSize)
+                {
+                    coord = coordUp;
+                    count = 1;
+                }
+                else
+                {
+                    coord.Y++;
+                    count++;
+                }
+                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                break;
+            }
+            break;
+		case KEY_ENTER:
+        if(count == 1)
+		{
+			cout<<"Please, enter the question"<<endl;
+			std::string question;
+			cin>>question;
+			game.addQuestion(question);
+			return;
+		}
+            else if(count == 2)
+			{
+				cout<<"Very pity."<<endl;
+				return;
+			}
+            break;
+        default:
+            ;
+        }
+    }while(1);
+}
+
+void Menu::instructionsAddingNewCharater()
+{
+	cout<<"Do you know the question that can help to distinguish this character?"<<endl;
+	cout<<"Yes"<<endl;
+	cout<<"No"<<endl;
 }
