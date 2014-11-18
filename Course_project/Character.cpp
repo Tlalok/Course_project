@@ -165,3 +165,19 @@ void Character::decTimesPicked()
 {
     timesPicked--;
 }
+
+void Character::characterGuessed(Vector<std::pair<uint, uint>> currentAnswers)
+{
+	for(uint i = 0; i < statisticsQuestions.size(); i++)
+	{
+		for(uint j = 0; j < currentAnswers.size(); j++)
+		{
+			if(currentAnswers[j].first == statisticsQuestions[i].getQuestionID())
+			{
+				++statisticsQuestions[i];
+				++statisticsQuestions[i][currentAnswers[j].second];
+				std::cout<<"!!!!!!!!!!!!!!!!!!!!!!!!"<<std::endl;
+			}
+		}
+	}
+}

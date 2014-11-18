@@ -157,7 +157,7 @@ bool StatisticsGames::isCharacterExist(std::string name)
 
 void StatisticsGames::addAnswer(StatisticsAnswer& toAdd)
 {
-    numberGames += characters.size(); // вроде так хотя если вероятность сходится не будет можно убрать
+   // numberGames += characters.size(); // вроде так хотя если вероятность сходится не будет можно убрать
 	for(uint i = 0; i < characters.size(); i++)
 	{
 		characters[i].addAnswer(toAdd);
@@ -166,7 +166,7 @@ void StatisticsGames::addAnswer(StatisticsAnswer& toAdd)
 
 void StatisticsGames::addCharacter(Character& toAdd)
 {
-    numberGames += toAdd.getTimesPicked(); // вроде так
+   // numberGames += toAdd.getTimesPicked(); // вроде так // лучше вручную метод вызывать
 	characters.push_back(toAdd);
 }
 
@@ -180,4 +180,18 @@ StatisticsGames& StatisticsGames::operator=(StatisticsGames toCopy)
 Vector <Character> &StatisticsGames::getCharacters()
 {
 	return this->characters;
+}
+
+void StatisticsGames::incNumberGames()
+{
+	numberGames++;
+}
+
+void StatisticsGames::characterGuessed(uint idCharacter, Vector<std::pair<uint, uint>>& currentAnswers)
+{
+	for(uint i = 0; i < characters.size(); i++)
+	{
+		if(idCharacter == characters[i].getId())
+			characters[i].characterGuessed(currentAnswers);
+	}
 }

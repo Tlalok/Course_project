@@ -178,7 +178,7 @@ uint Game::getIdNextQuestion()
 
 double Game::getPBAi(Character& character)
 {
-	double result = 0;
+	double result = 1;
 	uint idCharacter = character.getId();
 	for(uint i = 0; i < currentAnswers.size(); i++)
 		result *= statisticsGames.getPBjAi(idCharacter, currentAnswers[i].first, currentAnswers[i].second);
@@ -189,7 +189,7 @@ double Game::getPAiB(Character& character)
 {
 	double result = 0;
 	double PB = 1;
-	for(uint i = 0; i < questions.size(); i++)
+	for(uint i = 0; i < currentAnswers.size(); i++)
 		PB *= statisticsGames.getPBi(currentAnswers[i].first, currentAnswers[i].second);
 	result = getPBAi(character) * statisticsGames.getPAi(character.getId()) / PB;
     return result;
@@ -261,6 +261,7 @@ void Game::addCharacter(std::string name)
 			{
 				++toAddQStatistics;
 				++toAddQStatistics[currentAnswers[j].second];
+				std::cout<<"!!!!!!!!!!!!!!!!!!!!!!!!"<<std::endl;
 			}
 		}
 		toAdd.addQuestion(toAddQStatistics);
@@ -391,4 +392,14 @@ bool Game::canSupposeCharacter()
             idPrev = idCharacter;
     }
     return idMax - 0.2 > idPrev;
+}
+
+void Game::incNumberGames()
+{
+	statisticsGames.incNumberGames();
+}
+
+void Game::characterGuessed(uint idCharacter)
+{
+	statisticsGames.characterGuessed(idCharacter, currentAnswers);
 }

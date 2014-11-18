@@ -9,6 +9,7 @@ const int KEY_UP     = 72;
 const int KEY_DOWN   = 80;
 const int KEY_ENTER  = 13;
 const int KEY_ESCAPE = 27;
+const int KEY_SPECIAL = 224;
 
 void Menu :: menu_main()
 {
@@ -35,7 +36,7 @@ void Menu :: menu_main()
         choice = _getch();
         switch(choice)
         {
-        case 224:
+		case KEY_SPECIAL:
             choice = _getch();
             switch(choice)
             {
@@ -130,7 +131,7 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
         choice = _getch();
         switch(choice)
         {
-        case 224:
+        case KEY_SPECIAL:
             choice = _getch();
             switch(choice)
             {
@@ -202,12 +203,12 @@ void Menu::gameMenu()
             cout << "Name: " << characterToSuppose.getName() << endl;
            if(!game.getIdNextQuestion())
 		   {
-			   guessMenu(game, 1);
+			   guessMenu(game, characterToSuppose.getId(), 1);
 			   game.write();
 			   return;
 		   }
 		   else
-			   guessMenu(game);
+			   guessMenu(game, characterToSuppose.getId());
         }
         else if(counterOfAnswers > game.minQuestions)
         {
@@ -216,7 +217,7 @@ void Menu::gameMenu()
             {
                 Character characterToSuppose = game.getLeadingCharacter();
                 //есть лидер, угадываем
-				guessMenu(game);
+				guessMenu(game, characterToSuppose.getId());
             }
         }
     }
@@ -224,7 +225,7 @@ void Menu::gameMenu()
 
 }
 
-void Menu::guessMenu(Game &game, uint End_Of_Game)
+void Menu::guessMenu(Game &game, uint idCharacter, uint End_Of_Game)
 {
 	instructionsGuessMenu();
 	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -247,7 +248,7 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
         choice = _getch();
         switch(choice)
         {
-        case 224:
+        case KEY_SPECIAL:
             choice = _getch();
             switch(choice)
             {
@@ -283,8 +284,11 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
             break;
 		case KEY_ENTER:
         if(count == 1)
-			;
-            else if(count == 2)
+		{
+			game.characterGuessed(idCharacter);
+			return;
+		}
+        else if(count == 2)
 				if(End_Of_Game == 1)
 				{
 					addingNewCharacter(game);
@@ -339,7 +343,7 @@ void Menu::addingNewCharacter(Game &game)
 		choice = _getch();
         switch(choice)
         {
-        case 224:
+        case KEY_SPECIAL:
             choice = _getch();
             switch(choice)
             {

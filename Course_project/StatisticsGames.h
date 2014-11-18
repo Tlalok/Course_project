@@ -51,4 +51,6 @@ public:
 	friend std::ostream& operator<<(std::ostream& file, StatisticsGames& statisticsGames);
 
     StatisticsGames& operator=(StatisticsGames toCopy);
+	void incNumberGames();
+	void characterGuessed(uint idCharacter, Vector<std::pair<uint, uint>>& currentAnswers);
 };
