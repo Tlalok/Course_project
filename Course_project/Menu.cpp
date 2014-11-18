@@ -188,8 +188,9 @@ void Menu::gameMenu()
         cout << idQuestionToAsk;
         std::string questionText = game.getQuestionText(idQuestionToAsk);
         uint Answer = GiveAnswer(questionText, answers);
-        //game.printProbability();
-        //_getch();
+		game.calculate();
+        game.printProbability();
+		system("pause");
         counterOfAnswers++;
 		game.giveAnswer(idQuestionToAsk, Answer);
         // counterOfAnswers == game.stackOfQuestions  -  число заданных вопросов равно ограничению
@@ -202,10 +203,11 @@ void Menu::gameMenu()
            if(!game.getIdNextQuestion())
 		   {
 			   guessMenu(game, 1);
+			   game.write();
 			   return;
 		   }
 		   else
-			   guessMenu(game,0);
+			   guessMenu(game);
         }
         else if(counterOfAnswers > game.minQuestions)
         {
@@ -214,16 +216,15 @@ void Menu::gameMenu()
             {
                 Character characterToSuppose = game.getLeadingCharacter();
                 //есть лидер, угадываем
-				guessMenu(game,0);
+				guessMenu(game);
             }
         }
     }
-    
 
 
 }
 
-void Menu::guessMenu(Game &game, uint End_Of_Game = 0)
+void Menu::guessMenu(Game &game, uint End_Of_Game)
 {
 	instructionsGuessMenu();
 	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
