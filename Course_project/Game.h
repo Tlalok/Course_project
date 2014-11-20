@@ -33,6 +33,7 @@ class Game
 	double getPBAi(Character&);
 	//возвращает вероятность того,что загадан этот персонаж при данном наборе вопросов-ответов
 	double getPAiB(Character&);
+	bool checkVectorForId(Vector<uint> IDs, uint id);
 
 public: 
 	const static int stackOfQuestions = 20;

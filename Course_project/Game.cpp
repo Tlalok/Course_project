@@ -417,10 +417,47 @@ Vector<Character> Game::get5LeadingCharacters()
 {
 	Vector<Character> leadingCharacters;
 	Vector<uint> leadingIDs;
-	leadingIDs.push_back(this->statisticsGames.getCharacter(0).getId());
+	uint idMax = statisticsGames.getCharacter(0).getId();
+	leadingIDs.push_back(idMax);
+	for(uint i = 1; i <= currentProbability.size(); i++)
+	{
+		if(currentProbability[idMax] < currentProbability[i] && idMax != i)
+		{
+			idMax = i;
+			leadingIDs[0] = i;
+		}
+	}
+	for(uint i = 1; i < 5; i++)
+	{
+		for(uint i = 1; i <= currentProbability.size(); i++)
+		{
+			if(!checkVectorForId(leadingIDs, i))
+			{
+				idMax = i;
+				leadingIDs.push_back(idMax);
+				break;
+			}
+		}
+		for(uint j = 1; j <= currentProbability.size(); j++)
+		{
+			if(currentProbability[j] >= currentProbability[idMax] && !checkVectorForId(leadingIDs, j) && currentProbability[j] <= currentProbability[leadingIDs[leadingIDs.size() - 2]])
+			{
+				idMax = j;
+				leadingIDs[leadingIDs.size() - 1] = idMax;
+			}
+		}
+	}
 	for(uint i = 0; i < 5; i++)
 	{
-		
+		leadingCharacters.push_back(statisticsGames.getCharacterById(leadingIDs[i]));
 	}
 	return leadingCharacters;
+}
+
+bool Game::checkVectorForId(Vector<uint> IDs, uint id)
+{
+	for(uint i = 0; i < IDs.size(); i++)
+		if(id == IDs[i])
+			return true;
+	return false;
 }

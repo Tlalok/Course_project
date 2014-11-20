@@ -507,7 +507,7 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
         case KEY_ENTER:
 			if(count == leadingCharacters.size() + 1)
 				return 0;
-            return count;
+			return leadingCharacters[count - 1].getId();
             break;
         default:
             ;
