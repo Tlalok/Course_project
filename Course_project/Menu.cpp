@@ -204,7 +204,7 @@ void Menu::gameMenu()
         uint Answer = GiveAnswer(questionText, answers);
 		game.calculate();
         game.printProbability();
-        game.printNumberQuestionsCharacters();
+        //game.printNumberQuestionsCharacters();
 		system("pause");
         counterOfAnswers++;
 		game.giveAnswer(idQuestionToAsk, Answer);

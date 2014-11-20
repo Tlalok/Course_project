@@ -15,6 +15,7 @@ int main()
 	game.read();
 	game.printStatistics();
 	system("pause");
+    
 	Menu menu;
 	menu.menu_main();
     /*

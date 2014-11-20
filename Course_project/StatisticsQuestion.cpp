@@ -69,12 +69,12 @@ uint StatisticsQuestion::getTimesOfGivingAnswer(uint idAnswer)
 std::istream& operator>>(std::istream& file, StatisticsQuestion& statisticsQuestion)
 {
 	uint numberOfAnswers;
-	StatisticsAnswer tempStatisticsAnswers;
 	file.read((char *) &statisticsQuestion.id, sizeof(uint));
 	file.read((char *) &statisticsQuestion.timesOfAskingQuestion, sizeof(uint));
 	file.read((char *) &numberOfAnswers, sizeof(uint));
 	for(uint i = 0; i < numberOfAnswers; i++)
 	{
+        StatisticsAnswer tempStatisticsAnswers;
 		file >> tempStatisticsAnswers;
 		statisticsQuestion.statisticsAnswers.push_back(tempStatisticsAnswers);
 	}

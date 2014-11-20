@@ -111,10 +111,10 @@ std::istream& operator>>(std::istream& file, StatisticsGames& statisticsGames)
 {
     file.read((char *) &statisticsGames.numberGames, sizeof(uint));
 	uint numberOfCharacters;
-	Character tempCharacter;
 	file.read((char *) &numberOfCharacters, sizeof(uint));
 	for(uint i = 0; i < numberOfCharacters; i++)
 	{
+        Character tempCharacter;
 		file >> tempCharacter;
 		statisticsGames.characters.push_back(tempCharacter);
 	}

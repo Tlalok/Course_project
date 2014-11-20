@@ -105,7 +105,6 @@ uint Character::getTimesOfAskingQuestion(uint idQuestion)
 std::istream& operator>>(std::istream& file, Character& character)
 {
 	uint numberOfQuestions, nameLength;
-	StatisticsQuestion tempStatisticsQuestion;
 	file.read((char *) &character.id, sizeof(uint));
 	file.read((char *) &character.timesPicked, sizeof(uint));
 	file.read((char *) &nameLength, sizeof(uint));
@@ -115,6 +114,7 @@ std::istream& operator>>(std::istream& file, Character& character)
 	file.read((char *) &numberOfQuestions, sizeof(uint));
 	for(uint i = 0; i < numberOfQuestions; i++)
 	{
+        StatisticsQuestion tempStatisticsQuestion;
 		file >> tempStatisticsQuestion;
 		character.statisticsQuestions.push_back(tempStatisticsQuestion);
 	}
