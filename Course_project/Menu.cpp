@@ -4,6 +4,7 @@
 #include <wincon.h>
 #include "conio.h"
 #include "Menu.h"
+#include "HighlightMenu.h"
 
 const int KEY_UP      =  72;
 const int KEY_DOWN    =  80;
@@ -14,25 +15,12 @@ const int KEY_SPECIAL =  224;
 void Menu :: menu_main()
 {
     instructions();
+
     #pragma region
     #pragma region
-    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO cursor = {1, false};  // убираем
-    SetConsoleCursorInfo(hOutput, &cursor);   // курсор
-    DWORD cWritten;
-    COORD coord, coordUp, coordDown;
-    WORD  wColor1, wColor2;
     int choice;
-    int count = 1;
     int menuSize = 4;
-    coordUp.X = coordUp.Y = 0;
-    coordDown.X = 0;
-    coordDown.Y = menuSize - 1; 
-    coord.X = 0;      
-    coord.Y = 0;  
-    wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
-    wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
-    FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    HighlightMenu highlightMenu(menuSize);
     #pragma endregion init menu
     do
     {
@@ -45,47 +33,25 @@ void Menu :: menu_main()
             switch(choice)
             {
             case KEY_UP: //вверх
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == 1)
-                {
-                    coord = coordDown;
-                    count = menuSize;
-                }
-                else 
-                {
-                    coord.Y--;
-                    count--;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyUp();
                 break;
             case KEY_DOWN://вниз
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == menuSize)
-                {
-                    coord = coordUp;
-                    count = 1;
-                }
-                else
-                {
-                    coord.Y++;
-                    count++;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyDown();
                 break;
             }
             break;
         #pragma endregion Menu navigation
         case KEY_ENTER:
-            if(count == 1)
+            if(highlightMenu.getSelectedMenuItem() == 1)
 			{
                 gameMenu();
 				return;
 			}
-            else if(count == 2)
+            else if(highlightMenu.getSelectedMenuItem() == 2)
                 cout<<"You've chosen Two"<<endl;
-            else if(count == 3)
+            else if(highlightMenu.getSelectedMenuItem() == 3)
                 cout<<"You've chosen Three"<<endl;
-            else if(count == 4)
+            else if(highlightMenu.getSelectedMenuItem() == 4)
                 cout<<"You've chosen Four"<<endl;
             else
                 cout<<"Invalid choice"<<endl;
@@ -95,7 +61,7 @@ void Menu :: menu_main()
         default:
             ;
         }
-    }while(choice != KEY_ESCAPE);
+    } while(choice != KEY_ESCAPE);
     #pragma endregion Menu
 }
 
@@ -120,21 +86,9 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
     }
     #pragma region
     #pragma region
-    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    DWORD cWritten;
-    COORD coord, coordUp, coordDown;
-    WORD  wColor1, wColor2;
     int choice;
-    int count = 1;
     int menuSize = answers.size();
-    coordUp.X = 0;
-    coordUp.Y = 1;
-    coordDown.X = 0;
-    coordDown.Y = coordUp.Y + menuSize - 1; 
-    coord = coordUp;
-    wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
-    wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
-    FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    HighlightMenu highlightMenu(menuSize, 1);
     #pragma endregion init menu
     do
     {
@@ -147,38 +101,16 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
             switch(choice)
             {
             case KEY_UP: //вверх
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == 1)
-                {
-                    coord = coordDown;
-                    count = menuSize;
-                }
-                else 
-                {
-                    coord.Y--;
-                    count--;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyUp();
                 break;
             case KEY_DOWN://вниз
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == menuSize)
-                {
-                    coord = coordUp;
-                    count = 1;
-                }
-                else
-                {
-                    coord.Y++;
-                    count++;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyDown();
                 break;
             }
             break;
         #pragma endregion Menu navigation
         case KEY_ENTER:
-            return count;
+            return highlightMenu.getSelectedMenuItem();
             break;
         default:
             ;
@@ -245,21 +177,9 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
 	instructionsGuessMenu();
     #pragma region
     #pragma region
-	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    DWORD cWritten;
-    COORD coord, coordUp, coordDown;
-    WORD  wColor1, wColor2;
     int choice;
-    int count = 1;
     int menuSize = 2;
-    coordUp.X = 0;
-    coordUp.Y = 1;
-    coordDown.X = 0;
-    coordDown.Y = coordUp.Y + menuSize - 1; 
-    coord = coordUp;
-    wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
-    wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
-    FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    HighlightMenu highlightMenu(menuSize, 1);
     #pragma endregion init menu
 	do
     {
@@ -272,43 +192,21 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
             switch(choice)
             {
             case KEY_UP: //вверх
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == 1)
-                {
-                    coord = coordDown;
-                    count = menuSize;
-                }
-                else 
-                {
-                    coord.Y--;
-                    count--;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyUp();
                 break;
             case KEY_DOWN://вниз
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == menuSize)
-                {
-                    coord = coordUp;
-                    count = 1;
-                }
-                else
-                {
-                    coord.Y++;
-                    count++;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyDown();
                 break;
             }
             break;
         #pragma endregion menu navigation
 		case KEY_ENTER:
-            if(count == 1)
+            if(highlightMenu.getSelectedMenuItem() == 1)
 		    {
 			    game.characterGuessed(characterToSuppose.getId());
 			    return;
 		    }
-            else if(count == 2)
+            else if(highlightMenu.getSelectedMenuItem() == 2)
 				if(End_Of_Game == 1)
 				{
 					if(uint guessedCharacter = guessMenu5LeadingCharacters(game))
@@ -350,21 +248,9 @@ void Menu::addingNewCharacter(Game &game)
 	instructionsAddingNewCharater();
     #pragma region
     #pragma region
-	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    DWORD cWritten;
-    COORD coord, coordUp, coordDown;
-    WORD  wColor1, wColor2;
     int choice;
-    int count = 1;
     int menuSize = 2;
-    coordUp.X = 0;
-    coordUp.Y = 10;
-    coordDown.X = 0;
-    coordDown.Y = coordUp.Y + menuSize - 1; 
-    coord = coordUp;
-    wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
-    wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
-    FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    HighlightMenu highlightMenu(menuSize, 10);
     #pragma endregion init menu
 	do
 	{
@@ -377,38 +263,16 @@ void Menu::addingNewCharacter(Game &game)
             switch(choice)
             {
             case KEY_UP: //вверх
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == 1)
-                {
-                    coord = coordDown;
-                    count = menuSize;
-                }
-                else 
-                {
-                    coord.Y--;
-                    count--;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyUp();
                 break;
             case KEY_DOWN://вниз
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == menuSize)
-                {
-                    coord = coordUp;
-                    count = 1;
-                }
-                else
-                {
-                    coord.Y++;
-                    count++;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyDown();
                 break;
             }
             break;
         #pragma endregion menu navigation
 		case KEY_ENTER:
-            if(count == 1)
+            if(highlightMenu.getSelectedMenuItem() == 1)
 		    {
 			    cout<<"Please, enter the question"<<endl;
 			    std::string question;
@@ -416,7 +280,7 @@ void Menu::addingNewCharacter(Game &game)
 			    game.addQuestion(question);
 			    return;
 		    }
-            else if(count == 2)
+            else if(highlightMenu.getSelectedMenuItem() == 2)
 			{
 				cout<<"Very pity."<<endl;
 				return;
@@ -438,28 +302,16 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
 	uint i;
 	for(i = 0; i < leadingCharacters.size(); i++)
     {
-		std::cout<<leadingCharacters[i].getName()<<"-"<<leadingCharacters[i].getNumberOfQuestions()<<std::endl;
+		//std::cout<<leadingCharacters[i].getName()<<"-"<<leadingCharacters[i].getNumberOfQuestions()<<std::endl;
         //std::cout << i + 1 << "." << answers[i].getText() << std::endl;
 		std::cout << i + 1  << "." << leadingCharacters[i].getName()<< std::endl;
     }
 	std::cout << i + 1  << "." << "Нет, ни один из этих персонажей не тот, кого я загадал." << std::endl;
     #pragma region
     #pragma region
-    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    DWORD cWritten;
-    COORD coord, coordUp, coordDown;
-    WORD  wColor1, wColor2;
     int choice;
-    uint count = 1;
 	int menuSize = leadingCharacters.size();
-    coordUp.X = 0;
-    coordUp.Y = 1;
-    coordDown.X = 0;
-    coordDown.Y = coordUp.Y + menuSize; 
-    coord = coordUp;
-    wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
-    wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
-    FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    HighlightMenu highlightMenu(menuSize, 1);
     #pragma endregion init menu
     do
     {
@@ -472,40 +324,18 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
             switch(choice)
             {
             case KEY_UP: //вверх
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == 1)
-                {
-                    coord = coordDown;
-                    count = menuSize;
-                }
-                else 
-                {
-                    coord.Y--;
-                    count--;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyUp();
                 break;
             case KEY_DOWN://вниз
-                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
-                if(count == menuSize)
-                {
-                    coord = coordUp;
-                    count = 1;
-                }
-                else
-                {
-                    coord.Y++;
-                    count++;
-                }
-                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                highlightMenu.KeyDown();
                 break;
             }
             break;
         #pragma endregion menu navigation
         case KEY_ENTER:
-			if(count == leadingCharacters.size())
+			if(highlightMenu.getSelectedMenuItem() == leadingCharacters.size())
 				return 0;
-            return count;
+            return highlightMenu.getSelectedMenuItem();
             break;
         default:
             ;
