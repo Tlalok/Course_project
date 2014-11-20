@@ -10,7 +10,7 @@ void writeTestData();
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	writeTestData();
+	//writeTestData();
 	Game game;
 	game.read();
 	game.printStatistics();

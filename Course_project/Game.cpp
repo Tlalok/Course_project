@@ -195,7 +195,7 @@ double Game::getPAiB(Character& character)
 	for(uint i = 0; i < currentAnswers.size(); i++)
 		PB *= statisticsGames.getPBi(currentAnswers[i].first, currentAnswers[i].second);
 	//result = getPBAi(character) * statisticsGames.getPAi(character.getId()) / PB; 
-	result = getPBAi(character) * statisticsGames.getPAi(character.getId());	//убрал пока PB т.к. он почему-то равен PBAi О_О
+	result = getPBAi(character) * statisticsGames.getPAi(character.getId()) / PB;	
     return result;
 }
 
