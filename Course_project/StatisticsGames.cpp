@@ -82,13 +82,13 @@ double StatisticsGames::getPBjAi(uint idCharater, uint idQuestion, uint idAnswer
 {
     uint timesOfGivingAnswer = getCharacterById(idCharater).getTimesOfGivingAnswer(idQuestion, idAnswer);
     uint timesOfAskingQuestion = getCharacterById(idCharater).getTimesOfAskingQuestion(idQuestion);
-    return timesOfGivingAnswer / (double)timesOfAskingQuestion;
+    return (double)timesOfGivingAnswer / (double)timesOfAskingQuestion;
     //return characters[idCharater].getTimesOfGivingAnswer(idQuestion, idAnswer) / characters[idAnswer].getTimesOfAskingQuestion(idQuestion);
 }
 
 double StatisticsGames::getPAi(uint idCharacter)
 {
-	return getTimesCharacterPicked(idCharacter) / (double)numberGames;
+	return (double)getTimesCharacterPicked(idCharacter) / (double)numberGames;
 }
 
 bool StatisticsGames::charactersIsEmpty()
@@ -192,6 +192,9 @@ void StatisticsGames::characterGuessed(uint idCharacter, Vector<std::pair<uint, 
 	for(uint i = 0; i < characters.size(); i++)
 	{
 		if(idCharacter == characters[i].getId())
+		{
+			std::cout<<"***";
 			characters[i].characterGuessed(currentAnswers);
+		}
 	}
 }

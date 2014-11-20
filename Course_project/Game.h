@@ -57,6 +57,7 @@ public:
     bool canSupposeCharacter();
 	uint getIdLeadingCharacter();
     Character getLeadingCharacter();
+	Vector<Character> get5LeadingCharacters();
 	void incNumberGames();
 	void characterGuessed(uint idCharacter);
 };

@@ -1,6 +1,6 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-#include "Vector.h"
+#include "vector.h"
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 class IndexOutOfRange{};
 class BeginPtrisNULL{};

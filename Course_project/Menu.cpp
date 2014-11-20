@@ -95,6 +95,7 @@ void Menu :: menu_main()
 
 void Menu :: instructions()
 {
+	system("cls");
     cout << "\t\t\tgameMenu()" << endl;
     cout << "\t\t\tTwo" << endl;
     cout << "\t\t\tThree" << endl;
@@ -198,17 +199,17 @@ void Menu::gameMenu()
         // !game.getIdNextQuestion()                  -  не найден следующий впрос, т.е. вопросов больше нет
         if(counterOfAnswers == game.stackOfQuestions || !game.getIdNextQuestion())
         {
+			Character characterToSuppose = game.getLeadingCharacter();
             //попытка угадать
-            Character characterToSuppose = game.getLeadingCharacter();
-            cout << "Name: " << characterToSuppose.getName() << endl;
            if(!game.getIdNextQuestion())
 		   {
-			   guessMenu(game, characterToSuppose.getId(), 1);
+			   guessMenu(game, 1);
+			   game.incNumberGames();
 			   game.write();
 			   return;
 		   }
 		   else
-			   guessMenu(game, characterToSuppose.getId());
+			   guessMenu(game);
         }
         else if(counterOfAnswers > game.minQuestions)
         {
@@ -217,7 +218,7 @@ void Menu::gameMenu()
             {
                 Character characterToSuppose = game.getLeadingCharacter();
                 //есть лидер, угадываем
-				guessMenu(game, characterToSuppose.getId());
+				guessMenu(game);
             }
         }
     }
@@ -225,8 +226,11 @@ void Menu::gameMenu()
 
 }
 
-void Menu::guessMenu(Game &game, uint idCharacter, uint End_Of_Game)
+void Menu::guessMenu(Game &game, uint End_Of_Game)
 {
+	system("cls");
+	Character characterToSuppose = game.getLeadingCharacter();
+	cout << "Name: " << characterToSuppose.getName() << endl;
 	instructionsGuessMenu();
 	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD cWritten;
@@ -236,7 +240,7 @@ void Menu::guessMenu(Game &game, uint idCharacter, uint End_Of_Game)
     int count = 1;
     int menuSize = 2;
     coordUp.X = 0;
-    coordUp.Y = 5;
+    coordUp.Y = 1;
     coordDown.X = 0;
     coordDown.Y = coordUp.Y + menuSize - 1; 
     coord = coordUp;
@@ -285,12 +289,17 @@ void Menu::guessMenu(Game &game, uint idCharacter, uint End_Of_Game)
 		case KEY_ENTER:
         if(count == 1)
 		{
-			game.characterGuessed(idCharacter);
+			game.characterGuessed(characterToSuppose.getId());
 			return;
 		}
         else if(count == 2)
 				if(End_Of_Game == 1)
 				{
+					if(uint guessedCharacter = guessMenu5LeadingCharacters(game))
+					{
+						game.characterGuessed(guessedCharacter);
+						return;
+					}
 					addingNewCharacter(game);
 					return;
 				}
@@ -398,8 +407,88 @@ void Menu::addingNewCharacter(Game &game)
     }while(1);
 }
 
+uint Menu::guessMenu5LeadingCharacters(Game &game)
+{
+	system("cls");
+    Vector<Character> leadingCharacters;
+	leadingCharacters = game.get5LeadingCharacters();
+	std::cout<<"Может быть один из этих персонажей - тот, кого ты загадал7"<<std::endl;
+	uint i;
+	for(i = 0; i < leadingCharacters.size(); i++)
+    {
+		std::cout<<leadingCharacters[i].getName()<<"-"<<leadingCharacters[i].getNumberOfQuestions()<<std::endl;
+        //std::cout << i + 1 << "." << answers[i].getText() << std::endl;
+		std::cout << i + 1  << "." << leadingCharacters[i].getName()<< std::endl;
+    }
+	std::cout << i + 1  << "." << "Нет, ни один из этих персонажей не тот, кого я загадал." << std::endl;
+    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD cWritten;
+    COORD coord, coordUp, coordDown;
+    WORD  wColor1, wColor2;
+    int choice;
+    uint count = 1;
+	int menuSize = leadingCharacters.size();
+    coordUp.X = 0;
+    coordUp.Y = 1;
+    coordDown.X = 0;
+    coordDown.Y = coordUp.Y + menuSize; 
+    coord = coordUp;
+    wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+    wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
+    FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    do
+    {
+        choice = _getch();
+        switch(choice)
+        {
+        case KEY_SPECIAL:
+            choice = _getch();
+            switch(choice)
+            {
+            case KEY_UP: //вверх
+                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
+                if(count == 1)
+                {
+                    coord = coordDown;
+                    count = menuSize;
+                }
+                else 
+                {
+                    coord.Y--;
+                    count--;
+                }
+                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                break;
+            case KEY_DOWN://вниз
+                FillConsoleOutputAttribute(hOutput, wColor1, 50*1, coord, &cWritten);
+                if(count == menuSize)
+                {
+                    coord = coordUp;
+                    count = 1;
+                }
+                else
+                {
+                    coord.Y++;
+                    count++;
+                }
+                FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+                break;
+            }
+            break;
+        case KEY_ENTER:
+			if(count == leadingCharacters.size())
+				return 0;
+            return count;
+            break;
+        default:
+            ;
+        }
+    }while(1);
+}
+
 void Menu::instructionsAddingNewCharater()
 {
+	system("pause");
 	cout<<"Do you know the question that can help to distinguish this character?"<<endl;
 	cout<<"Yes"<<endl;
 	cout<<"No"<<endl;

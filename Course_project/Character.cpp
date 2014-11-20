@@ -168,6 +168,7 @@ void Character::decTimesPicked()
 
 void Character::characterGuessed(Vector<std::pair<uint, uint>> currentAnswers)
 {
+	timesPicked++;
 	for(uint i = 0; i < statisticsQuestions.size(); i++)
 	{
 		for(uint j = 0; j < currentAnswers.size(); j++)
@@ -176,7 +177,7 @@ void Character::characterGuessed(Vector<std::pair<uint, uint>> currentAnswers)
 			{
 				++statisticsQuestions[i];
 				++statisticsQuestions[i][currentAnswers[j].second];
-				std::cout<<"!!!!!!!!!!!!!!!!!!!!!!!!"<<std::endl;
+				std::cout<<name<<":"<<"Q:"<<currentAnswers[j].first<<"A:"<<currentAnswers[j].second<<"!!!!!!!!!!!"<<std::endl;
 			}
 		}
 	}

@@ -66,6 +66,7 @@ uint Game::write()
 	std::ofstream file("questions.txt");
 	if(file.is_open())
 	{
+		file.clear();
 		Question question;
 		for(uint i = 0; i < questions.size(); i++)
 		{
@@ -79,6 +80,7 @@ uint Game::write()
 	if(file.is_open())
 	{
 		Answer answer;
+		file.clear();
 		for(uint i = 0; i < answers.size(); i++)
 		{
 			file << answers[i];
@@ -90,6 +92,7 @@ uint Game::write()
 	file.open("statistic.txt");
 	if(file.is_open())
 	{
+		file.clear();
 		file << statisticsGames;
 		file.close();
 	}
@@ -191,7 +194,8 @@ double Game::getPAiB(Character& character)
 	double PB = 1;
 	for(uint i = 0; i < currentAnswers.size(); i++)
 		PB *= statisticsGames.getPBi(currentAnswers[i].first, currentAnswers[i].second);
-	result = getPBAi(character) * statisticsGames.getPAi(character.getId()) / PB;
+	//result = getPBAi(character) * statisticsGames.getPAi(character.getId()) / PB; 
+	result = getPBAi(character) * statisticsGames.getPAi(character.getId());	//убрал пока PB т.к. он почему-то равен PBAi ќ_ќ
     return result;
 }
 
@@ -251,6 +255,7 @@ void Game::addCharacter(std::string name)
     //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, questions.size() * answers.size());
     //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size()); // вроде так
     Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size() + 1); // вроде так
+
 	StatisticsQuestion toAddQStatistics(answers);
 	for(uint i = 0; i < questions.size(); i++)
 	{
@@ -266,6 +271,7 @@ void Game::addCharacter(std::string name)
 		}
 		toAdd.addQuestion(toAddQStatistics);
 	}
+	std::cout<<toAdd.getName()<<"-"<<toAdd.getNumberOfQuestions()<<std::endl;
     // проверка проводилась ли игра
     if (currentAnswers.size() == 0)
         toAdd.decTimesPicked();
@@ -274,6 +280,7 @@ void Game::addCharacter(std::string name)
 
 void Game::printStatistics()
 {
+	std::cout << "NumberGames: " << statisticsGames.getNumberGames() << std::endl << "===========================\n";
     std::cout << "\nQuestions:\n" << "===========================\n";
     for (uint i = 0; i < questions.size(); i++)
         std::cout << "id:   " << questions[i].getId() << std::endl
@@ -320,14 +327,7 @@ void Game::giveAnswer(uint idQuestion, uint idAnswer)
 	{
 		std::pair<uint, uint> toAdd(idQuestion, idAnswer);
 		currentAnswers.push_back(toAdd);
-        for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
-        {
-            uint idCharacter = statisticsGames.getCharacter(i).getId();
-            double PBjAi = statisticsGames.getPBjAi(idCharacter, idQuestion, idAnswer);
-            double PBi = statisticsGames.getPBi(idQuestion, idAnswer);
-            currentProbability[idCharacter] *= PBjAi / PBi;
-            //std:: cout << "current probability[" << idCharacter << "] = " << currentProbability[idCharacter] << std::endl;
-        }
+		calculate();
 	}
 	else throw incorrectID();
 }
@@ -402,4 +402,21 @@ void Game::incNumberGames()
 void Game::characterGuessed(uint idCharacter)
 {
 	statisticsGames.characterGuessed(idCharacter, currentAnswers);
+}
+
+Vector<Character> Game::get5LeadingCharacters()
+{
+	Vector<Character> leadingCharacters;
+	for(uint i = 1; i <=5; i++)
+		leadingCharacters.push_back(statisticsGames.getCharacterById(i));
+	for(uint i = 0; i < 5; i++)
+	{
+		double pMax = currentProbability[1];
+		for(int j = 1; j <= currentProbability.size(); j++)
+		{
+			if(currentProbability[j] > currentProbability[leadingCharacters[i].getId()]  && j != leadingCharacters[i].getId() && currentProbability[j] < currentProbability[leadingCharacters[(((j - 1) >= (0)) ? (j - 1) : (0))].getId()])
+				leadingCharacters[i] = statisticsGames.getCharacterById(j);
+		}
+	}
+	return leadingCharacters;
 }

@@ -10,7 +10,7 @@ void writeTestData();
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	//writeTestData();
+	writeTestData();
 	Game game;
 	game.read();
 	game.printStatistics();
@@ -38,21 +38,26 @@ int main()
 void writeTestData()
 {
     Game* game = new Game();
-    game->addAnswer("Answer 1");
-    game->addAnswer("Answer 2");
-    game->addAnswer("Answer 3");
+	for(uint i = 0; i < 15; i++)
+		game->incNumberGames();
+    game->addAnswer("да");
+    game->addAnswer("нет");
+    game->addAnswer("я не знаю :c");
         
-    game->addQuestion("Question 1");
-    game->addQuestion("Question 2");
-    game->addQuestion("Question 3");
-    game->addQuestion("Question 4");
+    game->addQuestion("Ваш персонаж реален7");
+    game->addQuestion("Ваш персонаж мужского пола7");
+    game->addQuestion("Ваш персонаж - актёр7");
+    game->addQuestion("Ваш персонаж - герой сериала7");
+	game->addQuestion("Ваш персонаж президент7");
     
-    game->addCharacter("Character 1");
-    game->addCharacter("Character 2");
-    game->addCharacter("Character 3");
+    game->addCharacter("Спок(Star Trek)");
+    game->addCharacter("Барак Обама");
+    game->addCharacter("Анджелина Джоли");
     game->addCharacter("Character 4");
     game->addCharacter("Character 5");
     
+	system("pause");
+
     game->write();
  
     delete game;
