@@ -102,7 +102,7 @@ void Menu :: menu_main()
 void Menu :: instructions()
 {
 	system("cls");
-    cout << "\t\t\tgameMenu()" << endl;
+    cout << "\t\t\tНачать игру" << endl;
     cout << "\t\t\tTwo" << endl;
     cout << "\t\t\tThree" << endl;
     cout << "\t\t\tFour" << endl;
@@ -324,7 +324,7 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
 					return;
 				}
             else
-                cout<<"Invalid choice"<<endl;
+                cout<<"Неверный выбор."<<endl;
             break;
             break;
         default:
@@ -337,15 +337,17 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
 
 void Menu::instructionsGuessMenu()
 {
-	cout<<"1.This is my character."<<endl;
-	cout<<"2.This isn't my character."<<endl;
+	cout<<"1.Да, это мой персонаж!"<<endl;
+	cout<<"2.Нет, это не тот персонаж, которого я загадал :с"<<endl;
 }
 
 void Menu::addingNewCharacter(Game &game)
 {
 	std::string name;
-	cout<<"Enter the name of your character: "<<endl;
+	cout<<"Введите имя персонажа: "<<endl;
+	SetConsoleCP(1251);
 	cin>>name;
+	SetConsoleCP(866);
 	game.addCharacter(name);
 	instructionsAddingNewCharater();
     #pragma region
@@ -410,15 +412,17 @@ void Menu::addingNewCharacter(Game &game)
 		case KEY_ENTER:
             if(count == 1)
 		    {
-			    cout<<"Please, enter the question"<<endl;
+			    cout<<"Пожалуйста, введите вопрос."<<endl;
 			    std::string question;
-			    cin>>question;
+				SetConsoleCP(1251);
+				cin>>question;
+				SetConsoleCP(866);
 			    game.addQuestion(question);
 			    return;
 		    }
             else if(count == 2)
 			{
-				cout<<"Very pity."<<endl;
+				cout<<"Очень жаль :с"<<endl;
 				return;
 			}
             break;
@@ -515,7 +519,7 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
 void Menu::instructionsAddingNewCharater()
 {
 	system("pause");
-	cout<<"Do you know the question that can help to distinguish this character?"<<endl;
-	cout<<"Yes"<<endl;
-	cout<<"No"<<endl;
+	cout<<"Можете предложить вопрос, который поможет нам отличить вашего персонажа от предложенных ранее7"<<endl;
+	cout<<"Да."<<endl;
+	cout<<"Нет."<<endl;
 }
