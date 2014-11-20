@@ -438,8 +438,6 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
 	uint i;
 	for(i = 0; i < leadingCharacters.size(); i++)
     {
-		std::cout<<leadingCharacters[i].getName()<<"-"<<leadingCharacters[i].getNumberOfQuestions()<<std::endl;
-        //std::cout << i + 1 << "." << answers[i].getText() << std::endl;
 		std::cout << i + 1  << "." << leadingCharacters[i].getName()<< std::endl;
     }
 	std::cout << i + 1  << "." << "Ќет, ни один из этих персонажей не тот, кого € загадал." << std::endl;
