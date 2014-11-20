@@ -416,16 +416,11 @@ void Game::characterGuessed(uint idCharacter)
 Vector<Character> Game::get5LeadingCharacters()
 {
 	Vector<Character> leadingCharacters;
-	for(uint i = 1; i <=5; i++)
-		leadingCharacters.push_back(statisticsGames.getCharacterById(i));
+	Vector<uint> leadingIDs;
+	leadingIDs.push_back(this->statisticsGames.getCharacter(0).getId());
 	for(uint i = 0; i < 5; i++)
 	{
-		double pMax = currentProbability[1];
-		for(int j = 1; j <= currentProbability.size(); j++)
-		{
-			if(currentProbability[j] > currentProbability[leadingCharacters[i].getId()]  && j != leadingCharacters[i].getId() && currentProbability[j] <= currentProbability[leadingCharacters[(((j - 1) < (leadingCharacters.size())) ? ((((j - 1) >= (0)) ? (j - 1) : (0))) : (leadingCharacters.size() - 1))].getId()])
-				leadingCharacters[i] = statisticsGames.getCharacterById(j);
-		}
+		
 	}
 	return leadingCharacters;
 }
