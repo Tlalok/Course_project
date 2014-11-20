@@ -266,7 +266,6 @@ void Game::addCharacter(std::string name)
 			{
 				++toAddQStatistics;
 				++toAddQStatistics[currentAnswers[j].second];
-				std::cout<<"!!!!!!!!!!!!!!!!!!!!!!!!"<<std::endl;
 			}
 		}
 		toAdd.addQuestion(toAddQStatistics);
@@ -424,7 +423,7 @@ Vector<Character> Game::get5LeadingCharacters()
 		double pMax = currentProbability[1];
 		for(int j = 1; j <= currentProbability.size(); j++)
 		{
-			if(currentProbability[j] > currentProbability[leadingCharacters[i].getId()]  && j != leadingCharacters[i].getId() && currentProbability[j] < currentProbability[leadingCharacters[(((j - 1) >= (0)) ? (j - 1) : (0))].getId()])
+			if(currentProbability[j] > currentProbability[leadingCharacters[i].getId()]  && j != leadingCharacters[i].getId() && currentProbability[j] <= currentProbability[leadingCharacters[(((j - 1) < (leadingCharacters.size())) ? ((((j - 1) >= (0)) ? (j - 1) : (0))) : (leadingCharacters.size() - 1))].getId()])
 				leadingCharacters[i] = statisticsGames.getCharacterById(j);
 		}
 	}
