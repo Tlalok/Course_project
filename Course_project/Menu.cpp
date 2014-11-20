@@ -5,15 +5,17 @@
 #include "conio.h"
 #include "Menu.h"
 
-const int KEY_UP     = 72;
-const int KEY_DOWN   = 80;
-const int KEY_ENTER  = 13;
-const int KEY_ESCAPE = 27;
-const int KEY_SPECIAL = 224;
+const int KEY_UP      =  72;
+const int KEY_DOWN    =  80;
+const int KEY_ENTER   =  13;
+const int KEY_ESCAPE  =  27;
+const int KEY_SPECIAL =  224;
 
 void Menu :: menu_main()
 {
     instructions();
+    #pragma region
+    #pragma region
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursor = {1, false};  // убираем
     SetConsoleCursorInfo(hOutput, &cursor);   // курсор
@@ -31,8 +33,10 @@ void Menu :: menu_main()
     wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
     FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    #pragma endregion init menu
     do
     {
+        #pragma region
         choice = _getch();
         switch(choice)
         {
@@ -70,6 +74,7 @@ void Menu :: menu_main()
                 break;
             }
             break;
+        #pragma endregion Menu navigation
         case KEY_ENTER:
             if(count == 1)
 			{
@@ -91,6 +96,7 @@ void Menu :: menu_main()
             ;
         }
     }while(choice != KEY_ESCAPE);
+    #pragma endregion Menu
 }
 
 void Menu :: instructions()
@@ -112,6 +118,8 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
         //std::cout << i + 1 << "." << answers[i].getText() << std::endl;
         std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
     }
+    #pragma region
+    #pragma region
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD cWritten;
     COORD coord, coordUp, coordDown;
@@ -127,8 +135,10 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
     wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
     FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    #pragma endregion init menu
     do
     {
+        #pragma region
         choice = _getch();
         switch(choice)
         {
@@ -166,13 +176,15 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
                 break;
             }
             break;
+        #pragma endregion Menu navigation
         case KEY_ENTER:
             return count;
             break;
         default:
             ;
         }
-    }while(1);
+    }while(1);   
+    #pragma endregion Menu
 }
 
 void Menu::gameMenu()
@@ -192,6 +204,7 @@ void Menu::gameMenu()
         uint Answer = GiveAnswer(questionText, answers);
 		game.calculate();
         game.printProbability();
+        game.printNumberQuestionsCharacters();
 		system("pause");
         counterOfAnswers++;
 		game.giveAnswer(idQuestionToAsk, Answer);
@@ -222,8 +235,6 @@ void Menu::gameMenu()
             }
         }
     }
-
-
 }
 
 void Menu::guessMenu(Game &game, uint End_Of_Game)
@@ -232,6 +243,8 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
 	Character characterToSuppose = game.getLeadingCharacter();
 	cout << "Name: " << characterToSuppose.getName() << endl;
 	instructionsGuessMenu();
+    #pragma region
+    #pragma region
 	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD cWritten;
     COORD coord, coordUp, coordDown;
@@ -247,8 +260,10 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
     wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
     FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    #pragma endregion init menu
 	do
     {
+        #pragma region
         choice = _getch();
         switch(choice)
         {
@@ -286,13 +301,14 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
                 break;
             }
             break;
+        #pragma endregion menu navigation
 		case KEY_ENTER:
-        if(count == 1)
-		{
-			game.characterGuessed(characterToSuppose.getId());
-			return;
-		}
-        else if(count == 2)
+            if(count == 1)
+		    {
+			    game.characterGuessed(characterToSuppose.getId());
+			    return;
+		    }
+            else if(count == 2)
 				if(End_Of_Game == 1)
 				{
 					if(uint guessedCharacter = guessMenu5LeadingCharacters(game))
@@ -315,7 +331,7 @@ void Menu::guessMenu(Game &game, uint End_Of_Game)
             ;
         }
     }while(1);
-
+    #pragma endregion Menu
 
 }
 
@@ -332,6 +348,8 @@ void Menu::addingNewCharacter(Game &game)
 	cin>>name;
 	game.addCharacter(name);
 	instructionsAddingNewCharater();
+    #pragma region
+    #pragma region
 	HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD cWritten;
     COORD coord, coordUp, coordDown;
@@ -347,8 +365,10 @@ void Menu::addingNewCharacter(Game &game)
     wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
     FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    #pragma endregion init menu
 	do
 	{
+        #pragma region
 		choice = _getch();
         switch(choice)
         {
@@ -386,15 +406,16 @@ void Menu::addingNewCharacter(Game &game)
                 break;
             }
             break;
+        #pragma endregion menu navigation
 		case KEY_ENTER:
-        if(count == 1)
-		{
-			cout<<"Please, enter the question"<<endl;
-			std::string question;
-			cin>>question;
-			game.addQuestion(question);
-			return;
-		}
+            if(count == 1)
+		    {
+			    cout<<"Please, enter the question"<<endl;
+			    std::string question;
+			    cin>>question;
+			    game.addQuestion(question);
+			    return;
+		    }
             else if(count == 2)
 			{
 				cout<<"Very pity."<<endl;
@@ -405,6 +426,7 @@ void Menu::addingNewCharacter(Game &game)
             ;
         }
     }while(1);
+    #pragma endregion Menu
 }
 
 uint Menu::guessMenu5LeadingCharacters(Game &game)
@@ -421,6 +443,8 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
 		std::cout << i + 1  << "." << leadingCharacters[i].getName()<< std::endl;
     }
 	std::cout << i + 1  << "." << "Нет, ни один из этих персонажей не тот, кого я загадал." << std::endl;
+    #pragma region
+    #pragma region
     HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD cWritten;
     COORD coord, coordUp, coordDown;
@@ -436,8 +460,10 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
     wColor1 = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     wColor2 = FOREGROUND_RED | FOREGROUND_BLUE;
     FillConsoleOutputAttribute(hOutput, wColor2, 50*1, coord, &cWritten);
+    #pragma endregion init menu
     do
     {
+        #pragma region
         choice = _getch();
         switch(choice)
         {
@@ -475,6 +501,7 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
                 break;
             }
             break;
+        #pragma endregion menu navigation
         case KEY_ENTER:
 			if(count == leadingCharacters.size())
 				return 0;
@@ -484,6 +511,7 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
             ;
         }
     }while(1);
+    #pragma endregion Menu
 }
 
 void Menu::instructionsAddingNewCharater()

@@ -1,5 +1,6 @@
 #pragma once
 #include "StatisticsGames.h"
+#include <iomanip>
 #include <math.h>
 
 
@@ -50,7 +51,8 @@ public:
 	uint write();
     void printStatistics();
 	void giveAnswer(uint idQuestion, uint idAnswer);
-	void Game::printProbability();
+	void printProbability();
+    void printNumberQuestionsCharacters();
 	//Vector<Answer>& getAnswers();
     Vector<Answer> getAnswers();
 	std::string getQuestionText(uint idQuestion);

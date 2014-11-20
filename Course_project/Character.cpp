@@ -177,7 +177,7 @@ void Character::characterGuessed(Vector<std::pair<uint, uint>> currentAnswers)
 			{
 				++statisticsQuestions[i];
 				++statisticsQuestions[i][currentAnswers[j].second];
-				std::cout<<name<<":"<<"Q:"<<currentAnswers[j].first<<"A:"<<currentAnswers[j].second<<"!!!!!!!!!!!"<<std::endl;
+				std::cout<<name<<":"<<" Q:"<<currentAnswers[j].first<<" A:"<<currentAnswers[j].second<<"!!!!!!!!!!!"<<std::endl;
 			}
 		}
 	}

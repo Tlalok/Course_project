@@ -341,6 +341,16 @@ void Game::printProbability()
 	}
 }
 
+void Game::printNumberQuestionsCharacters()
+{
+    Vector<Character> characters = statisticsGames.getCharacters();
+    std::cout << "Number questions: " << std:: endl;
+    for (uint i = 0; i < characters.size(); i++)
+    {
+        std::cout << characters[i].getId() << ". " << std::setw(15) << std::left << characters[i].getName() << " - " << characters[i].getNumberOfQuestions() << std::endl;
+    }
+}
+
 //Vector <Answer>& Game::getAnswers()
 Vector<Answer> Game::getAnswers()
 {
