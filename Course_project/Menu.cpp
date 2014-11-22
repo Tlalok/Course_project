@@ -346,7 +346,15 @@ void Menu::addingNewCharacter(Game &game)
 	std::string name;
 	cout<<"Введите имя персонажа: "<<endl;
 	SetConsoleCP(1251);
-	cin>>name;
+    
+    cin.clear();
+    cin.ignore(cin.rdbuf()->in_avail());
+    char* nameCstr = new char[100];
+    cin.getline(nameCstr, 100, '\n');
+    name = nameCstr;
+    delete [] nameCstr;
+    
+    //cin >> name;
 	SetConsoleCP(866);
 	game.addCharacter(name);
 	instructionsAddingNewCharater();
@@ -415,7 +423,15 @@ void Menu::addingNewCharacter(Game &game)
 			    cout<<"Пожалуйста, введите вопрос."<<endl;
 			    std::string question;
 				SetConsoleCP(1251);
-				cin>>question;
+                
+				cin.clear();
+                cin.ignore(cin.rdbuf()->in_avail());
+                char* questionCstr = new char[100];
+                cin.getline(questionCstr, 100, '\n');
+                question = questionCstr;
+                delete [] questionCstr;
+                
+                //cin >> question;
 				SetConsoleCP(866);
 			    game.addQuestion(question);
 			    return;

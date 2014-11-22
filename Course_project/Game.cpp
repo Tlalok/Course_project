@@ -254,6 +254,13 @@ void Game::addCharacter(std::string name)
 	//Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, 1);
     //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, questions.size() * answers.size());
     //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size()); // âğîäå òàê
+    // ÄÎÁÀÂÈÒÜ ÏĞÎÂÅĞÊÓ ÅÑÒÜ ËÈ ÒÀÊÎÉ ÏÅĞÑÎÍÀÆ
+    if (statisticsGames.isCharacterExist(name))
+    {
+        uint idCharacter = statisticsGames.isCharacterExist(name);
+        statisticsGames.characterGuessed(idCharacter, currentAnswers);
+        return;
+    }
     Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size() + 1); // âğîäå òàê
 
 	StatisticsQuestion toAddQStatistics(answers);
