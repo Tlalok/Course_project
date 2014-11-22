@@ -277,7 +277,7 @@ void Game::addCharacter(std::string name)
 		}
 		toAdd.addQuestion(toAddQStatistics);
 	}
-	std::cout<<toAdd.getName()<<"-"<<toAdd.getNumberOfQuestions()<<std::endl;
+	// std::cout<<toAdd.getName()<<"-"<<toAdd.getNumberOfQuestions()<<std::endl;
     // проверка проводилась ли игра
     if (currentAnswers.size() == 0)
         toAdd.decTimesPicked();
