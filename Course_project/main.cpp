@@ -11,9 +11,9 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 	//writeTestData();
-	Game game;
-	game.read();
-	game.printStatistics();
+	//Game game;
+	//game.read();
+	//game.printStatistics();
 	system("pause");
     
 	Menu menu;
@@ -45,17 +45,19 @@ void writeTestData()
     game->addAnswer("нет");
     game->addAnswer("я не знаю :c");
         
-    game->addQuestion("Ваш персонаж реален7");
-    game->addQuestion("Ваш персонаж мужского пола7");
-    game->addQuestion("Ваш персонаж - актёр7");
-    game->addQuestion("Ваш персонаж - герой сериала7");
-	game->addQuestion("Ваш персонаж президент7");
+    game->addQuestion("Ваш персонаж реален?");
+    game->addQuestion("Ваш персонаж мужского пола?");
+    game->addQuestion("Ваш персонаж - актёр?");
+    game->addQuestion("Ваш персонаж - герой сериала?");
+	game->addQuestion("Ваш персонаж президент?");
+	game->addQuestion("У вашего персонажа светлые волосы?");
+	game->addQuestion("Ваш персонаж супергерой?");
     
     game->addCharacter("Спок(Star Trek)");
     game->addCharacter("Барак Обама");
     game->addCharacter("Анджелина Джоли");
-    game->addCharacter("Character 4");
-    game->addCharacter("Character 5");
+    game->addCharacter("Мерилин Монро");
+    game->addCharacter("Бэтмен");
     
 	system("pause");
 
