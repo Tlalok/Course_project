@@ -1,10 +1,9 @@
 #pragma once
 #include "StatisticsQuestion.h"
-
+#include "include.h"
 
 class Character
 {
-	//мне кажется что нужно, да и инты быстрее стринга работать будут, мб ещё и персонажи с одинаковыми именами, хз
 	uint id;
     // имя персонажа
     std::string name;
@@ -13,7 +12,6 @@ class Character
     // информация по вопросам и ответам 
     // для данного персонажа
     Vector<StatisticsQuestion> statisticsQuestions;
-    //std::map<uint, StatisticsQuestion> statisticsQuestions;
 public:
     Character();
 	Character(Character& toCopy);

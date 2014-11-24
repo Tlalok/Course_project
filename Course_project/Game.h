@@ -2,7 +2,7 @@
 #include "StatisticsGames.h"
 #include <iomanip>
 #include <math.h>
-
+#include "include.h"
 
 //SetConsoleCP(1251);
 //SetConsoleCP(866);

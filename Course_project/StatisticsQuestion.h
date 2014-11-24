@@ -3,6 +3,7 @@
 #include "StatisticsAnswer.h"
 #include "Question.h"
 #include "Answer.h"
+#include "include.h"
 
 class StatisticsQuestion
 {
