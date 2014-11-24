@@ -143,13 +143,13 @@ void StatisticsGames::addQuestion(StatisticsQuestion& toAdd)
 	}
 }
 
-bool StatisticsGames::isCharacterExist(std::string name)
+uint StatisticsGames::isCharacterExist(std::string name)
 {
 	for(uint i = 0; i < characters.size(); i++)
 	{
 		if(name == characters[i].getName())
 		{
-			return true;
+            return characters[i].getId();
 		}
 	}
 	return false;
@@ -166,8 +166,8 @@ void StatisticsGames::addAnswer(StatisticsAnswer& toAdd)
 
 void StatisticsGames::addCharacter(Character& toAdd)
 {
-   // numberGames += toAdd.getTimesPicked(); // вроде так // лучше вручную метод вызывать
-	characters.push_back(toAdd);
+   // numberGames += toAdd.getTimesPicked(); // вроде так // лучше вручную метод вызывать	
+    characters.push_back(toAdd);
 }
 
 StatisticsGames& StatisticsGames::operator=(StatisticsGames toCopy)

@@ -19,7 +19,7 @@ void Game::checkCharactersStatistics()
 
 uint Game::read()
 {
-	std::ifstream file("questions.txt");
+	std::ifstream file("questions.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		Question question;
@@ -31,7 +31,7 @@ uint Game::read()
 	}
 	else return 0;
     
-	file.open("answers.txt");
+	file.open("answers.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		Answer answer;
@@ -43,7 +43,7 @@ uint Game::read()
 	}
 	else return 0;
     
-    file.open("statistic.txt");
+    file.open("statistic.txt", std::ios::binary);
     if(file.is_open())
 	{
         file >> statisticsGames;
@@ -63,7 +63,7 @@ uint Game::read()
 
 uint Game::write()
 {
-	std::ofstream file("questions.txt");
+	std::ofstream file("questions.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		file.clear();
@@ -76,7 +76,7 @@ uint Game::write()
 	}
 	else return 0;
     
-	file.open("answers.txt");
+	file.open("answers.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		Answer answer;
@@ -89,7 +89,7 @@ uint Game::write()
 	}
 	else return 0;
     
-	file.open("statistic.txt");
+	file.open("statistic.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		file.clear();
@@ -254,6 +254,13 @@ void Game::addCharacter(std::string name)
 	//Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, 1);
     //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, questions.size() * answers.size());
     //Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size()); // вроде так
+    // ДОБАВИТЬ ПРОВЕРКУ ЕСТЬ ЛИ ТАКОЙ ПЕРСОНАЖ
+    if (statisticsGames.isCharacterExist(name))
+    {
+        uint idCharacter = statisticsGames.isCharacterExist(name);
+        statisticsGames.characterGuessed(idCharacter, currentAnswers);
+        return;
+    }
     Character toAdd(statisticsGames.getNumberOfCharacters() + 1, name, answers.size() + 1); // вроде так
 
 	StatisticsQuestion toAddQStatistics(answers);
@@ -270,7 +277,7 @@ void Game::addCharacter(std::string name)
 		}
 		toAdd.addQuestion(toAddQStatistics);
 	}
-	std::cout<<toAdd.getName()<<"-"<<toAdd.getNumberOfQuestions()<<std::endl;
+	// std::cout<<toAdd.getName()<<"-"<<toAdd.getNumberOfQuestions()<<std::endl;
     // проверка проводилась ли игра
     if (currentAnswers.size() == 0)
         toAdd.decTimesPicked();

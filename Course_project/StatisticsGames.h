@@ -25,7 +25,7 @@ public:
     StatisticsGames();
     StatisticsGames(StatisticsGames &StatisticsGames);
 	void addAnswer(StatisticsAnswer& toAdd);
-	bool isCharacterExist(std::string name);
+	uint isCharacterExist(std::string name);
 	void addQuestion(StatisticsQuestion& toAdd);
 	void addCharacter(Character& toAdd);
 	void checkCharactersStatistics(Vector<Question>& questions, Vector<Answer>& answers);

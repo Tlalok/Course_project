@@ -10,6 +10,8 @@ void writeTestData();
 int main()
 {
 	setlocale(LC_ALL, "Russian");
+    SetConsoleTitle(L"Акинатор");
+
 	//writeTestData();
 	//Game game;
 	//game.read();
