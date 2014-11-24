@@ -19,7 +19,7 @@ void Game::checkCharactersStatistics()
 
 uint Game::read()
 {
-	std::ifstream file("questions.txt");
+	std::ifstream file("questions.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		Question question;
@@ -31,7 +31,7 @@ uint Game::read()
 	}
 	else return 0;
     
-	file.open("answers.txt");
+	file.open("answers.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		Answer answer;
@@ -43,7 +43,7 @@ uint Game::read()
 	}
 	else return 0;
     
-    file.open("statistic.txt");
+    file.open("statistic.txt", std::ios::binary);
     if(file.is_open())
 	{
         file >> statisticsGames;
@@ -63,7 +63,7 @@ uint Game::read()
 
 uint Game::write()
 {
-	std::ofstream file("questions.txt");
+	std::ofstream file("questions.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		file.clear();
@@ -76,7 +76,7 @@ uint Game::write()
 	}
 	else return 0;
     
-	file.open("answers.txt");
+	file.open("answers.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		Answer answer;
@@ -89,7 +89,7 @@ uint Game::write()
 	}
 	else return 0;
     
-	file.open("statistic.txt");
+	file.open("statistic.txt", std::ios::binary);
 	if(file.is_open())
 	{
 		file.clear();
