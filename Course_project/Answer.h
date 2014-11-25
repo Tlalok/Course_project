@@ -19,6 +19,7 @@ public:
 	void setId(uint id);
 	//устанавливает текст
 	void setText(std::string text);
+	bool Answer::operator==(Answer& toCompare);
 	friend std::ifstream& operator>>(std::ifstream& file, Answer& question);
 	friend std::ofstream& operator<<(std::ofstream& file, Answer& question);
 };

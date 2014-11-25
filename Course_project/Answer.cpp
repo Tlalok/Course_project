@@ -41,3 +41,10 @@ std::ofstream& operator<<(std::ofstream& file, Answer& answer)
     file.write(answer.text.c_str(), textLength);
     return file;
 }
+
+bool Answer::operator==(Answer& toCompare)
+{
+	if(this->getId() == toCompare.getId())
+		return true;
+	return false;
+}

@@ -41,3 +41,10 @@ void Question::setId(uint id)
 {
 	this->id = id;
 }
+
+bool Question::operator==(Question& toCompare)
+{
+	if(this->getId() == toCompare.getId())
+		return true;
+	return false;
+}

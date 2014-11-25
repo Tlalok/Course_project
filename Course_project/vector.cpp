@@ -102,6 +102,7 @@ template <class TEntry> bool Vector<TEntry> :: empty()
 {
 	return _size == 0;
 }
+
 template <class TEntry> bool Vector<TEntry> :: inVector(TEntry toCheck)
 {
 	for(int i = 0; i < _size; i++)

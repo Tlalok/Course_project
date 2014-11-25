@@ -16,6 +16,7 @@ public:
     uint getId();
 	void setText(std::string text);
 	void setId(uint id);
+	bool Question::operator==(Question& toCompare);
 	friend std::ifstream& operator>>(std::ifstream& file, Question& question);
 	friend std::ofstream& operator<<(std::ofstream& file, Question& question);
 	std::string getText();

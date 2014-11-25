@@ -23,4 +23,5 @@ public:
 	uint reserve();
 	bool empty();
 	Vector<TEntry>& del(<TEntry> toDelete);
+	bool inVector(TEntry toCheck);
 };

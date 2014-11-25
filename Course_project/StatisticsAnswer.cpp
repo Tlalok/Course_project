@@ -59,3 +59,10 @@ StatisticsAnswer& StatisticsAnswer::operator=(StatisticsAnswer &toCopy)
     this->timesOfGivingAnswer = toCopy.timesOfGivingAnswer;
     return *this;
 }
+
+bool StatisticsAnswer::operator==(StatisticsAnswer& toCompare)
+{
+	if(this->getAnswerID() == toCompare.getAnswerID())
+		return true;
+	return false;
+}

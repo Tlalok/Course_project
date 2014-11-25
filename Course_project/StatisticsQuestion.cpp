@@ -138,3 +138,9 @@ uint StatisticsQuestion::getNumberAnswers()
     return statisticsAnswers.size();
 }
 	
+bool StatisticsQuestion::operator==(StatisticsQuestion& toCompare)
+{
+	if(this->getQuestionID() == toCompare.getQuestionID())
+		return true;
+	return false;
+}

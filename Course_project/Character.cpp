@@ -182,3 +182,10 @@ void Character::characterGuessed(Vector<std::pair<uint, uint>> currentAnswers)
 		}
 	}
 }
+
+bool Character::operator==(Character& toCompare)
+{
+	if(this->getId() == toCompare.getId())
+		return true;
+	return false;
+}
