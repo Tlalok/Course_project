@@ -1,3 +1,4 @@
+#pragma comment (lib, "kernel32.lib")
 #include <Windows.h>
 #include "include.h"
 

@@ -1,12 +1,18 @@
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #include "HighlightMenu.h"
+#include <iostream>
+typedef BOOL (WINAPI * LPSetConsoleFont)(HANDLE,DWORD);
 
 HighlightMenu::HighlightMenu(int menuSize, int topMargin)
 {
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	LPSetConsoleFont SetConsoleFont = reinterpret_cast<LPSetConsoleFont>(GetProcAddress(GetModuleHandle(L"kernel32.dll"), "SetConsoleFont"));
+    SetConsoleFont(hConsole,11);
     hideCursor();
     mainColor = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     highlightColor = FOREGROUND_RED | FOREGROUND_BLUE;
     newMenu(menuSize, topMargin);
+
 }
 
 int HighlightMenu::getSelectedMenuItem()
@@ -66,13 +72,13 @@ void HighlightMenu::KeyDown()
 
 void HighlightMenu::hideCursor()
 {
-    CONSOLE_CURSOR_INFO cursor = {1, false};  // убираем
-    SetConsoleCursorInfo(hConsole, &cursor);  // курсор
+    CONSOLE_CURSOR_INFO cursor = {1, false};  // СѓР±РёСЂР°РµРј
+    SetConsoleCursorInfo(hConsole, &cursor);  // РєСѓСЂСЃРѕСЂ
 }
  
 void HighlightMenu::showCursor()
 {
-    CONSOLE_CURSOR_INFO cursor = {25, true}; //восстанавливаем курсор
+    CONSOLE_CURSOR_INFO cursor = {25, true}; //РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєСѓСЂСЃРѕСЂ
     SetConsoleCursorInfo(hConsole, &cursor);
 }
 

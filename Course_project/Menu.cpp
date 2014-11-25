@@ -72,8 +72,8 @@ void Menu :: instructions()
 {
 	system("cls");
     cout << "\t\t\tНачать игру" << endl;
-    cout << "\t\t\tTwo" << endl;
-    cout << "\t\t\tThree" << endl;
+    cout << "\t\t\tУправление базой" << endl;
+    cout << "\t\t\tНастройки" << endl;
     cout << "\t\t\tВыход" << endl;
 }
 
@@ -375,5 +375,5 @@ void Menu::instructionsAddingNewCharater()
 
 void Menu::printTips()
 {
-	cout<<"тут тип управление";
+	cout<<"Стрелки - перемещение, Enter - выбор, Backspace - отмена последнего ответа";
 }
