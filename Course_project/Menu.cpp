@@ -7,11 +7,14 @@
 #include "HighlightMenu.h"
 #include "include.h"
 
+class BACKSPACE{};
+
 const int KEY_UP      =  72;
 const int KEY_DOWN    =  80;
 const int KEY_ENTER   =  13;
 const int KEY_ESCAPE  =  27;
 const int KEY_SPECIAL =  224;
+const int KEY_BACKSPACE = 8;
 
 void Menu :: menu_main()
 {
@@ -113,6 +116,8 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
         case KEY_ENTER:
             return highlightMenu.getSelectedMenuItem();
             break;
+		case KEY_BACKSPACE:
+			throw BACKSPACE();
         default:
             ;
         }
@@ -134,13 +139,23 @@ void Menu::gameMenu()
             break;
         cout << idQuestionToAsk;
         std::string questionText = game.getQuestionText(idQuestionToAsk);
-        uint Answer = GiveAnswer(questionText, answers);
+		uint answer;
+        try
+		{
+			answer = GiveAnswer(questionText, answers);
+		}
+		catch(BACKSPACE)
+		{
+			game.deleteLastAnswer();
+			counterOfAnswers--;
+			continue;
+		}
 		game.calculate();
         game.printProbability();
         //game.printNumberQuestionsCharacters();
 		system("pause");
         counterOfAnswers++;
-		game.giveAnswer(idQuestionToAsk, Answer);
+		game.giveAnswer(idQuestionToAsk, answer);
         // counterOfAnswers == game.stackOfQuestions  -  число заданных вопросов равно ограничению
         // !game.getIdNextQuestion()                  -  не найден следующий впрос, т.е. вопросов больше нет
         if(counterOfAnswers == game.stackOfQuestions || !game.getIdNextQuestion())

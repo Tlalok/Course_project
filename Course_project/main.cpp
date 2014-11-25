@@ -11,30 +11,9 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
     SetConsoleTitle(L"Акинатор");
-
 	//writeTestData();
-	//Game game;
-	//game.read();
-	//game.printStatistics();
-	system("pause");
-    
 	Menu menu;
 	menu.menu_main();
-    /*
-	Game* game;
-	game = new Game();
-	game->read();
-    game->printStatistics();
-	std::string str("exist7");
-	std::cout << (int)game->isQuestionExist(str) << std::endl;
-	char buf[30];
-	SetConsoleCP(1251);
-	std::cin >> buf;
-	SetConsoleCP(866);
-	std::string name(buf);
-	game->addQuestion(name);
-    */
-
     return 0;
 }
 

@@ -22,6 +22,6 @@ public:
 	Vector<TEntry> &operator=(Vector<TEntry>& toCopy);
 	uint reserve();
 	bool empty();
-	Vector<TEntry>& del(<TEntry> toDelete);
+	Vector<TEntry>& del(TEntry toDelete);
 	bool inVector(TEntry toCheck);
 };

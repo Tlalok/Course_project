@@ -468,3 +468,12 @@ bool Game::checkVectorForId(Vector<uint> IDs, uint id)
 			return true;
 	return false;
 }
+
+void Game::deleteLastAnswer()
+{
+	if(currentAnswers.size())
+	{
+		std::pair<uint, uint> lastAnswer = currentAnswers[currentAnswers.size() - 1];
+		currentAnswers.del(lastAnswer);
+	}
+}

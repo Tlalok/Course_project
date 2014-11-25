@@ -105,7 +105,7 @@ template <class TEntry> bool Vector<TEntry> :: empty()
 
 template <class TEntry> bool Vector<TEntry> :: inVector(TEntry toCheck)
 {
-	for(int i = 0; i < _size; i++)
+	for(uint i = 0; i < _size; i++)
 		if(this->beginPtr[i] == toCheck)
 			return true;
 	return false;
@@ -117,22 +117,23 @@ template <class TEntry> Vector<TEntry>& Vector<TEntry> :: del( TEntry toDelete)
 	if(inVector(toDelete))
 	{
 		if(_size != 0)
-			_size = _size - 1;
-		beginPtr = new TEntry[_size];
-		for(int i = 0, j = 0; i < _size; i++, j++)
 		{
-			if(this[i] == toDelete)
-				i++;
-			else
+			TEntry *newbeginPtr = new TEntry[_reserve];
+			for(uint i = 0, j = 0; i < _size;)
 			{
-				beginPtr[j] = this->beginPtr[i];
-				i++;
-				j++;
+				if(this->beginPtr[i] == toDelete)
+					i++;
+				else
+				{
+					newbeginPtr[j] = this->beginPtr[i];
+					i++;
+					j++;
+				}
 			}
+			delete [] this->beginPtr;
+			beginPtr = newbeginPtr;
+			_size = _size - 1;
 		}
-		delete [] this->beginPtr;
-		return *beginPtr;
 	}
-	else
-		return *this;
+	return *this;
 }

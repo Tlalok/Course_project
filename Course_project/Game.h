@@ -63,4 +63,5 @@ public:
 	Vector<Character> get5LeadingCharacters();
 	void incNumberGames();
 	void characterGuessed(uint idCharacter);
+	void deleteLastAnswer();
 };
