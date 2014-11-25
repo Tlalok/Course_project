@@ -5,6 +5,7 @@
 #include "conio.h"
 #include "Menu.h"
 #include "HighlightMenu.h"
+#include "include.h"
 
 const int KEY_UP      =  72;
 const int KEY_DOWN    =  80;
@@ -51,7 +52,7 @@ void Menu :: menu_main()
             else if(highlightMenu.getSelectedMenuItem() == 3)
                 cout<<"You've chosen Three"<<endl;
             else if(highlightMenu.getSelectedMenuItem() == 4)
-                cout<<"You've chosen Four"<<endl;
+                return;
             else
                 cout<<"Invalid choice"<<endl;
             break;
@@ -70,7 +71,7 @@ void Menu :: instructions()
     cout << "\t\t\tНачать игру" << endl;
     cout << "\t\t\tTwo" << endl;
     cout << "\t\t\tThree" << endl;
-    cout << "\t\t\tFour" << endl;
+    cout << "\t\t\tВыход" << endl;
 }
 
 // подумать насчет вывода id ответа
@@ -245,17 +246,7 @@ void Menu::addingNewCharacter(Game &game)
 	std::string name;
     system("cls");
 	cout<<"Введите имя загаданного вами персонажа: "<<endl;
-	SetConsoleCP(1251);
-    
-    cin.clear();
-    cin.ignore(cin.rdbuf()->in_avail());
-    char* nameCstr = new char[100];
-    cin.getline(nameCstr, 100, '\n');
-    name = nameCstr;
-    delete [] nameCstr;
-    
-    //cin >> name;
-	SetConsoleCP(866);
+	cin>>name;
 	game.addCharacter(name);
 	instructionsAddingNewCharater();
     #pragma region
@@ -288,20 +279,8 @@ void Menu::addingNewCharacter(Game &game)
 		case KEY_ENTER:
             if(highlightMenu.getSelectedMenuItem() == 1)
 		    {
-			    cout<<"Пожалуйста, введите вопрос."<<endl;
-                highlightMenu.showCursor();
-			    std::string question;
-				SetConsoleCP(1251);
-                
-				cin.clear();
-                cin.ignore(cin.rdbuf()->in_avail());
-                char* questionCstr = new char[100];
-                cin.getline(questionCstr, 100, '\n');
-                question = questionCstr;
-                delete [] questionCstr;
-                
-                //cin >> question;
-				SetConsoleCP(866);
+				std::string question;
+                cin >> question;
 			    game.addQuestion(question);
 			    return;
 		    }

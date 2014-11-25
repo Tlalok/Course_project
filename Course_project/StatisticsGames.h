@@ -1,7 +1,7 @@
 #pragma once
 //#include <unordered_map>
 #include "Character.h"
-#include <string>
+#include "include.h"
 
 
 class StatisticsGames

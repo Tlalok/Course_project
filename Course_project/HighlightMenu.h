@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include "include.h"
 
 class HighlightMenu
 {
