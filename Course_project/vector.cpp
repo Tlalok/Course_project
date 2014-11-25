@@ -102,3 +102,36 @@ template <class TEntry> bool Vector<TEntry> :: empty()
 {
 	return _size == 0;
 }
+template <class TEntry> bool Vector<TEntry> :: inVector(TEntry toCheck)
+{
+	for(int i = 0; i < _size; i++)
+		if(this->beginPtr[i] == toCheck)
+			return true;
+	return false;
+	
+}
+
+template <class TEntry> Vector<TEntry>& Vector<TEntry> :: del( TEntry toDelete)
+{
+	if(inVector(toDelete))
+	{
+		if(_size != 0)
+			_size = _size - 1;
+		beginPtr = new TEntry[_size];
+		for(int i = 0, j = 0; i < _size; i++, j++)
+		{
+			if(this[i] == toDelete)
+				i++;
+			else
+			{
+				beginPtr[j] = this->beginPtr[i];
+				i++;
+				j++;
+			}
+		}
+		delete [] this->beginPtr;
+		return *beginPtr;
+	}
+	else
+		return *this;
+}
