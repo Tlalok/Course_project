@@ -76,6 +76,13 @@ void HighlightMenu::showCursor()
     SetConsoleCursorInfo(hConsole, &cursor);
 }
 
+void HighlightMenu::setCursor(int X, int Y)
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD position = {X, Y};
+	SetConsoleCursorPosition(handle, position);
+}
+
 HighlightMenu::~HighlightMenu()
 {
     showCursor();

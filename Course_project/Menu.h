@@ -17,4 +17,5 @@ public:
 	void instructionsGuessMenu();
 	void addingNewCharacter(Game &game);
 	void instructionsAddingNewCharater();
+	void printTips();
 };

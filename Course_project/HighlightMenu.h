@@ -20,5 +20,6 @@ public:
     void KeyDown();
     void hideCursor();
     void showCursor();
+	void setCursor(int X, int Y);
     ~HighlightMenu();
 };

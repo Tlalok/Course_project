@@ -92,6 +92,9 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
     int menuSize = answers.size();
     int topMargin = 1;
     HighlightMenu highlightMenu(menuSize, topMargin);
+	highlightMenu.setCursor(0, 24);
+	printTips();
+	highlightMenu.setCursor(0, 6);
     int choice;
     #pragma endregion init menu
     do
@@ -368,4 +371,9 @@ void Menu::instructionsAddingNewCharater()
 	cout<<"ћожете предложить вопрос, который поможет нам отличить вашего персонажа от предложенных ранее7"<<endl;
 	cout<<"ƒа."<<endl;
 	cout<<"Ќет."<<endl;
+}
+
+void Menu::printTips()
+{
+	cout<<"тут тип управление";
 }
