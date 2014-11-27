@@ -400,14 +400,15 @@ bool Game::canSupposeCharacter()
         if (currentProbability[idCharacter] > currentProbability[idMax])
             idMax = idCharacter;
     }
-    uint idPrev = idMax == statisticsGames.getCharacter(0).getId() ? statisticsGames.getCharacter(1).getId() : statisticsGames.getCharacter(0).getId();
+    uint idPrev = (idMax == statisticsGames.getCharacter(0).getId()) ? statisticsGames.getCharacter(1).getId() : statisticsGames.getCharacter(0).getId();
     for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
     {
         uint idCharacter = statisticsGames.getCharacter(i).getId();
         if (idCharacter != idMax && currentProbability[idCharacter] > currentProbability[idPrev])
             idPrev = idCharacter;
     }
-    return idMax - 0.2 > idPrev;
+    //return idMax - 0.2 > idPrev;
+    return (currentProbability[idPrev] / currentProbability[idMax]) <= 0.8;
 }
 
 void Game::incNumberGames()

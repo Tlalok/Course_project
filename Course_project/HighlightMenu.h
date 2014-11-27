@@ -1,4 +1,4 @@
-#pragma comment (lib, "kernel32.lib")
+#pragma once
 #include <Windows.h>
 #include "include.h"
 

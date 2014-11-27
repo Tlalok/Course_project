@@ -1,18 +1,15 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
+#pragma once
 #include "HighlightMenu.h"
 #include <iostream>
-typedef BOOL (WINAPI * LPSetConsoleFont)(HANDLE,DWORD);
 
 HighlightMenu::HighlightMenu(int menuSize, int topMargin)
 {
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	LPSetConsoleFont SetConsoleFont = reinterpret_cast<LPSetConsoleFont>(GetProcAddress(GetModuleHandle(L"kernel32.dll"), "SetConsoleFont"));
-    SetConsoleFont(hConsole,11);
     hideCursor();
     mainColor = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     highlightColor = FOREGROUND_RED | FOREGROUND_BLUE;
     newMenu(menuSize, topMargin);
-
 }
 
 int HighlightMenu::getSelectedMenuItem()
