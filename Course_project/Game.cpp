@@ -407,7 +407,8 @@ bool Game::canSupposeCharacter()
         if (idCharacter != idMax && currentProbability[idCharacter] > currentProbability[idPrev])
             idPrev = idCharacter;
     }
-    return idMax - 0.2 > idPrev;
+    //return idMax - 0.2 > idPrev;
+    return (currentProbability[idPrev] / currentProbability[idMax]) <= 0.8;
 }
 
 void Game::incNumberGames()

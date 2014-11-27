@@ -1,3 +1,4 @@
+#pragma once
 #include "HighlightMenu.h"
 
 HighlightMenu::HighlightMenu(int menuSize, int topMargin)

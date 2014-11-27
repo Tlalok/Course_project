@@ -36,8 +36,8 @@ class Game
 	bool checkVectorForId(Vector<uint> IDs, uint id);
 
 public: 
-	const static int stackOfQuestions = 20;
-	const static int minQuestions = 10;
+	const static uint stackOfQuestions = 20;
+	const static uint minQuestions = 10;
 	// возвращает индекс следующего вопроса, который нужно задать
     uint getIdNextQuestion();
 	bool isQuestionExist(std::string text);
