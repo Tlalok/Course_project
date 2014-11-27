@@ -8,6 +8,8 @@ using namespace std;
 class Menu
 {
     typedef uint (Menu::*eventHandler)(int seletedMenuItem, void *param);
+	typedef void (Game::*deleteFunc)(uint);
+	typedef void (Game::*addFunc)(std::string);
 
     uint RunMenu(int menuSize, int topMargin, eventHandler keyEnterPress = NULL, void *param = NULL, eventHandler keyBackspacePress = NULL);
     uint chooseActionMainMenu(int seletedMenuItem, void *param);
@@ -23,8 +25,13 @@ public:
 	void gameMenu();
     uint guessMenuMiddleGame(Game &game);
 	uint guessMenu5LeadingCharacters(Game &game);
+	void baseManagementMenu();
 	void instructionsGuessMenu();
+	void instructionsBaseMenu();
+	void instructionsDataActions();
 	void addingNewCharacter(Game &game);
 	void instructionsAddingNewCharater();
 	void printTips();
+	void deleteFromBase(deleteFunc deleteNode);
+	void addToBase(addFunc addNode);
 };

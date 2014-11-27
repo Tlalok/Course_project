@@ -20,6 +20,7 @@ public:
 	Character& operator=(Character& toCopy); 
 	uint getTimesPicked();
 	uint getId();
+	void setId(uint id);
 	std::string getName();
 	StatisticsQuestion& getStatisticsQuestion(uint idQuestion);
     uint getNumberOfQuestions();

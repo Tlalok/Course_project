@@ -39,6 +39,11 @@ uint Character::getId()
 	return id;
 }
 
+void Character::setId(uint id)
+{
+	this->id = id;
+}
+
 std::string Character::getName()
 {
 	return name;

@@ -198,3 +198,14 @@ void StatisticsGames::characterGuessed(uint idCharacter, Vector<std::pair<uint, 
 		}
 	}
 }
+
+
+void StatisticsGames::deleteCharacter(uint id)
+{
+	characters.del(getCharacterById(id));
+	for(uint i = 0; i < characters.size(); i++)
+	{
+		if(characters[i].getId() > id)
+			characters[i].setId(characters[i].getId() - 1);
+	}
+}
