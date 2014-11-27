@@ -21,7 +21,6 @@ public:
 	void instructionsMainMenu();
 	uint GiveAnswer(string QuestionText, Vector<Answer>& answers);
 	void gameMenu();
-	//void guessMenu(Game &game, uint End_Of_Game = 0);
     uint guessMenuMiddleGame(Game &game);
 	uint guessMenu5LeadingCharacters(Game &game);
 	void instructionsGuessMenu();

@@ -29,16 +29,15 @@ void Menu::instructionsMainMenu()
 
 void Menu::instructionsGuessMenu()
 {
-	cout<<"1.ƒа, это мой персонаж!"<<endl;
-	cout<<"2.Ќет, это не тот персонаж, которого € загадал :с"<<endl;
+	cout << "1.ƒа, это мой персонаж!" << endl;
+	cout << "2.Ќет, это не тот персонаж, которого € загадал :с" << endl;
 }
 
 void Menu::instructionsAddingNewCharater()
 {
-	//system("pause");
-	cout<<"ћожете предложить вопрос, который поможет нам отличить вашего персонажа от предложенных ранее7"<<endl;
-	cout<<"ƒа."<<endl;
-	cout<<"Ќет."<<endl;
+	cout << "ћожете предложить вопрос, который поможет нам отличить вашего персонажа от предложенных ранее7"<<endl;
+	cout << "ƒа." << endl;
+	cout << "Ќет." << endl;
 }
 
 uint Menu::RunMenu(int menuSize, int topMargin, eventHandler keyEnterPress, void *param, eventHandler keyBackspacePress)
@@ -86,16 +85,16 @@ uint Menu::chooseActionMainMenu(int seletedMenuItem, void *param)
         gameMenu();
         break;
     case 2:
-        cout<<"You've chosen Two"<<endl;
+        cout << "You've chosen Two" << endl;
         break;
     case 3:
-        cout<<"You've chosen Three"<<endl;
+        cout << "You've chosen Three" << endl;
         break;
     case 4:
-        cout<<"You've chosen Four"<<endl;
+        cout << "You've chosen Four" << endl;
         break;
     default:
-        cout<<"Invalid choice"<<endl;
+        cout << "Invalid choice" << endl;
     }
     return seletedMenuItem;
 }
@@ -158,58 +157,12 @@ void Menu :: menu_main()
     int menuSize = 4;
     int topMargin = 0;
     RunMenu(menuSize, topMargin , &Menu::chooseActionMainMenu);
-    /*
-    HighlightMenu highlightMenu(menuSize);
-    int choice;
-
-    do
-    {
-
-        choice = _getch();
-        switch(choice)
-        {
-		case KEY_SPECIAL:
-            choice = _getch();
-            switch(choice)
-            {
-            case KEY_UP: //вверх
-                highlightMenu.KeyUp();
-                break;
-            case KEY_DOWN://вниз
-                highlightMenu.KeyDown();
-                break;
-            }
-            break;
-
-        case KEY_ENTER:
-            if(highlightMenu.getSelectedMenuItem() == 1)
-			{
-                gameMenu();
-				return;
-			}
-            else if(highlightMenu.getSelectedMenuItem() == 2)
-                cout<<"You've chosen Two"<<endl;
-            else if(highlightMenu.getSelectedMenuItem() == 3)
-                cout<<"You've chosen Three"<<endl;
-            else if(highlightMenu.getSelectedMenuItem() == 4)
-                return;
-            else
-                cout<<"Invalid choice"<<endl;
-            break;
-        case KEY_ESCAPE:
-            break;
-        default:
-            ;
-        }
-    }while(choice != KEY_ESCAPE);
-    */
 }
 
-// подумать насчет вывода id ответа
 uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
 {
 	system("cls");
-    cout<<QuestionText<<std::endl;
+    cout << QuestionText << std::endl;
     for(uint i = 0; i < answers.size(); i++)
     {
         //std::cout << i + 1 << "." << answers[i].getText() << std::endl;
@@ -219,40 +172,6 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
     int menuSize = answers.size();
     int topMargin = 1;
     return RunMenu(menuSize, topMargin, NULL, NULL, &Menu::throwBackspacePressException);
-    /*
-    HighlightMenu highlightMenu(menuSize, topMargin);
-	//highlightMenu.setCursor(0, 24);
-	//printTips();
-	//highlightMenu.setCursor(0, 6);
-    int choice;
-
-    do
-    {
-        choice = _getch();
-        switch(choice)
-        {
-        case KEY_SPECIAL:
-            choice = _getch();
-            switch(choice)
-            {
-            case KEY_UP: //вверх
-                highlightMenu.KeyUp();
-                break;
-            case KEY_DOWN://вниз
-                highlightMenu.KeyDown();
-                break;
-            }
-            break;
-        case KEY_ENTER:
-            return highlightMenu.getSelectedMenuItem();
-            break;
-		case KEY_BACKSPACE:
-			throw BACKSPACE();
-        default:
-            ;
-        }
-    }while(1);  
-    */
 }
 
 void Menu::gameMenu()
@@ -298,7 +217,6 @@ void Menu::gameMenu()
         game.printProbability();
 		system("pause");
         bool askedMinNumberQuestions = counterOfAnswers >= game.minQuestions;
-        //bool mustTryGuess = counterOfAnswers == game.stackOfQuestions;
         bool mustTryGuess = (counterOfAnswers % game.stackOfQuestions) == 0;
         if(mustTryGuess || askedMinNumberQuestions && game.canSupposeCharacter())
         {
@@ -312,103 +230,8 @@ void Menu::gameMenu()
 			    return;
             }
         }
-        /*
-        // counterOfAnswers == game.stackOfQuestions  -  число заданных вопросов равно ограничению
-        // !game.getIdNextQuestion()                  -  не найден следующий впрос, т.е. вопросов больше нет
-        if(counterOfAnswers == game.stackOfQuestions || !game.getIdNextQuestion())
-        {
-			Character characterToSuppose = game.getLeadingCharacter();
-            //попытка угадать
-           if(!game.getIdNextQuestion())
-		   {
-			   guessMenu(game, 1);
-			   game.incNumberGames();
-			   game.write();
-			   return;
-		   }
-		   else
-			   guessMenu(game);
-        }
-        else if(counterOfAnswers > game.minQuestions)
-        {
-            //uint idCharacterToSuppose = game.LeadingCharacter();
-            if(game.canSupposeCharacter())
-            {
-                Character characterToSuppose = game.getLeadingCharacter();
-                //есть лидер, угадываем
-				guessMenu(game);
-            }
-        }
-        */
     }
 }
-
-/*
-void Menu::guessMenu(Game &game, uint End_Of_Game)
-{
-	system("cls");
-	Character characterToSuppose = game.getLeadingCharacter();
-	cout << "Name: " << characterToSuppose.getName() << endl;
-	instructionsGuessMenu();
-    #pragma region
-    #pragma region
-    int menuSize = 2;
-    int topMargin = 1;
-    HighlightMenu highlightMenu(menuSize, topMargin);
-    int choice;
-    #pragma endregion init menu
-	do
-    {
-        #pragma region
-        choice = _getch();
-        switch(choice)
-        {
-        case KEY_SPECIAL:
-            choice = _getch();
-            switch(choice)
-            {
-            case KEY_UP: //вверх
-                highlightMenu.KeyUp();
-                break;
-            case KEY_DOWN://вниз
-                highlightMenu.KeyDown();
-                break;
-            }
-            break;
-        #pragma endregion menu navigation
-		case KEY_ENTER:
-            if(highlightMenu.getSelectedMenuItem() == 1)
-		    {
-			    game.characterGuessed(characterToSuppose.getId());
-			    return;
-		    }
-            else if(highlightMenu.getSelectedMenuItem() == 2)
-				if(End_Of_Game == 1)
-				{
-					if(uint guessedCharacter = guessMenu5LeadingCharacters(game))
-					{
-						game.characterGuessed(guessedCharacter);
-						return;
-					}
-					addingNewCharacter(game);
-					return;
-				}
-				else
-				{
-					return;
-				}
-            else
-                cout<<"Ќеверный выбор."<<endl;
-            break;
-            break;
-        default:
-            ;
-        }
-    }while(1);
-    #pragma endregion Menu
-
-}
-*/
 
 uint Menu::guessMenuMiddleGame(Game &game)
 {
@@ -427,56 +250,24 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
 	system("cls");
     Vector<Character> leadingCharacters;
 	leadingCharacters = game.get5LeadingCharacters();
-	std::cout<<"ћожет быть один из этих персонажей - тот, кого ты загадал7"<<std::endl;
+	std::cout << "ћожет быть один из этих персонажей - тот, кого ты загадал7" << std::endl;
 	uint i;
 	for(i = 0; i < leadingCharacters.size(); i++)
     {
-		std::cout << i + 1  << "." << leadingCharacters[i].getName()<< std::endl;
+		std::cout << i + 1  << "." << leadingCharacters[i].getName() << std::endl;
     }
 	std::cout << i + 1  << "." << "Ќет, ни один из этих персонажей не тот, кого € загадал." << std::endl;
 
     int menuSize = leadingCharacters.size() + 1;
     int topMargin = 1;
     return RunMenu(menuSize, topMargin, &Menu::chooseFrom5Characters, &leadingCharacters);
-    /*
-    HighlightMenu highlightMenu(menuSize, topMargin);
-    int choice;
-
-    do
-    {
-        choice = _getch();
-        switch(choice)
-        {
-        case KEY_SPECIAL:
-            choice = _getch();
-            switch(choice)
-            {
-            case KEY_UP: //вверх
-                highlightMenu.KeyUp();
-                break;
-            case KEY_DOWN://вниз
-                highlightMenu.KeyDown();
-                break;
-            }
-            break;
-
-        case KEY_ENTER:
-            if(highlightMenu.getSelectedMenuItem() == leadingCharacters.size() + 1)
-				return 0;
-			return leadingCharacters[highlightMenu.getSelectedMenuItem() - 1].getId();
-            break;
-        default:
-            ;
-        }
-    }while(1);
-    */
 }
 
 void Menu::addingNewCharacter(Game &game)
 {
 	std::string name;
     system("cls");
-	cout<<"¬ведите им€ загаданного вами персонажа: "<<endl;
+	cout << "¬ведите им€ загаданного вами персонажа: " << endl;
 	cin>>name;
 	game.addCharacter(name);
 	instructionsAddingNewCharater();
@@ -484,45 +275,6 @@ void Menu::addingNewCharacter(Game &game)
     int menuSize = 2;
     int topMargin = 4;
     RunMenu(menuSize, topMargin, &Menu::chooseActionAddingQuestion, &game);
-    /*
-    HighlightMenu highlightMenu(menuSize, topMargin);
-    int choice;
-	do
-	{
-		choice = _getch();
-        switch(choice)
-        {
-        case KEY_SPECIAL:
-            choice = _getch();
-            switch(choice)
-            {
-            case KEY_UP: //вверх
-                highlightMenu.KeyUp();
-                break;
-            case KEY_DOWN://вниз
-                highlightMenu.KeyDown();
-                break;
-            }
-            break;
-		case KEY_ENTER:
-            if(highlightMenu.getSelectedMenuItem() == 1)
-		    {
-				std::string question;
-                cin >> question;
-			    game.addQuestion(question);
-			    return;
-		    }
-            else if(highlightMenu.getSelectedMenuItem() == 2)
-			{
-				cout<<"ќчень жаль :с"<<endl;
-				return;
-			}
-            break;
-        default:
-            ;
-        }
-    }while(1);
-    */
 }
 
 void Menu::setCursor(int X, int Y)
@@ -536,7 +288,7 @@ void Menu::printTips()
 {
     setCursor(0, 24);
 
-    cout<<"тут тип управление";
+    cout << "тут тип управление";
 
 	setCursor(0, 6);
 }
