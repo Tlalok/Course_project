@@ -19,7 +19,7 @@ public:
 	uint getAnswerID();
 	uint getTimesOfGivingAnswer();
 	void setId(uint id);
-	bool StatisticsAnswer::operator==(StatisticsAnswer& toCompare);
+	bool operator==(StatisticsAnswer& toCompare);
 	friend std::istream& operator>>(std::istream& file, StatisticsAnswer& statisticsAnswer);
 	friend std::ostream& operator<<(std::ostream& file, StatisticsAnswer& statisticsAnswer);
     StatisticsAnswer& operator=(StatisticsAnswer &toCopy);

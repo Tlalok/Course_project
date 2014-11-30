@@ -34,7 +34,7 @@ public:
     // уменьшаем на 1 количество того сколько
     // раз был загадан персонаж
     void decTimesPicked();
-	bool Character::operator==(Character& toCompare);
+	bool operator==(Character& toCompare);
 	void characterGuessed(Vector<std::pair<uint, uint>> currentAnswers);
 	void deleteQuestion(uint id);
 	void deleteAnswer(uint id);
