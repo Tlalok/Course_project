@@ -145,7 +145,9 @@ void Menu::baseManagementMenu()
 		switch(selectedAction)
 		{
 		case 1:
-			addToBase(&Game::addCharacter);
+			system("cls");
+			cout<<"¬ведите им€ нового персонажа:"<<endl;
+			addToBase(&statistic, &Game::addCharacter);
 			break;
 		case 2:
 			characters = statistic.getCharacters();
@@ -154,7 +156,7 @@ void Menu::baseManagementMenu()
 			{
 				std::cout << characters[i].getId() << "." << characters[i].getName() << std::endl;
 			}
-			deleteFromBase(&Game::deleteCharacter);
+			deleteFromBase(&statistic, &Game::deleteCharacter, characters.size());
 			break;
 		default:
 			break;
@@ -166,7 +168,7 @@ void Menu::baseManagementMenu()
 		case 1:
 			system("cls");
 			cout<<"¬ведите новый вопрос:"<<endl;
-			addToBase(&Game::addQuestion);
+			addToBase(&statistic, &Game::addQuestion);
 			break;
 		case 2:
 			questions = statistic.getQuestions();
@@ -175,7 +177,7 @@ void Menu::baseManagementMenu()
 			{
 				std::cout << questions[i].getId() << "." << questions[i].getText() << std::endl;
 			}
-			deleteFromBase(&Game::deleteQuestion);
+			deleteFromBase(&statistic, &Game::deleteQuestion, questions.size());
 			break;
 		default:
 			break;
@@ -185,7 +187,10 @@ void Menu::baseManagementMenu()
 		switch(selectedAction)
 		{
 		case 1:
-			addToBase(&Game::addAnswer);
+			system("cls");
+			cout<<"¬ведите новый ответ:"<<endl;
+			addToBase(&statistic, &Game::addAnswer);
+			break;
 		case 2:
 			answers = statistic.getAnswers();
 			system("cls");
@@ -193,25 +198,35 @@ void Menu::baseManagementMenu()
 			{
 				std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
 			}
-			deleteFromBase(&Game::deleteAnswer);
-		break;
+			deleteFromBase(&statistic, &Game::deleteAnswer, answers.size());
+			break;
 	default:
 		return;
 		}
 		break;
 	}
+	statistic.write();
 }
 
-void Menu::addToBase(addFunc f)
+void Menu::addToBase(Game* game, addFunc addFuncPtr)
 {
 	std::string newText;
 	cin>>newText;
-
+	(game->*addFuncPtr)(newText);
 };
 
-void Menu::deleteFromBase(deleteFunc f)
+void Menu::deleteFromBase(Game* game, deleteFunc deleteFuncPtr, uint numberOfUnits)
 {
-	
+	uint selectedAction;
+	try
+	{
+		selectedAction = RunMenu(numberOfUnits, 0, NULL, NULL, &Menu::throwBackspacePressException);
+	}
+	catch(BACKSPACE)
+	{
+		return;
+	}
+	(game->*deleteFuncPtr)(selectedAction);
 };
 
 

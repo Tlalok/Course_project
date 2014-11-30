@@ -36,6 +36,8 @@ public:
     void decTimesPicked();
 	bool Character::operator==(Character& toCompare);
 	void characterGuessed(Vector<std::pair<uint, uint>> currentAnswers);
+	void deleteQuestion(uint id);
+	void deleteAnswer(uint id);
 	friend std::istream& operator>>(std::istream& file, Character& character);
 	friend std::ostream& operator<<(std::ostream& file, Character& character);
 };

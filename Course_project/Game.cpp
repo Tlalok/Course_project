@@ -494,5 +494,14 @@ void Game::deleteCharacter(uint id)
 	statisticsGames.deleteCharacter(id);
 }
 
-void Game::deleteQuestion(uint id){};
-void Game::deleteAnswer(uint id){};
+void Game::deleteQuestion(uint id)
+{
+	questions.del(getQuestions()[id-1]);
+	statisticsGames.deleteQuestion(id);
+}
+
+void Game::deleteAnswer(uint id)
+{
+	answers.del(getAnswers()[id-1]);
+	statisticsGames.deleteAnswer(id);
+}

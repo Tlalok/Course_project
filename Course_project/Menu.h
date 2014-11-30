@@ -32,6 +32,6 @@ public:
 	void addingNewCharacter(Game &game);
 	void instructionsAddingNewCharater();
 	void printTips();
-	void deleteFromBase(deleteFunc deleteNode);
-	void addToBase(addFunc addNode);
+	void deleteFromBase(Game* game, deleteFunc deleteNode, uint numberOfUnits);
+	void addToBase(Game* game, addFunc addNode);
 };
