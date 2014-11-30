@@ -27,7 +27,7 @@ public:
     uint getTimesOfGivingAnswer(uint idAnswer);
     uint getNumberAnswers();
 	void addAnswer(StatisticsAnswer toAdd);
-	bool StatisticsQuestion::operator==(StatisticsQuestion& toCompare);
+	bool operator==(StatisticsQuestion& toCompare);
 	friend std::istream& operator>>(std::istream& file, StatisticsQuestion& statisticsquestion);
 	friend std::ostream& operator<<(std::ostream& file, StatisticsQuestion& statisticsquestion);
 	
