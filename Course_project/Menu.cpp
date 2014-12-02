@@ -207,8 +207,12 @@ void Menu::gameMenu()
 		}
 		catch(BACKSPACE)
 		{
-			game.deleteLastAnswer();
-			counterOfAnswers--;
+            if (counterOfAnswers > 0)
+            {
+                game.deleteLastAnswer();
+			    counterOfAnswers--;
+                game.calculate();
+            }
 			continue;
 		}
         counterOfAnswers++;
@@ -250,6 +254,8 @@ uint Menu::guessMenu5LeadingCharacters(Game &game)
 	system("cls");
     Vector<Character> leadingCharacters;
 	leadingCharacters = game.get5LeadingCharacters();
+    if (leadingCharacters.size() == 0)
+        return 0;
 	std::cout << "Может быть один из этих персонажей - тот, кого ты загадал7" << std::endl;
 	uint i;
 	for(i = 0; i < leadingCharacters.size(); i++)
