@@ -90,8 +90,11 @@ uint Menu::RunMenu(int menuSize, int topMargin, eventHandler keyEnterPress, void
             if (keyBackspacePress)
                 (this->*keyBackspacePress)(highlightMenu.getSelectedMenuItem(), param);
             break;
+		case KEY_ESCAPE:
+			exit(0);
+			break;
         default:
-            cout << "incorrect choice" << endl;
+			break;
         }
     } while(1);
 }
@@ -106,8 +109,11 @@ uint Menu::chooseActionMainMenu(int seletedMenuItem, void *param)
     case 2:
 		baseManagementMenu();
         break;
+	case 3:
+		exit(0);
+		break;
     default:
-        cout << "Invalid choice" << endl;
+		break;
     }
     return seletedMenuItem;
 }
@@ -117,95 +123,101 @@ void Menu::baseManagementMenu()
 	Game statistic;
 	statistic.read();
 	uint selectedData;
-	instructionsBaseMenu();
-	try
+	while(1)
 	{
-		selectedData = RunMenu(3, 1, NULL, NULL, NULL);
-	}
-	catch(BACKSPACE)
-	{
-		return;
-	}
-	uint selectedAction;
-	instructionsDataActions();
-	try
-	{
-		selectedAction = RunMenu(2, 1, NULL, NULL, NULL);
-	}
-	catch(BACKSPACE)
-	{
-		return;
-	}
-	Vector<Character> characters;
-	Vector<Question> questions;
-	Vector<Answer> answers;
-	switch(selectedData)
-	{
-	case 1:
-		switch(selectedAction)
+		instructionsBaseMenu();
+		try
 		{
-		case 1:
-			system("cls");
-			cout<<"¬ведите им€ нового персонажа:"<<endl;
-			addToBase(&statistic, &Game::addCharacter);
-			break;
-		case 2:
-			characters = statistic.getCharacters();
-			system("cls");
-			for(uint i = 0; i < characters.size(); i++)
-			{
-				std::cout << characters[i].getId() << "." << characters[i].getName() << std::endl;
-			}
-			deleteFromBase(&statistic, &Game::deleteCharacter, characters.size());
-			break;
-		default:
-			break;
+			selectedData = RunMenu(3, 1, NULL, NULL, &Menu::throwBackspacePressException);
 		}
-		break;
-	case 2:
-		switch(selectedAction)
+		catch(BACKSPACE)
 		{
-		case 1:
-			system("cls");
-			cout<<"¬ведите новый вопрос:"<<endl;
-			addToBase(&statistic, &Game::addQuestion);
-			break;
-		case 2:
-			questions = statistic.getQuestions();
-			system("cls");
-			for(uint i = 0; i < questions.size(); i++)
-			{
-				std::cout << questions[i].getId() << "." << questions[i].getText() << std::endl;
-			}
-			deleteFromBase(&statistic, &Game::deleteQuestion, questions.size());
-			break;
-		default:
-			break;
+			return;
 		}
-		break;
-	case 3:
-		switch(selectedAction)
+		uint selectedAction;
+		instructionsDataActions();
+		try
+		{
+			selectedAction = RunMenu(2, 1, NULL, NULL, &Menu::throwBackspacePressException);
+		}
+		catch(BACKSPACE)
+		{
+			continue;
+		}
+		Vector<Character> characters;
+		Vector<Question> questions;
+		Vector<Answer> answers;
+		switch(selectedData)
 		{
 		case 1:
-			system("cls");
-			cout<<"¬ведите новый ответ:"<<endl;
-			addToBase(&statistic, &Game::addAnswer);
+			switch(selectedAction)
+			{
+			case 1:
+				system("cls");
+				cout<<"¬ведите им€ нового персонажа:"<<endl;
+				addToBase(&statistic, &Game::addCharacter);
+				break;
+			case 2:
+				characters = statistic.getCharacters();
+				system("cls");
+				for(uint i = 0; i < characters.size(); i++)
+				{
+					std::cout << characters[i].getId() << "." << characters[i].getName() << std::endl;
+				}
+				deleteFromBase(&statistic, &Game::deleteCharacter, characters.size());
+				break;
+			default:
+				break;
+			}
 			break;
 		case 2:
-			answers = statistic.getAnswers();
-			system("cls");
-			for(uint i = 0; i < answers.size(); i++)
+			switch(selectedAction)
 			{
-				std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
+			case 1:
+				system("cls");
+				cout<<"¬ведите новый вопрос:"<<endl;
+				addToBase(&statistic, &Game::addQuestion);
+				break;
+			case 2:
+				questions = statistic.getQuestions();
+				system("cls");
+				for(uint i = 0; i < questions.size(); i++)
+				{
+					std::cout << questions[i].getId() << "." << questions[i].getText() << std::endl;
+				}
+				deleteFromBase(&statistic, &Game::deleteQuestion, questions.size());
+				break;
+			default:
+				break;
 			}
-			deleteFromBase(&statistic, &Game::deleteAnswer, answers.size());
 			break;
-	default:
-		return;
+		case 3:
+			switch(selectedAction)
+			{
+			case 1:
+				system("cls");
+				cout<<"¬ведите новый ответ:"<<endl;
+				addToBase(&statistic, &Game::addAnswer);
+				break;
+			case 2:
+				answers = statistic.getAnswers();
+				system("cls");
+				for(uint i = 0; i < answers.size(); i++)
+				{
+					std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
+				}
+				deleteFromBase(&statistic, &Game::deleteAnswer, answers.size());
+				break;
+		default:
+			return;
+			}
+			break;
 		}
 		break;
 	}
 	statistic.write();
+	cout<<"»зменени€ успешно сохранены."<<endl;
+	system("pause");
 }
 
 void Menu::addToBase(Game* game, addFunc addFuncPtr)
@@ -283,11 +295,13 @@ uint Menu::throwBackspacePressException(int selectedMenuItem, void *param)
 
 void Menu :: menu_main()
 {
-    instructionsMainMenu();
-
-    int menuSize = 4;
-    int topMargin = 0;
-    RunMenu(menuSize, topMargin , &Menu::chooseActionMainMenu);
+	while(1)
+	{
+		instructionsMainMenu();
+		int menuSize = 3;
+		int topMargin = 0;
+		RunMenu(menuSize, topMargin , &Menu::chooseActionMainMenu);
+	}
 }
 
 uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
@@ -343,6 +357,10 @@ void Menu::gameMenu()
 			    counterOfAnswers--;
                 game.calculate();
             }
+			else
+			{
+				return;
+			}
 			continue;
 		}
         counterOfAnswers++;

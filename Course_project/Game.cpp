@@ -497,11 +497,21 @@ void Game::deleteCharacter(uint id)
 void Game::deleteQuestion(uint id)
 {
 	questions.del(getQuestions()[id-1]);
+	for(uint i = 0; i < questions.size(); i++)
+	{
+		if(questions[i].getId() > id)
+			questions[i].setId(questions[i].getId() - 1);
+	}
 	statisticsGames.deleteQuestion(id);
 }
 
 void Game::deleteAnswer(uint id)
 {
 	answers.del(getAnswers()[id-1]);
+	for(uint i = 0; i < answers.size(); i++)
+	{
+		if(answers[i].getId() > id)
+			answers[i].setId(answers[i].getId() - 1);
+	}
 	statisticsGames.deleteAnswer(id);
 }
