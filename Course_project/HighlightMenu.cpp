@@ -1,5 +1,7 @@
+п»ї#define _CRT_SECURE_NO_WARNINGS
 #pragma once
 #include "HighlightMenu.h"
+#include <iostream>
 
 HighlightMenu::HighlightMenu(int menuSize, int topMargin)
 {
@@ -67,13 +69,13 @@ void HighlightMenu::KeyDown()
 
 void HighlightMenu::hideCursor()
 {
-    CONSOLE_CURSOR_INFO cursor = {1, false};  // убираем
-    SetConsoleCursorInfo(hConsole, &cursor);  // курсор
+    CONSOLE_CURSOR_INFO cursor = {1, false};  // СѓР±РёСЂР°РµРј
+    SetConsoleCursorInfo(hConsole, &cursor);  // РєСѓСЂСЃРѕСЂ
 }
  
 void HighlightMenu::showCursor()
 {
-    CONSOLE_CURSOR_INFO cursor = {25, true}; //восстанавливаем курсор
+    CONSOLE_CURSOR_INFO cursor = {25, true}; //РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєСѓСЂСЃРѕСЂ
     SetConsoleCursorInfo(hConsole, &cursor);
 }
 

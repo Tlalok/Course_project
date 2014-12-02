@@ -17,14 +17,33 @@ const int KEY_SPECIAL    =  224;
 const int KEY_BACKSPACE  =  8;
 
 typedef uint (Menu::*eventHandler)(int, void *);
+typedef void (Game::*deleteFunc)(uint);
+typedef void (Game::*addFunc)(std::string);
+
 
 void Menu::instructionsMainMenu()
 {
 	system("cls");
-    cout << "\t\t\tНачать игру" << endl;
-    cout << "\t\t\tTwo" << endl;
-    cout << "\t\t\tThree" << endl;
+	cout << "\t\t\tНачать игру" << endl;
+    cout << "\t\t\tУправление базой" << endl;
     cout << "\t\t\tВыход" << endl;
+}
+
+void Menu::instructionsBaseMenu()
+{
+	system("cls");
+	cout << "\t\t\tУправление базой:" << endl;
+	cout << "\t\t\tПерсонажи." << endl;
+    cout << "\t\t\tВопросы." << endl;
+    cout << "\t\t\tОтветы." << endl;
+}
+
+void Menu::instructionsDataActions()
+{
+	system("cls");
+	cout << "\t\t\tВыберите действие:" << endl;
+	cout << "\t\t\tДобавление." << endl;
+    cout << "\t\t\tУдаление." << endl;
 }
 
 void Menu::instructionsGuessMenu()
@@ -85,19 +104,131 @@ uint Menu::chooseActionMainMenu(int seletedMenuItem, void *param)
         gameMenu();
         break;
     case 2:
-        cout << "You've chosen Two" << endl;
-        break;
-    case 3:
-        cout << "You've chosen Three" << endl;
-        break;
-    case 4:
-        cout << "You've chosen Four" << endl;
+		baseManagementMenu();
         break;
     default:
         cout << "Invalid choice" << endl;
     }
     return seletedMenuItem;
 }
+
+void Menu::baseManagementMenu()
+{
+	Game statistic;
+	statistic.read();
+	uint selectedData;
+	instructionsBaseMenu();
+	try
+	{
+		selectedData = RunMenu(3, 1, NULL, NULL, NULL);
+	}
+	catch(BACKSPACE)
+	{
+		return;
+	}
+	uint selectedAction;
+	instructionsDataActions();
+	try
+	{
+		selectedAction = RunMenu(2, 1, NULL, NULL, NULL);
+	}
+	catch(BACKSPACE)
+	{
+		return;
+	}
+	Vector<Character> characters;
+	Vector<Question> questions;
+	Vector<Answer> answers;
+	switch(selectedData)
+	{
+	case 1:
+		switch(selectedAction)
+		{
+		case 1:
+			system("cls");
+			cout<<"Введите имя нового персонажа:"<<endl;
+			addToBase(&statistic, &Game::addCharacter);
+			break;
+		case 2:
+			characters = statistic.getCharacters();
+			system("cls");
+			for(uint i = 0; i < characters.size(); i++)
+			{
+				std::cout << characters[i].getId() << "." << characters[i].getName() << std::endl;
+			}
+			deleteFromBase(&statistic, &Game::deleteCharacter, characters.size());
+			break;
+		default:
+			break;
+		}
+		break;
+	case 2:
+		switch(selectedAction)
+		{
+		case 1:
+			system("cls");
+			cout<<"Введите новый вопрос:"<<endl;
+			addToBase(&statistic, &Game::addQuestion);
+			break;
+		case 2:
+			questions = statistic.getQuestions();
+			system("cls");
+			for(uint i = 0; i < questions.size(); i++)
+			{
+				std::cout << questions[i].getId() << "." << questions[i].getText() << std::endl;
+			}
+			deleteFromBase(&statistic, &Game::deleteQuestion, questions.size());
+			break;
+		default:
+			break;
+		}
+		break;
+	case 3:
+		switch(selectedAction)
+		{
+		case 1:
+			system("cls");
+			cout<<"Введите новый ответ:"<<endl;
+			addToBase(&statistic, &Game::addAnswer);
+			break;
+		case 2:
+			answers = statistic.getAnswers();
+			system("cls");
+			for(uint i = 0; i < answers.size(); i++)
+			{
+				std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
+			}
+			deleteFromBase(&statistic, &Game::deleteAnswer, answers.size());
+			break;
+	default:
+		return;
+		}
+		break;
+	}
+	statistic.write();
+}
+
+void Menu::addToBase(Game* game, addFunc addFuncPtr)
+{
+	std::string newText;
+	cin>>newText;
+	(game->*addFuncPtr)(newText);
+};
+
+void Menu::deleteFromBase(Game* game, deleteFunc deleteFuncPtr, uint numberOfUnits)
+{
+	uint selectedAction;
+	try
+	{
+		selectedAction = RunMenu(numberOfUnits, 0, NULL, NULL, &Menu::throwBackspacePressException);
+	}
+	catch(BACKSPACE)
+	{
+		return;
+	}
+	(game->*deleteFuncPtr)(selectedAction);
+};
+
 
 uint Menu::chooseActionAddingQuestion(int selectedMenuItem, void *param)
 {
@@ -165,7 +296,6 @@ uint Menu::GiveAnswer(string QuestionText, Vector<Answer>& answers)
     cout << QuestionText << std::endl;
     for(uint i = 0; i < answers.size(); i++)
     {
-        //std::cout << i + 1 << "." << answers[i].getText() << std::endl;
         std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
     }
     printTips();
@@ -293,8 +423,6 @@ void Menu::setCursor(int X, int Y)
 void Menu::printTips()
 {
     setCursor(0, 24);
-
-    cout << "тут тип управление";
-
+    cout << "Стрелки - перемещение, Enter - выбор, Backspace - отмена последнего ответа";
 	setCursor(0, 6);
 }

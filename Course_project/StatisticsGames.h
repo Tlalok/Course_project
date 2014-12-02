@@ -53,4 +53,7 @@ public:
     StatisticsGames& operator=(StatisticsGames toCopy);
 	void incNumberGames();
 	void characterGuessed(uint idCharacter, Vector<std::pair<uint, uint>>& currentAnswers);
+	void deleteQuestion(uint id);
+	void deleteCharacter(uint id);
+	void deleteAnswer(uint id);
 };

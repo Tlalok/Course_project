@@ -56,6 +56,8 @@ public:
     void printNumberQuestionsCharacters();
 	//Vector<Answer>& getAnswers();
     Vector<Answer> getAnswers();
+	Vector<Question> getQuestions();
+	Vector<Character> getCharacters();
 	std::string getQuestionText(uint idQuestion);
     bool canSupposeCharacter();
 	uint getIdLeadingCharacter();
@@ -64,4 +66,7 @@ public:
 	void incNumberGames();
 	void characterGuessed(uint idCharacter);
 	void deleteLastAnswer();
+	void deleteQuestion(uint id);
+	void deleteCharacter(uint id);
+	void deleteAnswer(uint id);
 };

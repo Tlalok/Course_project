@@ -137,6 +137,16 @@ uint StatisticsQuestion::getNumberAnswers()
 {
     return statisticsAnswers.size();
 }
+
+void StatisticsQuestion::deleteAnswer(uint id)
+{
+	statisticsAnswers.del(getAnswerStatistic(id));
+	for(uint i = 0; i < statisticsAnswers.size(); i++)
+	{
+		if(statisticsAnswers[i].getAnswerID() > id)
+			statisticsAnswers[i].setId(statisticsAnswers[i].getAnswerID() - 1);
+	}
+}
 	
 bool StatisticsQuestion::operator==(StatisticsQuestion& toCompare)
 {

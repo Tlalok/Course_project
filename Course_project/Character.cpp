@@ -39,6 +39,11 @@ uint Character::getId()
 	return id;
 }
 
+void Character::setId(uint id)
+{
+	this->id = id;
+}
+
 std::string Character::getName()
 {
 	return name;
@@ -181,6 +186,22 @@ void Character::characterGuessed(Vector<std::pair<uint, uint>> currentAnswers)
 			}
 		}
 	}
+}
+
+void Character::deleteQuestion(uint id)
+{
+	statisticsQuestions.del(getStatisticsQuestion(id));
+	for(uint i = 0; i < statisticsQuestions.size(); i++)
+	{
+		if(statisticsQuestions[i].getQuestionID() > id)
+			statisticsQuestions[i].setId(statisticsQuestions[i].getQuestionID() - 1);
+	}
+}
+
+void Character::deleteAnswer(uint id)
+{
+	for(uint i = 0; i < statisticsQuestions.size(); i++)
+		statisticsQuestions[i].deleteAnswer(id);
 }
 
 bool Character::operator==(Character& toCompare)

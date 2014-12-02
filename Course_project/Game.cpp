@@ -363,6 +363,16 @@ Vector<Answer> Game::getAnswers()
 	return answers;
 }
 
+Vector<Question> Game::getQuestions()
+{
+	return questions;
+}
+
+Vector<Character> Game::getCharacters()
+{
+	return statisticsGames.getCharacters();
+}
+
 std::string Game::getQuestionText(uint idQuestion)
 {
 	for(uint i = 0; i < questions.size(); i++)
@@ -477,4 +487,21 @@ void Game::deleteLastAnswer()
 		std::pair<uint, uint> lastAnswer = currentAnswers[currentAnswers.size() - 1];
 		currentAnswers.del(lastAnswer);
 	}
+}
+
+void Game::deleteCharacter(uint id)
+{
+	statisticsGames.deleteCharacter(id);
+}
+
+void Game::deleteQuestion(uint id)
+{
+	questions.del(getQuestions()[id-1]);
+	statisticsGames.deleteQuestion(id);
+}
+
+void Game::deleteAnswer(uint id)
+{
+	answers.del(getAnswers()[id-1]);
+	statisticsGames.deleteAnswer(id);
 }
