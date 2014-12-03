@@ -274,7 +274,8 @@ uint Menu::chooseCharacterMiddleGame(int selectedMenuItem, void *param)
     const uint constinueGame = 1;
     const uint finishGame = 0;
     Game *game = (Game *)param;
-    Vector<Character> characterToSuppose = game->getLeadingCharacters();
+    //Vector<Character> characterToSuppose = game->getLeadingCharacters();
+    Vector<Character> characterToSuppose = game->getLeadingCharacters(1);
 	if(!characterToSuppose.size())
 	{
 		return constinueGame;
@@ -406,7 +407,8 @@ uint Menu::guessMenuLeadingCharacters(Game &game)
 {
 	system("cls");
     Vector<Character> leadingCharacters;
-	leadingCharacters = game.getLeadingCharacters(1);
+	//leadingCharacters = game.getLeadingCharacters(1);
+    leadingCharacters = game.getLeadingCharacters(5);
     if (leadingCharacters.size() == 0)
         return 0;
 	std::cout << "Может быть один из этих персонажей - тот, кого ты загадал?" << std::endl;
