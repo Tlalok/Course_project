@@ -356,7 +356,6 @@ void Game::printNumberQuestionsCharacters()
     }
 }
 
-//Vector <Answer>& Game::getAnswers()
 Vector<Answer> Game::getAnswers()
 {
 	return answers;
@@ -384,24 +383,7 @@ std::string Game::getQuestionText(uint idQuestion)
 
 bool Game::canSupposeCharacter()
 {
-    // предусмотеть наличие только 1-го персонажа
-    /*uint idMax = statisticsGames.getCharacter(0).getId();
-    for (uint i = 1; i < statisticsGames.getNumberOfCharacters(); i++)
-    {
-        uint idCharacter = statisticsGames.getCharacter(i).getId();
-        if (currentProbability[idCharacter] > currentProbability[idMax])
-            idMax = idCharacter;
-    }
-    uint idPrev = (idMax == statisticsGames.getCharacter(0).getId()) ? statisticsGames.getCharacter(1).getId() : statisticsGames.getCharacter(0).getId();
-    for (uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
-    {
-        uint idCharacter = statisticsGames.getCharacter(i).getId();
-        if (idCharacter != idMax && currentProbability[idCharacter] > currentProbability[idPrev])
-            idPrev = idCharacter;
-    }
-	*/
 	Vector<Character> leaders = getLeadingCharacters(2);
-    //return idMax - 0.2 > idPrev;
 	if(leaders.size() == 1)
 		return true;
 	if(!leaders.size())
