@@ -24,7 +24,7 @@ public:
 	uint GiveAnswer(string QuestionText, Vector<Answer>& answers);
 	void gameMenu();
     uint guessMenuMiddleGame(Game &game);
-	uint guessMenu5LeadingCharacters(Game &game);
+	uint guessMenuLeadingCharacters(Game &game);
 	void baseManagementMenu();
 	void instructionsGuessMenu();
 	void instructionsBaseMenu();

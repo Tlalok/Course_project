@@ -23,6 +23,7 @@ class Game
 	std::map<uint, double> currentProbability;
     // возвращает верятность что на указанный вопрос будет дан указанный ответ
     // с учетом уже полученных ответов (нужна для расчета энтропии)
+	std::map<uint, bool> charactersToIgnore;
     double getPQjAns(uint idQuestion, uint idAnswer);
     // возвращает энтопию для состояния, если мы зададим указанный вопрос
     // и получим указанный ответ
@@ -33,8 +34,7 @@ class Game
 	double getPBAi(Character&);
 	//возвращает вероятность того,что загадан этот персонаж при данном наборе вопросов-ответов
 	double getPAiB(Character&);
-	bool checkVectorForId(Vector<uint> IDs, uint id);
-
+	void initializeCharactersToIgnore();
 public: 
 	const static uint stackOfQuestions = 20;
 	const static uint minQuestions = 10;
@@ -60,13 +60,12 @@ public:
 	Vector<Character> getCharacters();
 	std::string getQuestionText(uint idQuestion);
     bool canSupposeCharacter();
-	uint getIdLeadingCharacter();
-    Character getLeadingCharacter();
-	Vector<Character> get5LeadingCharacters();
+	Vector<Character> getLeadingCharacters(uint leadersNeeded = 5);
 	void incNumberGames();
 	void characterGuessed(uint idCharacter);
 	void deleteLastAnswer();
 	void deleteQuestion(uint id);
 	void deleteCharacter(uint id);
 	void deleteAnswer(uint id);
+	void ignoreCharacter(uint id);
 };

@@ -55,9 +55,8 @@ uint Game::read()
     {
         uint idCharacter = statisticsGames.getCharacter(i).getId();
         currentProbability[idCharacter] = statisticsGames.getPAi(idCharacter);
-        //std:: cout << "current probability[" << idCharacter << "] = " << currentProbability[idCharacter] << std::endl;
     }
-    
+	initializeCharactersToIgnore();
 	return 1;
 }
 
@@ -383,27 +382,10 @@ std::string Game::getQuestionText(uint idQuestion)
 	throw incorrectID();
 }
 
-uint Game::getIdLeadingCharacter()
-{
-    uint idMax = statisticsGames.getCharacter(0).getId();
-    for (uint i = 1; i < statisticsGames.getNumberOfCharacters(); i++)
-    {
-        uint idCharacter = statisticsGames.getCharacter(i).getId();
-        if (currentProbability[idCharacter] > currentProbability[idMax])
-            idMax = idCharacter;
-    }
-    return idMax;
-}
-
-Character Game::getLeadingCharacter()
-{
-    return statisticsGames.getCharacterById(getIdLeadingCharacter());
-}
-
 bool Game::canSupposeCharacter()
 {
     // предусмотеть наличие только 1-го персонажа
-    uint idMax = statisticsGames.getCharacter(0).getId();
+    /*uint idMax = statisticsGames.getCharacter(0).getId();
     for (uint i = 1; i < statisticsGames.getNumberOfCharacters(); i++)
     {
         uint idCharacter = statisticsGames.getCharacter(i).getId();
@@ -417,8 +399,14 @@ bool Game::canSupposeCharacter()
         if (idCharacter != idMax && currentProbability[idCharacter] > currentProbability[idPrev])
             idPrev = idCharacter;
     }
+	*/
+	Vector<Character> leaders = getLeadingCharacters(2);
     //return idMax - 0.2 > idPrev;
-    return (currentProbability[idPrev] / currentProbability[idMax]) <= 0.8;
+	if(leaders.size() == 1)
+		return true;
+	if(!leaders.size())
+		return false;
+	return (currentProbability[leaders[1].getId()] / currentProbability[leaders[0].getId()]) <= 0.6;
 }
 
 void Game::incNumberGames()
@@ -431,54 +419,67 @@ void Game::characterGuessed(uint idCharacter)
 	statisticsGames.characterGuessed(idCharacter, currentAnswers);
 }
 
-Vector<Character> Game::get5LeadingCharacters()
+Vector<Character> Game::getLeadingCharacters(uint leadersNeeded)
 {
 	Vector<Character> leadingCharacters;
 	Vector<uint> leadingIDs;
-	uint idMax = statisticsGames.getCharacter(0).getId();
-	leadingIDs.push_back(idMax);
-	for(uint i = 1; i <= currentProbability.size(); i++)
+	uint idMax;
+	bool notIgnoredCharacterExist = false;
+	for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
 	{
-		if(currentProbability[idMax] < currentProbability[i] && idMax != i)
+		if(!charactersToIgnore[statisticsGames.getCharacter(i).getId()])
 		{
-			idMax = i;
-			leadingIDs[0] = i;
+			idMax = statisticsGames.getCharacter(i).getId();
+			leadingIDs.push_back(idMax);
+			notIgnoredCharacterExist = true;
+			break;
 		}
 	}
-	for(uint i = 1; i < 5; i++)
+	if(notIgnoredCharacterExist)
 	{
 		for(uint i = 1; i <= currentProbability.size(); i++)
 		{
-			if(!checkVectorForId(leadingIDs, i))
+			if(currentProbability[idMax] < currentProbability[i] && idMax != i && !charactersToIgnore[i])
 			{
 				idMax = i;
-				leadingIDs.push_back(idMax);
-				break;
+				leadingIDs[0] = i;
 			}
 		}
-		for(uint j = 1; j <= currentProbability.size(); j++)
+		for(uint i = 1; i < 5; i++)
 		{
-			if(currentProbability[j] >= currentProbability[idMax] && !checkVectorForId(leadingIDs, j) && currentProbability[j] <= currentProbability[leadingIDs[leadingIDs.size() - 2]])
+			for(uint k = 1; k <= currentProbability.size(); k++)
 			{
-				idMax = j;
-				leadingIDs[leadingIDs.size() - 1] = idMax;
+				if(!leadingIDs.inVector(k) && !charactersToIgnore[k])
+				{
+					idMax = k;
+					leadingIDs.push_back(idMax);
+					break;
+				}
+			}
+			for(uint j = 1; j <= currentProbability.size(); j++)
+			{
+				if(currentProbability[j] >= currentProbability[idMax] 
+					&& !leadingIDs.inVector(j) 
+					&& currentProbability[j] <= currentProbability[leadingIDs[leadingIDs.size() - 2]] 
+					&& !charactersToIgnore[j])
+				{
+					idMax = j;
+					leadingIDs[leadingIDs.size() - 1] = idMax;
+				}
 			}
 		}
-	}
-	for(uint i = 0; i < 5; i++)
-	{
-		leadingCharacters.push_back(statisticsGames.getCharacterById(leadingIDs[i]));
+		for(uint i = 0; i < min(leadingIDs.size(), leadersNeeded);)
+		{
+			if(!charactersToIgnore[leadingIDs[i]])
+			{
+				leadingCharacters.push_back(statisticsGames.getCharacterById(leadingIDs[i]));
+				i++;
+			}
+		}
 	}
 	return leadingCharacters;
 }
 
-bool Game::checkVectorForId(Vector<uint> IDs, uint id)
-{
-	for(uint i = 0; i < IDs.size(); i++)
-		if(id == IDs[i])
-			return true;
-	return false;
-}
 
 void Game::deleteLastAnswer()
 {
@@ -515,3 +516,17 @@ void Game::deleteAnswer(uint id)
 	}
 	statisticsGames.deleteAnswer(id);
 }
+
+void Game::ignoreCharacter(uint id)
+{
+	charactersToIgnore[id] = true;
+}
+
+void Game::initializeCharactersToIgnore()
+{
+	for(uint i = 0; i < statisticsGames.getNumberOfCharacters(); i++)
+	{
+		charactersToIgnore[statisticsGames.getCharacter(i).getId()] = false;
+	}
+}
+

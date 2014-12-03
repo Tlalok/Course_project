@@ -54,7 +54,7 @@ void Menu::instructionsGuessMenu()
 
 void Menu::instructionsAddingNewCharater()
 {
-	cout << "ћожете предложить вопрос, который поможет нам отличить вашего персонажа от предложенных ранее7"<<endl;
+	cout << "ћожете предложить вопрос, который поможет нам отличить вашего персонажа от предложенных ранее?"<<endl;
 	cout << "ƒа." << endl;
 	cout << "Ќет." << endl;
 }
@@ -274,17 +274,24 @@ uint Menu::chooseCharacterMiddleGame(int selectedMenuItem, void *param)
     const uint constinueGame = 1;
     const uint finishGame = 0;
     Game *game = (Game *)param;
-    Character characterToSuppose = game->getLeadingCharacter();
-    if(selectedMenuItem == 1)
-    {
-        game->characterGuessed(characterToSuppose.getId());
-        return finishGame;
-    }
-    else if(selectedMenuItem == 2)
-        return constinueGame;
-    else
-        cout << "Ќеверный выбор." << endl;
-    return selectedMenuItem;
+    Vector<Character> characterToSuppose = game->getLeadingCharacters();
+	if(!characterToSuppose.size())
+	{
+		return constinueGame;
+	}
+	if(selectedMenuItem == 1)
+	{
+		game->characterGuessed(characterToSuppose[0].getId());
+		return finishGame;
+	}
+	else if(selectedMenuItem == 2)
+	{
+		game->ignoreCharacter(characterToSuppose[0].getId());
+		return constinueGame;
+	}
+	else
+		cout << "Ќеверный выбор." << endl;
+	return selectedMenuItem;
 }
 
 uint Menu::throwBackspacePressException(int selectedMenuItem, void *param)
@@ -333,7 +340,7 @@ void Menu::gameMenu()
             uint continueGame = guessMenuMiddleGame(game);
             if (continueGame)
             {
-                if(uint guessedCharacter = guessMenu5LeadingCharacters(game))
+                if(uint guessedCharacter = guessMenuLeadingCharacters(game))
                     game.characterGuessed(guessedCharacter);
                 else
                     addingNewCharacter(game);
@@ -342,7 +349,6 @@ void Menu::gameMenu()
 			game.write();
             break;
         }
-        cout << idQuestionToAsk;
         std::string questionText = game.getQuestionText(idQuestionToAsk);
 		uint answer;
         try
@@ -388,23 +394,22 @@ void Menu::gameMenu()
 uint Menu::guessMenuMiddleGame(Game &game)
 {
 	system("cls");
-	Character characterToSuppose = game.getLeadingCharacter();
-	cout << "Name: " << characterToSuppose.getName() << endl;
+	Vector<Character> characterToSuppose = game.getLeadingCharacters(1);
+	cout << "Name: " << characterToSuppose[0].getName() << endl;
 	instructionsGuessMenu();
-
     int menuSize = 2;
     int topMargin = 1;
     return RunMenu(menuSize, topMargin, &Menu::chooseCharacterMiddleGame, &game);
 }
 
-uint Menu::guessMenu5LeadingCharacters(Game &game)
+uint Menu::guessMenuLeadingCharacters(Game &game)
 {
 	system("cls");
     Vector<Character> leadingCharacters;
-	leadingCharacters = game.get5LeadingCharacters();
+	leadingCharacters = game.getLeadingCharacters(1);
     if (leadingCharacters.size() == 0)
         return 0;
-	std::cout << "ћожет быть один из этих персонажей - тот, кого ты загадал7" << std::endl;
+	std::cout << "ћожет быть один из этих персонажей - тот, кого ты загадал?" << std::endl;
 	uint i;
 	for(i = 0; i < leadingCharacters.size(); i++)
     {
@@ -441,6 +446,6 @@ void Menu::setCursor(int X, int Y)
 void Menu::printTips()
 {
     setCursor(0, 24);
-    cout << "—трелки - перемещение, Enter - выбор, Backspace - отмена последнего ответа";
+    cout << "—трелки - перемещение, Enter - выбор, Backspace - назад/отмена ответа";
 	setCursor(0, 6);
 }

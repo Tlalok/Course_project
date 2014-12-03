@@ -193,7 +193,6 @@ void StatisticsGames::characterGuessed(uint idCharacter, Vector<std::pair<uint, 
 	{
 		if(idCharacter == characters[i].getId())
 		{
-			std::cout<<"***";
 			characters[i].characterGuessed(currentAnswers);
 		}
 	}
