@@ -373,8 +373,8 @@ void Menu::gameMenu()
         counterOfAnswers++;
 		game.giveAnswer(idQuestionToAsk, answer);
         game.calculate();
-        game.printProbability();
-		system("pause");
+        //game.printProbability();
+		//system("pause");
         bool askedMinNumberQuestions = counterOfAnswers >= game.minQuestions;
         bool mustTryGuess = (counterOfAnswers % game.stackOfQuestions) == 0;
         if(mustTryGuess || askedMinNumberQuestions && game.canSupposeCharacter())

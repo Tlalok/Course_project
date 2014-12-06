@@ -54,10 +54,9 @@ public:
 	void giveAnswer(uint idQuestion, uint idAnswer);
 	void printProbability();
     void printNumberQuestionsCharacters();
-	//Vector<Answer>& getAnswers();
-    Vector<Answer> getAnswers();
-	Vector<Question> getQuestions();
-	Vector<Character> getCharacters();
+    Vector<Answer>& getAnswers();
+	Vector<Question>& getQuestions();
+	Vector<Character>& getCharacters();
 	std::string getQuestionText(uint idQuestion);
     bool canSupposeCharacter();
 	Vector<Character> getLeadingCharacters(uint leadersNeeded = 5);

@@ -356,17 +356,17 @@ void Game::printNumberQuestionsCharacters()
     }
 }
 
-Vector<Answer> Game::getAnswers()
+Vector<Answer>& Game::getAnswers()
 {
 	return answers;
 }
 
-Vector<Question> Game::getQuestions()
+Vector<Question>& Game::getQuestions()
 {
 	return questions;
 }
 
-Vector<Character> Game::getCharacters()
+Vector<Character>& Game::getCharacters()
 {
 	return statisticsGames.getCharacters();
 }
@@ -388,7 +388,7 @@ bool Game::canSupposeCharacter()
 		return true;
 	if(!leaders.size())
 		return false;
-	return (currentProbability[leaders[1].getId()] / currentProbability[leaders[0].getId()]) <= 0.6;
+	return (currentProbability[leaders[1].getId()] / currentProbability[leaders[0].getId()]) <= 0.3;
 }
 
 void Game::incNumberGames()

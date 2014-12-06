@@ -14,7 +14,7 @@ class StatisticsAnswer
 public:
 	StatisticsAnswer();
 	StatisticsAnswer(uint id, uint timesOfGivingAnswer);
-    StatisticsAnswer(const StatisticsAnswer &statisticsAnswer);
+    StatisticsAnswer(const StatisticsAnswer& statisticsAnswer);
     StatisticsAnswer& operator++();
 	uint getAnswerID();
 	uint getTimesOfGivingAnswer();
@@ -22,5 +22,5 @@ public:
 	bool operator==(StatisticsAnswer& toCompare);
 	friend std::istream& operator>>(std::istream& file, StatisticsAnswer& statisticsAnswer);
 	friend std::ostream& operator<<(std::ostream& file, StatisticsAnswer& statisticsAnswer);
-    StatisticsAnswer& operator=(StatisticsAnswer &toCopy);
+    StatisticsAnswer& operator=(StatisticsAnswer& toCopy);
 };
