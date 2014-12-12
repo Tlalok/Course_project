@@ -12,12 +12,12 @@ StatisticsGames::StatisticsGames(StatisticsGames &statisticsGames)
     this->characters = statisticsGames.characters;
 }
 
-Character StatisticsGames::getCharacter(uint n)
+Character& StatisticsGames::getCharacter(uint n)
 {
 	return characters[n];
 }
 
-Character StatisticsGames::getCharacterById(uint id)
+Character& StatisticsGames::getCharacterById(uint id)
 {
     for (uint i = 0; i < characters.size(); i++)
         if (characters[i].getId() == id)

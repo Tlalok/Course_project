@@ -14,7 +14,7 @@ class StatisticsQuestion
 public:
 	StatisticsQuestion();
 	StatisticsQuestion(Vector<Answer>& answers);
-	StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer> answers);
+	StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer>& answers);
     StatisticsQuestion(StatisticsQuestion& toCopy);
     //StatisticsQuestion(StatisticsQuestion & statisticsQuestion);
     StatisticsQuestion& operator++();
@@ -23,10 +23,10 @@ public:
 	void setId(uint id);
 	uint getQuestionID();
 	uint getTimesOfAskingQuestion();
-	StatisticsAnswer getAnswerStatistic(uint idAnswer);
+	StatisticsAnswer& getAnswerStatistic(uint idAnswer);
     uint getTimesOfGivingAnswer(uint idAnswer);
     uint getNumberAnswers();
-	void addAnswer(StatisticsAnswer toAdd);
+	void addAnswer(StatisticsAnswer& toAdd);
 	void deleteAnswer(uint id);
 	bool operator==(StatisticsQuestion& toCompare);
 	friend std::istream& operator>>(std::istream& file, StatisticsQuestion& statisticsquestion);

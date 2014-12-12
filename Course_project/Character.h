@@ -35,7 +35,7 @@ public:
     // раз был загадан персонаж
     void decTimesPicked();
 	bool operator==(Character& toCompare);
-	void characterGuessed(Vector<std::pair<uint, uint>> currentAnswers);
+	void characterGuessed(Vector<std::pair<uint, uint>>& currentAnswers);
 	void deleteQuestion(uint id);
 	void deleteAnswer(uint id);
 	friend std::istream& operator>>(std::istream& file, Character& character);

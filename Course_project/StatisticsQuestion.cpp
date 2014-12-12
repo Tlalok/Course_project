@@ -20,7 +20,7 @@ StatisticsQuestion::StatisticsQuestion(Vector<Answer>& answers)
 	}
 }
 
-StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer> answers)
+StatisticsQuestion :: StatisticsQuestion(uint id, uint timesOfAskingQuestion, Vector<StatisticsAnswer>& answers)
 {
 	this->id = id;
 	this->timesOfAskingQuestion = timesOfAskingQuestion;
@@ -46,7 +46,7 @@ uint StatisticsQuestion :: getTimesOfAskingQuestion()
 	return this->timesOfAskingQuestion;
 }
 
-StatisticsAnswer StatisticsQuestion :: getAnswerStatistic(uint idAnswer)
+StatisticsAnswer& StatisticsQuestion :: getAnswerStatistic(uint idAnswer)
 {
 	for(uint i = 0; i < statisticsAnswers.size(); i++)
 	{
@@ -95,7 +95,7 @@ std::ostream& operator<<(std::ostream& file, StatisticsQuestion& statisticsQuest
     return file;
 }
 
-void StatisticsQuestion::addAnswer(StatisticsAnswer toAdd)
+void StatisticsQuestion::addAnswer(StatisticsAnswer& toAdd)
 {
 	statisticsAnswers.push_back(toAdd);
 }

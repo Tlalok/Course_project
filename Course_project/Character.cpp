@@ -171,7 +171,7 @@ void Character::decTimesPicked()
     timesPicked--;
 }
 
-void Character::characterGuessed(Vector<std::pair<uint, uint>> currentAnswers)
+void Character::characterGuessed(Vector<std::pair<uint, uint>>& currentAnswers)
 {
 	timesPicked++;
 	for(uint i = 0; i < statisticsQuestions.size(); i++)
