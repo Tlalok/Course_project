@@ -7,7 +7,7 @@ HighlightMenu::HighlightMenu(int menuSize, int topMargin)
 {
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     hideCursor();
-    mainColor = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+	mainColor = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
     highlightColor = FOREGROUND_RED | FOREGROUND_BLUE;
     newMenu(menuSize, topMargin);
 }

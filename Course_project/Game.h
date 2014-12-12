@@ -25,7 +25,7 @@ class Game
     // с учетом уже полученных ответов (нужна для расчета энтропии)
 	std::map<uint, bool> charactersToIgnore;
     double getPQjAns(uint idQuestion, uint idAnswer);
-    // возвращает энтопию для состояния, если мы зададим указанный вопрос
+    // возвращает энтропию для состояния, если мы зададим указанный вопрос
     // и получим указанный ответ
     double getHPAiBQjAns(uint idQuestion, uint idAnswer);
     // проверяет был ли задан указанный вопрос

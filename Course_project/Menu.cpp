@@ -134,86 +134,110 @@ void Menu::baseManagementMenu()
 		{
 			return;
 		}
-		uint selectedAction;
-		instructionsDataActions();
-		try
+		while(1)
 		{
-			selectedAction = RunMenu(2, 1, NULL, NULL, &Menu::throwBackspacePressException);
-		}
-		catch(BACKSPACE)
-		{
-			continue;
-		}
-		Vector<Character> characters;
-		Vector<Question> questions;
-		Vector<Answer> answers;
-		switch(selectedData)
-		{
-		case 1:
-			switch(selectedAction)
+			uint selectedAction;
+			instructionsDataActions();
+			try
+			{
+				selectedAction = RunMenu(2, 1, NULL, NULL, &Menu::throwBackspacePressException);
+			}
+			catch(BACKSPACE)
+			{
+				break;
+			}
+			Vector<Character> characters;
+			Vector<Question> questions;
+			Vector<Answer> answers;
+			switch(selectedData)
 			{
 			case 1:
-				system("cls");
-				cout<<"¬ведите им€ нового персонажа:"<<endl;
-				addToBase(&statistic, &Game::addCharacter);
+				switch(selectedAction)
+				{
+				case 1:
+					system("cls");
+					cout<<"¬ведите им€ нового персонажа:"<<endl;
+					addToBase(&statistic, &Game::addCharacter);
+					break;
+				case 2:
+					characters = statistic.getCharacters();
+					system("cls");
+					for(uint i = 0; i < characters.size(); i++)
+					{
+						std::cout << characters[i].getId() << "." << characters[i].getName() << std::endl;
+					}
+					try
+					{
+						deleteFromBase(&statistic, &Game::deleteCharacter, characters.size());
+					}
+					catch(BACKSPACE)
+					{
+						continue;
+					}
+					break;
+				default:
+					break;
+				}
 				break;
 			case 2:
-				characters = statistic.getCharacters();
-				system("cls");
-				for(uint i = 0; i < characters.size(); i++)
+				switch(selectedAction)
 				{
-					std::cout << characters[i].getId() << "." << characters[i].getName() << std::endl;
+				case 1:
+					system("cls");
+					cout<<"¬ведите новый вопрос:"<<endl;
+					addToBase(&statistic, &Game::addQuestion);
+					break;
+				case 2:
+					questions = statistic.getQuestions();
+					system("cls");
+					for(uint i = 0; i < questions.size(); i++)
+					{
+						std::cout << questions[i].getId() << "." << questions[i].getText() << std::endl;
+					}
+					try
+					{
+						deleteFromBase(&statistic, &Game::deleteQuestion, questions.size());
+					}
+					catch(BACKSPACE)
+					{
+						continue;
+					}
+					break;
+				default:
+					break;
 				}
-				deleteFromBase(&statistic, &Game::deleteCharacter, characters.size());
 				break;
+			case 3:
+				switch(selectedAction)
+				{
+				case 1:
+					system("cls");
+					cout<<"¬ведите новый ответ:"<<endl;
+					addToBase(&statistic, &Game::addAnswer);
+					break;
+				case 2:
+					answers = statistic.getAnswers();
+					system("cls");
+					for(uint i = 0; i < answers.size(); i++)
+					{
+						std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
+					}
+					try
+					{
+					deleteFromBase(&statistic, &Game::deleteAnswer, answers.size());
+					}
+					catch(BACKSPACE)
+					{
+						continue;
+					}
+					break;
 			default:
-				break;
-			}
-			break;
-		case 2:
-			switch(selectedAction)
-			{
-			case 1:
-				system("cls");
-				cout<<"¬ведите новый вопрос:"<<endl;
-				addToBase(&statistic, &Game::addQuestion);
-				break;
-			case 2:
-				questions = statistic.getQuestions();
-				system("cls");
-				for(uint i = 0; i < questions.size(); i++)
-				{
-					std::cout << questions[i].getId() << "." << questions[i].getText() << std::endl;
+				return;
 				}
-				deleteFromBase(&statistic, &Game::deleteQuestion, questions.size());
 				break;
-			default:
-				break;
-			}
-			break;
-		case 3:
-			switch(selectedAction)
-			{
-			case 1:
-				system("cls");
-				cout<<"¬ведите новый ответ:"<<endl;
-				addToBase(&statistic, &Game::addAnswer);
-				break;
-			case 2:
-				answers = statistic.getAnswers();
-				system("cls");
-				for(uint i = 0; i < answers.size(); i++)
-				{
-					std::cout << answers[i].getId() << "." << answers[i].getText() << std::endl;
-				}
-				deleteFromBase(&statistic, &Game::deleteAnswer, answers.size());
-				break;
-		default:
-			return;
 			}
 			break;
 		}
-		break;
 	}
 	statistic.write();
 	cout<<"»зменени€ успешно сохранены."<<endl;
@@ -225,7 +249,7 @@ void Menu::addToBase(Game* game, addFunc addFuncPtr)
 	std::string newText;
 	cin>>newText;
 	(game->*addFuncPtr)(newText);
-};
+}
 
 void Menu::deleteFromBase(Game* game, deleteFunc deleteFuncPtr, uint numberOfUnits)
 {
@@ -236,10 +260,10 @@ void Menu::deleteFromBase(Game* game, deleteFunc deleteFuncPtr, uint numberOfUni
 	}
 	catch(BACKSPACE)
 	{
-		return;
+		throwBackspacePressException(0, NULL);
 	}
 	(game->*deleteFuncPtr)(selectedAction);
-};
+}
 
 
 uint Menu::chooseActionAddingQuestion(int selectedMenuItem, void *param)
@@ -274,7 +298,6 @@ uint Menu::chooseCharacterMiddleGame(int selectedMenuItem, void *param)
     const uint constinueGame = 1;
     const uint finishGame = 0;
     Game *game = (Game *)param;
-    //Vector<Character> characterToSuppose = game->getLeadingCharacters();
     Vector<Character> characterToSuppose = game->getLeadingCharacters(1);
 	if(!characterToSuppose.size())
 	{

@@ -170,7 +170,7 @@ uint Game::getIdNextQuestion()
         H.push_back(HQuestion);
     }
     if (H.size() == 0)
-        return 0;    // заменить на исключение или иземнить тип возвращаемого значения
+        return 0;    // заменить на исключение или изменить тип возвращаемого значения
     uint indexMin = 0;
     for (uint i = 1; i < H.size(); i++)
         if (H[indexMin].second > H[i].second)
@@ -245,7 +245,7 @@ bool Game::isQuestionExist(std::string text)
 
 bool Game::isCharacterExist(std::string name)
 {
-	return statisticsGames.isCharacterExist(name);
+	return (bool)statisticsGames.isCharacterExist(name);
 }
 
 void Game::addCharacter(std::string name)
